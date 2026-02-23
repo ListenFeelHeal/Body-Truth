@@ -59,7 +59,6 @@
         </div>
     </section>
 
-
     <section id="pricing" class="pricing container">
         <h2>Обери свій формат</h2>
         
@@ -83,19 +82,20 @@
             </div>
             <p class="offer-subtitle">Забронюй місце за найкращою ціною</p>
         </div>
+
         <div class="pricing-grid">
             <div class="price-card">
                 <h3>Пакет "Старт"</h3>
                 <div class="price-wrapper">
                     <span class="old-price">1500 грн</span>
-                    <span class="price">900 грн</span>
+                    <span class="price">390 грн</span>
                 </div>
                 <ul>
                     <li>Короткі відео (10–15 хв)</li>
                     <li>Аудіо-практики</li>
                     <li>PDF з поясненнями</li>
                 </ul>
-                <a href="#" class="btn btn-outline">Обрати Старт</a>
+                <a href="#" class="btn btn-outline" onclick="openPopup(); return false;">Обрати Старт</a>
             </div>
             <div class="price-card premium">
                 <h3>Пакет "З підтримкою"</h3>
@@ -108,7 +108,7 @@
                     <li>Чат учасників</li>
                     <li>Моя особиста підтримка та відповіді</li>
                 </ul>
-                <a href="#" class="btn">Отримати підтримку</a>
+                <a href="#" class="btn" onclick="openPopup(); return false;">Отримати підтримку</a>
             </div>
         </div>
     </section>
@@ -121,22 +121,23 @@
         <div class="modal-content">
             <span class="close-btn" id="close-popup">×</span>
             <h3 class="modal-title">Отримай доступ до курсу<br>за спеціальною ціною!</h3>
-            <p class="modal-subtitle">Залиш свої контакти, щоб забронювати місце в групі.</p>
+            <p class="modal-subtitle">Заповни форму, і тебе автоматично перенаправить на безпечну сторінку оплати.</p>
             
             <div class="price-wrapper modal-price">
                 <span class="old-price">1500 грн</span>
-                <span class="price">900 грн</span>
+                <span class="price">390 грн</span>
             </div>
 
             <form class="popup-form">
                 <input type="text" placeholder="Ваш E-mail" required>
                 <input type="tel" placeholder="Ваш телефон" required>
-                <button type="submit" class="btn full-width">Отримати доступ</button>
+                <button type="submit" class="btn full-width">Перейти до оплати</button>
             </form>
 
-            <p class="privacy-text">🔒 Всі дані конфіденційні і потрібні тільки для зв'язку.</p>
+            <p class="privacy-text">🔒 Безпечна оплата через WayForPay</p>
 
             <h4 class="offer-title-small">До закінчення акції залишилось:</h4>
+            
             <div class="timer-container timer-small" id="popup-timer">
                 <div class="timer-box">
                     <span class="timer-value hours">00</span>
@@ -159,6 +160,7 @@
             </p>
         </div>
     </div>
+
     <script src="script.js"></script>
 
 </body>
