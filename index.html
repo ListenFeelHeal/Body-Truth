@@ -4,93 +4,173 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Body Exhale | Жіноче тіло в стресі</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header class="hero">
-        <div class="container">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
             <div class="logo">Body Exhale</div>
-            <h1>Жіноче тіло в стресі</h1>
-            <h2 class="subtitle">чому болить, коли “все нормально”</h2>
+            <h1>Жіноче тіло <br> <span>в стресі</span></h1>
+            <p class="subtitle">чому болить, коли “все нормально”</p>
             <p class="hero-desc">7-денний міні-курс для жінок, у яких аналізи — в нормі, а тіло — ні.</p>
-            <a href="#pricing" class="btn">Я хочу почути своє тіло</a>
+            <a href="#" class="btn btn-gold" onclick="openPopup(); return false;">Я хочу почути своє тіло</a>
         </div>
     </header>
 
-    <section class="about container">
-        <h2>Про мене</h2>
-        <div class="about-content">
-            <p>Я — жінка, яка довго жила з відчуттям, що з тілом ніби щось не так, але ніхто не може пояснити — що саме. Були періоди, коли тіло боліло, німіло, а лікарі казали: <em>«у вас усе в нормі»</em>.</p>
-            <p>Я жила в режимі: «терпи», «будь сильною», «всі так живуть». Але тіло не погоджувалось. Я почала не лікувати його — а слухати.</p>
-            <p><strong>Цей курс я створила з позиції: «я була там, де ти зараз».</strong></p>
+    <section class="pain-points container section-padding">
+        <div class="split-layout">
+            <div class="split-text">
+                <h2 class="fade-in">Чи знайомо <br>тобі це?</h2>
+            </div>
+            <div class="split-list">
+                <ul>
+                    <li>Аналізи «в нормі», а тіло постійно болить.</li>
+                    <li>Напруга в шиї, стиснута щелепа, важкість у грудях.</li>
+                    <li>Гормони ніби «ок», але ПМС і втома виснажують.</li>
+                    <li>Відчуття: «зі мною щось не так, але ніхто не пояснює що».</li>
+                </ul>
+            </div>
         </div>
     </section>
 
-    <section class="philosophy">
+    <section class="quote-section">
         <div class="container">
-            <h2>Про що цей курс насправді</h2>
-            <p>Це про звʼязок психіки і тіла, про стрес, який накопичується всередині і починає говорити через біль. Біль — не ворог. Це сигнал.</p>
-            <div class="results-grid">
-                <div class="res-item">🌿 Розуміти мову свого тіла</div>
-                <div class="res-item">🌿 Знімати напругу, а не заглушати її</div>
-                <div class="res-item">🌿 Повернути відчуття безпеки</div>
+            <h2>Тіло не ламається просто так. <br>Воно реагує.</h2>
+            <p>На страх. На напругу. На відповідальність, яку жінка тягне мовчки. <br>На слова, які не сказала. На злість, яку не дозволила собі прожити.</p>
+        </div>
+    </section>
+
+    <section class="about container section-padding">
+        <div class="about-grid">
+            <div class="about-image">
+                <div class="image-placeholder">Твоє естетичне фото</div>
+            </div>
+            <div class="about-text">
+                <h2 class="section-title">Про мене</h2>
+                <p>Я — жінка, яка довго жила з відчуттям, що з тілом ніби щось не так, але ніхто не може пояснити — що саме.</p>
+                <p>Були періоди, коли тіло боліло, німіло, а лікарі казали: <em>«у вас усе в нормі»</em>. Я жила в режимі: «терпи», «будь сильною», «всі так живуть». Але тіло не погоджувалось.</p>
+                <p>Я почала не лікувати його — а слухати.</p>
+                <p class="highlight">Цей курс я створила з позиції: «я була там, де ти зараз».</p>
             </div>
         </div>
     </section>
 
-    <section class="program container">
-        <h2>Програма курсу</h2>
-        <div class="day-list">
-            <div class="day-item"><span>1</span> <strong>Чому болить, коли “все нормально”</strong> (Сканування тіла)</div>
-            <div class="day-item"><span>2</span> <strong>Шия, щелепа, голова</strong> (Зона контролю та розслаблення)</div>
-            <div class="day-item"><span>3</span> <strong>Живіт і ШКТ</strong> (Непрожиті емоції та заземлення)</div>
-            <div class="day-item"><span>4</span> <strong>Глибоке розслаблення</strong> (Аудіо-релакс для нервової системи)</div>
-            <div class="day-item"><span>5</span> <strong>Жіночий цикл і стрес</strong> (Гормональний фон та м'який ритуал)</div>
-            <div class="day-item"><span>6</span> <strong>Як читати сигнали тіла</strong> (Твоя персональна карта болю)</div>
-            <div class="day-item"><span>7</span> <strong>Інтеграція та підтримка</strong> (М'яке завершення та догляд за собою)</div>
+    <section class="program section-padding">
+        <div class="container">
+            <h2 class="section-title text-center">Програма курсу</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="day-num">I</div>
+                    <div class="day-info">
+                        <h3>Чому болить, коли “все нормально”</h3>
+                        <p>Як тіло реагує на хронічний стрес. Сканування тіла.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="day-num">II</div>
+                    <div class="day-info">
+                        <h3>Шия, щелепа, голова</h3>
+                        <p>Зона контролю та зняття напруги без насилля.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="day-num">III</div>
+                    <div class="day-info">
+                        <h3>Живіт і ШКТ</h3>
+                        <p>Непрожиті емоції (страх, злість) та заземлення.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="day-num">IV</div>
+                    <div class="day-info">
+                        <h3>Глибоке розслаблення</h3>
+                        <p>Аудіо-релакс для зняття напруги з нервової системи.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="day-num">V</div>
+                    <div class="day-info">
+                        <h3>Жіночий цикл і стрес</h3>
+                        <p>Гормональний фон та м'який жіночий ритуал.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="day-num">VI</div>
+                    <div class="day-info">
+                        <h3>Як читати сигнали тіла</h3>
+                        <p>Твоя персональна карта: мій біль → моє послання.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="day-num">VII</div>
+                    <div class="day-info">
+                        <h3>Інтеграція і підтримка</h3>
+                        <p>М'яке завершення та закріплення результату.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="pricing" class="pricing container">
-        <div class="timer-wrap">
-            <p>Спеціальна ціна діє ще:</p>
-            <div id="landing-timer" class="timer">
-                <span class="hours">00</span>:<span class="minutes">00</span>:<span class="seconds">00</span>
-            </div>
-        </div>
+    <section id="pricing" class="pricing-section section-padding">
+        <div class="container">
+            <div class="pricing-card premium-shadow">
+                <div class="pricing-header">
+                    <h3>Повний доступ до курсу</h3>
+                    <p>7 днів глибокої роботи з тілом</p>
+                </div>
+                
+                <div class="pricing-features">
+                    <p>✓ Відео та аудіо-практики</p>
+                    <p>✓ Гайди з поясненнями</p>
+                    <p>✓ Доступ у зручний час</p>
+                    <p>✓ Коуч-підтримка</p>
+                </div>
 
-        <div class="price-card">
-            <h3>Повний доступ до 7-денного курсу</h3>
-            <div class="format-list">
-                <span>📹 Відео та аудіо-практики</span>
-                <span>📄 Гайди з поясненнями</span>
-                <span>💬 Коуч підтримка</span>
+                <div class="urgency-block">
+                    <p class="urgency-text">Спеціальна ціна діє ще:</p>
+                    <div id="landing-timer" class="elegant-timer">
+                        <span class="hours">00</span><span class="colon">:</span><span class="minutes">00</span><span class="colon">:</span><span class="seconds">00</span>
+                    </div>
+                </div>
+
+                <div class="price-display">
+                    <span class="old-price">1200 грн</span>
+                    <span class="new-price">399 грн</span>
+                </div>
+
+                <a href="#" class="btn btn-dark full-width" onclick="openPopup(); return false;">Записатись на курс</a>
+                <p class="guarantee">Гарантія повернення коштів — 14 днів</p>
             </div>
-            <div class="price-main">
-                <span class="old">1200 грн</span>
-                <span class="current">399 грн</span>
-            </div>
-            <a href="#" class="btn" onclick="openPopup(); return false;">Записатись на курс</a>
         </div>
     </section>
 
-    <footer class="container">
-        <p>Тіло не ламається просто так. Воно говорить тоді, коли його довго не чують. 🤍</p>
+    <footer>
+        <div class="container text-center">
+            <p class="footer-quote">"Тіло не ламається просто так. Воно говорить тоді, коли його довго не чують."</p>
+            <p class="copyright">© 2026 Body Exhale. Всі права захищено.</p>
+        </div>
     </footer>
 
     <div id="popup-modal" class="modal-overlay">
-        <div class="modal-content">
+        <div class="modal-content premium-shadow">
             <span class="close-btn" id="close-popup">×</span>
-            <h3>Я хочу почути своє тіло</h3>
-            <p>Введіть дані для доступу до кабінету</p>
+            <h3 class="modal-title">Почути своє тіло</h3>
+            <p class="modal-desc">Заповніть форму для отримання доступу. Після цього вас буде перенаправлено на безпечну сторінку оплати.</p>
+            
             <form class="popup-form">
-                <input type="email" placeholder="Ваш E-mail" required>
-                <input type="tel" placeholder="Ваш телефон" required>
-                <button type="submit" class="btn full-width">Перейти до оплати</button>
+                <div class="input-group">
+                    <input type="email" placeholder="Ваш E-mail" required>
+                </div>
+                <div class="input-group">
+                    <input type="tel" placeholder="Ваш телефон" required>
+                </div>
+                <button type="submit" class="btn btn-gold full-width">Оплатити 399 грн</button>
             </form>
-            <p class="secure">🔒 Безпечна оплата WayForPay</p>
+            <p class="secure-text">🔒 Захищено сервісом WayForPay</p>
         </div>
     </div>
 
