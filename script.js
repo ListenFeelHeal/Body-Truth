@@ -59,7 +59,7 @@ const emailChips = document.querySelectorAll('.email-chip');
 if (emailInput && emailChips.length > 0) {
     emailChips.forEach(chip => {
         chip.addEventListener('click', function(e) {
-            e.preventDefault(); // Запобігає перезавантаженню від кнопки
+            e.preventDefault(); // Запобігає перезавантаженню
             let val = emailInput.value;
             // Якщо вже є @, відрізаємо все, що після неї
             if (val.includes('@')) {
@@ -78,11 +78,9 @@ if (phoneInput) {
     phoneInput.value = '+380'; // Встановлюємо початкове значення
 
     phoneInput.addEventListener('input', function() {
-        // Якщо користувач спробував стерти +380 повністю або частково
+        // Забороняємо стерти +380 при вводі
         if (!this.value.startsWith('+380')) {
-            // Витягуємо тільки цифри, які він ввів
-            let digits = this.value.replace(/\D/g, '');
-            // Якщо цифри починаються на 380, прибираємо їх, щоб не дублювати
+            let digits = this.value.replace(/\D/g, ''); // витягуємо тільки цифри
             if(digits.startsWith('380')) {
                 digits = digits.substring(3);
             }
@@ -90,7 +88,7 @@ if (phoneInput) {
         }
     });
 
-    // Фізично блокуємо клавішу Backspace, якщо курсор стоїть одразу після +380
+    // Фізично блокуємо клавіші Backspace/Delete, якщо курсор на +380
     phoneInput.addEventListener('keydown', function(e) {
         if ((e.key === 'Backspace' || e.key === 'Delete') && this.selectionStart <= 4) {
             e.preventDefault();
@@ -103,8 +101,9 @@ const popupForm = document.querySelector('.popup-form');
 
 if (popupForm) {
     popupForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Зупиняємо перезавантаження сторінки
-        // Перенаправляємо на посилання WayForPay
+        event.preventDefault(); // Зупиняємо перезавантаження
+        
+        // Перенаправляємо на твоє посилання WayForPay
         window.location.href = 'https://secure.wayforpay.com/button/b2669a557ef69';
     });
 }
