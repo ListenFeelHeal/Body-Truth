@@ -76,12 +76,29 @@ h1, h2, h3, h4 { font-weight: 800; }
 .hero h1 span { color: var(--gold); }
 .subtitle { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-style: italic; margin-bottom: 20px; color: #E5E0D8; }
 .hero-desc { font-size: 1.1rem; max-width: 500px; margin: 0 auto 30px; opacity: 0.9; }
-/* Додай це в розділ HERO в style.css */
+/* Додай це в розділ HERO в style.css замість старого коду для лого */
 .site-logo {
-    max-width: 200px; /* Оптимальний розмір, щоб не перебивати заголовок */
+    max-width: 180px; /* Трохи зменшив розмір, для кола так краще */
     height: auto;
     margin: 0 auto 30px; /* Центрування і відступ знизу */
     display: block;
+    
+    /* РОБИМО КРУГЛИМ */
+    border-radius: 50%; 
+    
+    /* Додаємо тонку золоту рамку для краси */
+    border: 2px solid var(--gold); 
+    
+    /* (Необов'язково) Невеликий відступ між рамкою і картинкою */
+    padding: 5px; 
+}
+
+/* На мобільних адаптуємо розмір */
+@media (max-width: 768px) {
+    .site-logo {
+        max-width: 140px;
+        margin-bottom: 25px;
+    }
 }
 
 /* На мобільних зробимо його трохи меншим */
