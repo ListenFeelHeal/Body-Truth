@@ -63,3 +63,42 @@ if (popupForm) {
         window.location.href = 'https://secure.wayforpay.com/button/b2669a557ef69';
     });
 }
+// --- ФУНКЦІОНАЛ АВТОЗАПОВНЕННЯ EMAIL ---
+const emailInput = document.getElementById('user-email');
+const emailChips = document.querySelectorAll('.email-chip');
+
+if (emailInput && emailChips) {
+    emailChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            const val = emailInput.value;
+            // Якщо людина вже ввела @, просто замінюємо домен
+            if (val.includes('@')) {
+                emailInput.value = val.split('@')[0] + chip.innerText;
+            } else {
+                // Якщо @ ще немає, просто додаємо домен до тексту
+                emailInput.value = val + chip.innerText;
+            }
+            // Повертаємо курсор у поле
+            emailInput.focus();
+        });
+    });
+}
+
+// --- ФУНКЦІОНАЛ ТЕЛЕФОНУ (+380) ---
+const phoneInput = document.getElementById('user-phone');
+
+if (phoneInput) {
+    // Якщо поле у фокусі, і воно пусте, ставимо +380
+    phoneInput.addEventListener('focus', function() {
+        if (this.value === '') {
+            this.value = '+380';
+        }
+    });
+
+    // Забороняємо видаляти +380 під час вводу
+    phoneInput.addEventListener('input', function() {
+        if (this.value.length < 4 || !this.value.startsWith('+380')) {
+            this.value = '+380';
+        }
+    });
+}
