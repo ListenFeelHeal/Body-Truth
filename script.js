@@ -87,3 +87,23 @@ window.addEventListener('click', (event) => {
         closePopup();
     }
 });
+// --- ФУНКЦІОНАЛ ОПЛАТИ (WAYFORPAY) ---
+
+const popupForm = document.querySelector('.popup-form');
+
+if (popupForm) {
+    popupForm.addEventListener('submit', function(event) {
+        // 1. Зупиняємо стандартну поведінку форми (щоб сторінка не перезавантажувалась)
+        event.preventDefault(); 
+        
+        // 2. Отримуємо дані, які ввела людина
+        const email = popupForm.querySelector('input[type="text"]').value;
+        const phone = popupForm.querySelector('input[type="tel"]').value;
+
+        // Згодом ми можемо додати сюди відправку цих даних тобі в Telegram, 
+        // щоб ти бачила, хто намагався оплатити.
+
+        // 3. Перенаправляємо на твоє посилання WayForPay
+        window.location.href = 'https://secure.wayforpay.com/button/b2669a557ef69';
+    });
+}
