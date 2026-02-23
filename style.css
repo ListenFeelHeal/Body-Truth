@@ -1,0 +1,178 @@
+/* Базові налаштування */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FAF9F6; /* М'який беж */
+    color: #2D2D2D;
+    line-height: 1.6;
+}
+
+h1, h2, h3, .logo {
+    font-family: 'Playfair Display', serif;
+    color: #4A5D4E; /* Заспокійливий зелений */
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+/* Кнопки */
+.btn {
+    display: inline-block;
+    background-color: #8E735B; /* Теплий коричневий */
+    color: white;
+    padding: 15px 35px;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: #6F5844;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: #8E735B;
+    border: 2px solid #8E735B;
+}
+
+.btn-outline:hover {
+    background-color: #8E735B;
+    color: white;
+}
+
+/* Головний екран */
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    background-color: #EFECE5;
+}
+
+.hero .logo {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    color: #555;
+}
+
+/* Секція "Проблеми" */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Ключова ідея */
+.idea {
+    background-color: #4A5D4E;
+    color: white;
+    text-align: center;
+}
+
+.idea h2 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.idea p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Програма */
+.day {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border-left: 5px solid #8E735B;
+}
+
+.day h3 {
+    margin-bottom: 10px;
+}
+
+/* Тарифи */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.price-card {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.price-card.premium {
+    border: 2px solid #4A5D4E;
+    transform: scale(1.02);
+}
+
+.price {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #4A5D4E;
+    margin: 20px 0;
+}
+
+ul {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+ul li {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+/* Футер */
+footer {
+    text-align: center;
+    padding: 30px;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* Адаптивність для телефонів */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2rem; }
+    .idea h2 { font-size: 1.8rem; }
+}
