@@ -56,15 +56,16 @@ window.addEventListener('click', (event) => {
 const emailInput = document.getElementById('user-email');
 const emailChips = document.querySelectorAll('.email-chip');
 
-if (emailInput && emailChips) {
+if (emailInput && emailChips.length > 0) {
     emailChips.forEach(chip => {
-        chip.addEventListener('click', () => {
+        chip.addEventListener('click', function(e) {
+            e.preventDefault(); // Запобігає перезавантаженню від кнопки
             let val = emailInput.value;
             // Якщо вже є @, відрізаємо все, що після неї
             if (val.includes('@')) {
                 val = val.split('@')[0];
             }
-            emailInput.value = val + chip.innerText;
+            emailInput.value = val + this.innerText;
             emailInput.focus();
         });
     });
@@ -74,14 +75,14 @@ if (emailInput && emailChips) {
 const phoneInput = document.getElementById('user-phone');
 
 if (phoneInput) {
-    // Встановлюємо початкове значення
-    phoneInput.value = '+380';
+    phoneInput.value = '+380'; // Встановлюємо початкове значення
 
-    // Забороняємо стерти +380 при вводі
     phoneInput.addEventListener('input', function() {
+        // Якщо користувач спробував стерти +380 повністю або частково
         if (!this.value.startsWith('+380')) {
-            // Залишаємо тільки ті цифри, що ввели після +380
+            // Витягуємо тільки цифри, які він ввів
             let digits = this.value.replace(/\D/g, '');
+            // Якщо цифри починаються на 380, прибираємо їх, щоб не дублювати
             if(digits.startsWith('380')) {
                 digits = digits.substring(3);
             }
@@ -89,7 +90,7 @@ if (phoneInput) {
         }
     });
 
-    // Фізично блокуємо клавіші Backspace/Delete, якщо курсор дійшов до +380
+    // Фізично блокуємо клавішу Backspace, якщо курсор стоїть одразу після +380
     phoneInput.addEventListener('keydown', function(e) {
         if ((e.key === 'Backspace' || e.key === 'Delete') && this.selectionStart <= 4) {
             e.preventDefault();
@@ -103,7 +104,6 @@ const popupForm = document.querySelector('.popup-form');
 if (popupForm) {
     popupForm.addEventListener('submit', function(event) {
         event.preventDefault(); // Зупиняємо перезавантаження сторінки
-        
         // Перенаправляємо на посилання WayForPay
         window.location.href = 'https://secure.wayforpay.com/button/b2669a557ef69';
     });
