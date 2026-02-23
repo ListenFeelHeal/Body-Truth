@@ -146,10 +146,39 @@ h1, h2, h3, h4 { font-weight: 800; }
 .time-box small { font-size: 0.75rem; text-transform: uppercase; margin-top: 5px; color: var(--gold); font-weight: 600; }
 .time-separator { font-size: 2.5rem; font-weight: 800; color: var(--bg-dark); margin-top: 5px; }
 
-/* ================= ФУТЕР ================= */
-footer { background: var(--bg-dark); color: var(--text-light); padding: 40px 20px; }
-.footer-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-style: italic; color: var(--gold); margin-bottom: 20px; }
-.copyright { font-size: 0.8rem; color: #666; text-transform: uppercase; }
+/* ================= ФУТЕР ТА ЮРИДИЧНА ІНФОРМАЦІЯ ================= */
+footer { background: var(--bg-dark); color: var(--text-light); padding: 50px 20px 100px; }
+.footer-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-style: italic; color: var(--gold); margin-bottom: 30px; }
+
+.legal-info {
+    margin: 30px auto;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.85rem;
+    color: #999;
+    max-width: 700px;
+    line-height: 1.6;
+}
+.legal-contacts { margin-bottom: 20px; }
+.legal-contacts strong { color: var(--gold); font-size: 0.95rem; }
+
+.legal-links { margin: 20px 0; }
+.legal-links a {
+    color: var(--gold);
+    text-decoration: underline;
+    transition: 0.3s;
+}
+.legal-links a:hover { color: #fff; }
+.divider { margin: 0 10px; color: #555; }
+
+.disclaimer {
+    font-size: 0.75rem;
+    color: #666;
+    text-align: justify;
+    margin-bottom: 30px;
+}
+
+.copyright { font-size: 0.8rem; color: #555; text-transform: uppercase; letter-spacing: 1px; }
 
 /* ================= STICKY BAR ================= */
 .sticky-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 15px 20px; box-shadow: 0 -5px 20px rgba(0,0,0,0.1); z-index: 900; text-align: center; }
