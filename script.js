@@ -1,42 +1,65 @@
-// Таймер на 5 годин з пам'яттю
+// --- ФУНКЦІОНАЛ ТАЙМЕРА (5 ГОДИН ІЗ ЗБЕРЕЖЕННЯМ) ---
 function initTimer() {
-    let endTime = localStorage.getItem('courseTimer');
+    let endTime = localStorage.getItem('courseTimerDirect');
     if (!endTime) {
-        endTime = new Date().getTime() + (5 * 60 * 60 * 1000);
-        localStorage.setItem('courseTimer', endTime);
+        const now = new Date().getTime();
+        endTime = now + (5 * 60 * 60 * 1000); 
+        localStorage.setItem('courseTimerDirect', endTime);
+    } else {
+        endTime = parseInt(endTime, 10);
     }
     return endTime;
 }
 
-const finalTime = initTimer();
+const endTime = initTimer();
 
-function update() {
+function updateTimers() {
     const now = new Date().getTime();
-    let diff = finalTime - now;
-    if (diff < 0) diff = 0;
+    let timeLeft = endTime - now;
 
-    const h = Math.floor(diff / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
+    if (timeLeft < 0) { timeLeft = 0; }
 
-    const str = `${h < 10 ? '0'+h : h}:${m < 10 ? '0'+m : m}:${s < 10 ? '0'+s : s}`;
-    document.querySelector('.hours').innerText = h < 10 ? '0'+h : h;
-    document.querySelector('.minutes').innerText = m < 10 ? '0'+m : m;
-    document.querySelector('.seconds').innerText = s < 10 ? '0'+s : s;
+    const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+    const seconds = Math.floor((timeLeft / 1000) % 60);
+
+    function formatTime(time) { return time < 10 ? `0${time}` : time; }
+
+    const timerElements = [document.getElementById('landing-timer'), document.getElementById('popup-timer')];
+
+    timerElements.forEach(timer => {
+        if (timer) {
+            timer.querySelector('.hours').textContent = formatTime(hours);
+            timer.querySelector('.minutes').textContent = formatTime(minutes);
+            timer.querySelector('.seconds').textContent = formatTime(seconds);
+        }
+    });
 }
-setInterval(update, 1000);
 
-// Попап логіка
+updateTimers();
+setInterval(updateTimers, 1000);
+
+// --- ФУНКЦІОНАЛ POP-UP ВІКНА ---
 const modal = document.getElementById('popup-modal');
+const closeBtn = document.getElementById('close-popup');
+
 function openPopup() { modal.classList.add('active'); }
 function closePopup() { modal.classList.remove('active'); }
 
-document.getElementById('close-popup').onclick = closePopup;
-window.onclick = (e) => { if(e.target == modal) closePopup(); }
+closeBtn.addEventListener('click', closePopup);
 
-// Оплата
-document.querySelector('.popup-form').onsubmit = (e) => {
-    e.preventDefault();
-    // Тут можна додати збір даних у Telegram
-    window.location.href = 'https://secure.wayforpay.com/button/b2669a557ef69';
-};
+window.addEventListener('click', (event) => {
+    if (event.target === modal) { closePopup(); }
+});
+
+// --- ФУНКЦІОНАЛ ОПЛАТИ (WAYFORPAY) ---
+const popupForm = document.querySelector('.popup-form');
+
+if (popupForm) {
+    popupForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Зупиняємо перезавантаження
+        
+        // Перенаправляємо на твоє посилання WayForPay
+        window.location.href = 'https://secure.wayforpay.com/button/b2669a557ef69';
+    });
+}
