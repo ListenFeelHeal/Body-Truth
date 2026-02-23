@@ -52,53 +52,59 @@ window.addEventListener('click', (event) => {
     if (event.target === modal) { closePopup(); }
 });
 
-// --- ФУНКЦІОНАЛ ОПЛАТИ (WAYFORPAY) ---
-const popupForm = document.querySelector('.popup-form');
-
-if (popupForm) {
-    popupForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Зупиняємо перезавантаження
-        
-        // Перенаправляємо на твоє посилання WayForPay
-        window.location.href = 'https://secure.wayforpay.com/button/b2669a557ef69';
-    });
-}
-// --- ФУНКЦІОНАЛ АВТОЗАПОВНЕННЯ EMAIL ---
+// --- АВТОЗАПОВНЕННЯ EMAIL (КНОПКИ) ---
 const emailInput = document.getElementById('user-email');
 const emailChips = document.querySelectorAll('.email-chip');
 
 if (emailInput && emailChips) {
     emailChips.forEach(chip => {
         chip.addEventListener('click', () => {
-            const val = emailInput.value;
-            // Якщо людина вже ввела @, просто замінюємо домен
+            let val = emailInput.value;
+            // Якщо вже є @, відрізаємо все, що після неї
             if (val.includes('@')) {
-                emailInput.value = val.split('@')[0] + chip.innerText;
-            } else {
-                // Якщо @ ще немає, просто додаємо домен до тексту
-                emailInput.value = val + chip.innerText;
+                val = val.split('@')[0];
             }
-            // Повертаємо курсор у поле
+            emailInput.value = val + chip.innerText;
             emailInput.focus();
         });
     });
 }
 
-// --- ФУНКЦІОНАЛ ТЕЛЕФОНУ (+380) ---
+// --- БЛОКУВАННЯ ВИДАЛЕННЯ +380 ---
 const phoneInput = document.getElementById('user-phone');
 
 if (phoneInput) {
-    // Якщо поле у фокусі, і воно пусте, ставимо +380
-    phoneInput.addEventListener('focus', function() {
-        if (this.value === '') {
-            this.value = '+380';
+    // Встановлюємо початкове значення
+    phoneInput.value = '+380';
+
+    // Забороняємо стерти +380 при вводі
+    phoneInput.addEventListener('input', function() {
+        if (!this.value.startsWith('+380')) {
+            // Залишаємо тільки ті цифри, що ввели після +380
+            let digits = this.value.replace(/\D/g, '');
+            if(digits.startsWith('380')) {
+                digits = digits.substring(3);
+            }
+            this.value = '+380' + digits;
         }
     });
 
-    // Забороняємо видаляти +380 під час вводу
-    phoneInput.addEventListener('input', function() {
-        if (this.value.length < 4 || !this.value.startsWith('+380')) {
-            this.value = '+380';
+    // Фізично блокуємо клавіші Backspace/Delete, якщо курсор дійшов до +380
+    phoneInput.addEventListener('keydown', function(e) {
+        if ((e.key === 'Backspace' || e.key === 'Delete') && this.selectionStart <= 4) {
+            e.preventDefault();
         }
+    });
+}
+
+// --- ФУНКЦІОНАЛ ОПЛАТИ (WAYFORPAY) ---
+const popupForm = document.querySelector('.popup-form');
+
+if (popupForm) {
+    popupForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Зупиняємо перезавантаження сторінки
+        
+        // Перенаправляємо на посилання WayForPay
+        window.location.href = 'https://secure.wayforpay.com/button/b2669a557ef69';
     });
 }
