@@ -76,6 +76,21 @@ h1, h2, h3, h4 { font-weight: 800; }
 .hero h1 span { color: var(--gold); }
 .subtitle { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-style: italic; margin-bottom: 20px; color: #E5E0D8; }
 .hero-desc { font-size: 1.1rem; max-width: 500px; margin: 0 auto 30px; opacity: 0.9; }
+/* Додай це в розділ HERO в style.css */
+.site-logo {
+    max-width: 200px; /* Оптимальний розмір, щоб не перебивати заголовок */
+    height: auto;
+    margin: 0 auto 30px; /* Центрування і відступ знизу */
+    display: block;
+}
+
+/* На мобільних зробимо його трохи меншим */
+@media (max-width: 768px) {
+    .site-logo {
+        max-width: 160px;
+        margin-bottom: 20px;
+    }
+}
 
 /* ================= ПРО МЕНЕ & ФОТО ================= */
 .section-title { font-size: 2.2rem; margin-bottom: 30px; color: var(--bg-dark); text-transform: uppercase; }
