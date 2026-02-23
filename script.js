@@ -59,9 +59,8 @@ const emailChips = document.querySelectorAll('.email-chip');
 if (emailInput && emailChips.length > 0) {
     emailChips.forEach(chip => {
         chip.addEventListener('click', function(e) {
-            e.preventDefault(); // Запобігає перезавантаженню
+            e.preventDefault(); 
             let val = emailInput.value;
-            // Якщо вже є @, відрізаємо все, що після неї
             if (val.includes('@')) {
                 val = val.split('@')[0];
             }
@@ -71,28 +70,16 @@ if (emailInput && emailChips.length > 0) {
     });
 }
 
-// --- БЛОКУВАННЯ ВИДАЛЕННЯ +380 ---
-const phoneInput = document.getElementById('user-phone');
+// --- ІНІЦІАЛІЗАЦІЯ ПРАПОРЦІВ ТА КОДІВ КРАЇН (intl-tel-input) ---
+const phoneInputField = document.querySelector("#user-phone");
+let phoneInput;
 
-if (phoneInput) {
-    phoneInput.value = '+380'; // Встановлюємо початкове значення
-
-    phoneInput.addEventListener('input', function() {
-        // Забороняємо стерти +380 при вводі
-        if (!this.value.startsWith('+380')) {
-            let digits = this.value.replace(/\D/g, ''); // витягуємо тільки цифри
-            if(digits.startsWith('380')) {
-                digits = digits.substring(3);
-            }
-            this.value = '+380' + digits;
-        }
-    });
-
-    // Фізично блокуємо клавіші Backspace/Delete, якщо курсор на +380
-    phoneInput.addEventListener('keydown', function(e) {
-        if ((e.key === 'Backspace' || e.key === 'Delete') && this.selectionStart <= 4) {
-            e.preventDefault();
-        }
+if (phoneInputField) {
+    phoneInput = window.intlTelInput(phoneInputField, {
+        // Улюблені країни, які будуть зверху списку
+        preferredCountries: ["ua", "pl", "de", "us", "gb", "cz", "it", "es"],
+        // Підключаємо додаткові утиліти для форматування номеру
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
     });
 }
 
@@ -101,9 +88,13 @@ const popupForm = document.querySelector('.popup-form');
 
 if (popupForm) {
     popupForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Зупиняємо перезавантаження
+        event.preventDefault(); 
         
-        // Перенаправляємо на твоє посилання WayForPay
+        // Можна отримати повний номер з кодом країни, якщо потрібно буде відправляти в Телеграм:
+        // const fullPhoneNumber = phoneInput.getNumber();
+        // const emailValue = emailInput.value;
+
+        // Перенаправляємо на WayForPay
         window.location.href = 'https://secure.wayforpay.com/button/b2669a557ef69';
     });
 }
