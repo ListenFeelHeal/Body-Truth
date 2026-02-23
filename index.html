@@ -238,9 +238,20 @@
             </div>
 
             <form class="popup-form">
-                <input type="email" placeholder="Ваш E-mail" required>
-                <input type="tel" placeholder="Ваш телефон" required>
+                <div class="email-wrapper">
+                    <input type="email" id="user-email" placeholder="Ваш E-mail" required>
+                    <div class="email-suggestions">
+                        <span class="email-chip">@gmail.com</span>
+                        <span class="email-chip">@ukr.net</span>
+                        <span class="email-chip">@icloud.com</span>
+                    </div>
+                </div>
+
+                <input type="tel" id="user-phone" value="+380" placeholder="Ваш телефон" required>
+                
                 <button type="submit" class="btn btn-dark full-width pulse">ПЕРЕЙТИ ДО ОПЛАТИ</button>
+                
+                <p class="bonus-text">Після реєстрації ти отримаєш приємний бонус від мене ❤️</p>
             </form>
 
             <p class="secure-text">🔒 Всі дані конфіденційні</p>
