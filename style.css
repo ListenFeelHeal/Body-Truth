@@ -1,8 +1,8 @@
 /* ================= ЗМІННІ ТА БАЗА ================= */
 :root {
-    --bg-light: #F9F8F6; /* Слонова кістка */
-    --bg-dark: #1A1A1A;  /* Графіт */
-    --gold: #C2A373;     /* Приглушене золото */
+    --bg-light: #F9F8F6;
+    --bg-dark: #1A1A1A;
+    --gold: #C2A373;
     --gold-hover: #A88B5E;
     --text-dark: #2C2C2C;
     --text-light: #FFFFFF;
@@ -29,7 +29,7 @@ body {
 h1, h2, h3, h4 { font-weight: 800; }
 .gold-text { color: #A88B5E; }
 
-/* ================= КНОПКИ ================= */
+/* ================= КНОПКИ ТА БОНУС ТЕКСТ ================= */
 .btn {
     display: inline-block;
     padding: 20px 30px;
@@ -48,12 +48,18 @@ h1, h2, h3, h4 { font-weight: 800; }
 
 .btn-gold { background-color: var(--gold); color: var(--text-light); }
 .btn-gold:hover { background-color: var(--gold-hover); }
-
 .btn-dark { background-color: var(--bg-dark); color: var(--gold); }
 .btn-dark:hover { background-color: #000; }
-
 .full-width { max-width: 100%; }
 .huge-btn { font-size: 1.2rem; padding: 25px 20px; white-space: normal; }
+
+.bonus-text-hero {
+    margin-top: 20px;
+    font-size: 0.95rem;
+    color: var(--gold);
+    font-style: italic;
+    font-weight: 500;
+}
 
 .pulse { animation: pulse-animation 2s infinite; }
 @keyframes pulse-animation {
@@ -96,7 +102,6 @@ h1, h2, h3, h4 { font-weight: 800; }
 .day-card h4 { font-size: 1.2rem; margin-bottom: 10px; color: var(--bg-dark); }
 .day-card p { font-size: 0.95rem; color: #555; margin-bottom: 15px; }
 .practice { display: inline-block; background: var(--bg-light); padding: 5px 10px; border-radius: 5px; font-size: 0.85rem; font-weight: 600; }
-.highlight-card { background: var(--bg-dark); border-color: var(--bg-dark); }
 
 /* ================= ФОРМАТ ТА РЕЗУЛЬТАТИ ================= */
 .format-flex { display: flex; gap: 30px; justify-content: space-between; flex-wrap: wrap; }
@@ -105,8 +110,15 @@ h1, h2, h3, h4 { font-weight: 800; }
 .format-box ul, .results-box ul { list-style: none; }
 .format-box li, .results-box li { margin-bottom: 15px; font-size: 1.05rem; }
 
-/* ================= АТМОСФЕРА ================= */
+/* ================= АТМОСФЕРА (ЖУРНАЛЬНИЙ БЛОК) ================= */
 .subtitle-text { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-style: italic; color: #888; margin-bottom: 20px; }
+.pressure-container { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; align-items: center; background: #ffffff; padding: 50px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.04); }
+.pressure-image-wrapper { width: 100%; height: 100%; border-radius: 15px; overflow: hidden; }
+.pressure-img { width: 100%; height: 100%; object-fit: cover; min-height: 450px; background-color: #E5E0D8; display: block; }
+.pressure-text-wrapper { text-align: left; }
+.pressure-text-wrapper .section-title { font-size: 2.2rem; }
+.mb-15 { margin-bottom: 15px; font-size: 1.05rem; color: #444; }
+.small-quote { font-size: 1.3rem; margin: 20px 0; padding: 15px 0 15px 20px; }
 
 /* ================= АУДИТОРІЯ ================= */
 .audience { background-color: #fff; }
@@ -143,7 +155,7 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 40px 20p
 .sticky-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 15px 20px; box-shadow: 0 -5px 20px rgba(0,0,0,0.1); z-index: 900; text-align: center; }
 .sticky-btn { margin: 0; max-width: 100%; padding: 18px 10px; font-size: 1.1rem; }
 
-/* ================= POPUP ================= */
+/* ================= POPUP ТА ФОРМА ================= */
 .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
 .modal-overlay.active { display: flex; }
 .modal-content { background: var(--gold); width: 100%; max-width: 400px; padding: 40px 25px; border-radius: 20px; position: relative; text-align: center; color: var(--bg-dark); }
@@ -153,7 +165,15 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 40px 20p
 .price-big { font-size: 3rem; font-weight: 900; display: block; line-height: 1; }
 .price-crossed { font-size: 1.3rem; text-decoration: line-through; color: rgba(26,26,26,0.6); font-weight: 700; }
 
-.popup-form input { width: 100%; padding: 18px; margin-bottom: 15px; border: none; border-radius: 8px; font-size: 1rem; font-family: 'Montserrat', sans-serif; font-weight: 600; text-align: center; }
+.popup-form input { width: 100%; padding: 18px; border: none; border-radius: 8px; font-size: 1rem; font-family: 'Montserrat', sans-serif; font-weight: 600; text-align: center; margin-bottom: 15px; }
+
+/* Стилі для кнопок пошти */
+.email-wrapper { margin-bottom: 15px; }
+.email-wrapper input { margin-bottom: 8px; }
+.email-suggestions { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+.email-chip { background: rgba(26, 26, 26, 0.1); padding: 8px 14px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; transition: 0.2s; color: var(--bg-dark); font-weight: 600; display: inline-block; }
+.email-chip:hover { background: rgba(26, 26, 26, 0.25); }
+
 .secure-text { margin-top: 15px; font-size: 0.85rem; font-weight: 600; }
 
 .timer-wrapper-small { margin-top: 20px; border-top: 1px solid rgba(26,26,26,0.2); padding-top: 15px; }
@@ -162,117 +182,20 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 40px 20p
 .small-boxes .time-box span { font-size: 1.8rem; }
 .small-boxes .time-separator { font-size: 1.8rem; margin-top: 5px; }
 
-/* ================= ПОКРАЩЕННЯ ФОРМИ (Email, Телефон, Бонус) ================= */
-.email-wrapper {
-    margin-bottom: 15px;
-}
-.popup-form .email-wrapper input {
-    margin-bottom: 8px; /* Менший відступ, щоб кнопки пошти були ближче */
-}
-.email-suggestions {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-.email-chip {
-    background: rgba(26, 26, 26, 0.08);
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: 0.2s;
-    color: var(--bg-dark);
-    font-weight: 600;
-    font-family: 'Montserrat', sans-serif;
-}
-.email-chip:hover {
-    background: rgba(26, 26, 26, 0.15);
-}
-.bonus-text {
-    margin-top: 15px;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--bg-dark);
-    font-style: italic;
-}
 /* ================= АДАПТИВНІСТЬ ================= */
 @media (max-width: 768px) {
     .hero h1 { font-size: 2.8rem; }
     .about-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
     .about-text { text-align: center; }
     .highlight-quote { border-left: none; border-top: 3px solid var(--gold); border-bottom: 3px solid var(--gold); padding: 20px 0; }
+    
+    .pressure-container { grid-template-columns: 1fr; padding: 30px 20px; text-align: center; gap: 30px; }
+    .pressure-text-wrapper { text-align: center; }
+    .pressure-img { min-height: 250px; }
+    .pressure-text-wrapper .small-quote { padding: 20px 0; border-left: none; border-top: 2px solid var(--gold); border-bottom: 2px solid var(--gold); }
+    
     .audience-grid { grid-template-columns: 1fr; gap: 20px; }
     .offer-block { margin: 20px 0; border-radius: 0; padding: 40px 15px; }
     .massive-price { font-size: 3.5rem; }
     .time-box { min-width: 70px; }
-}
-/* ================= АТМОСФЕРА (ЖУРНАЛЬНА ВЕРСТКА) ================= */
-.pressure-container {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 50px;
-    align-items: center;
-    background: #ffffff;
-    padding: 50px;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.04);
-}
-
-.pressure-image-wrapper {
-    width: 100%;
-    height: 100%;
-    border-radius: 15px;
-    overflow: hidden;
-}
-
-.pressure-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    min-height: 450px;
-    background-color: #E5E0D8; /* Колір-заглушка, поки не додаси фото */
-    display: block;
-}
-
-.pressure-text-wrapper {
-    text-align: left;
-}
-
-.pressure-text-wrapper .section-title {
-    font-size: 2.2rem;
-}
-
-.mb-15 {
-    margin-bottom: 15px;
-    font-size: 1.05rem;
-    color: #444;
-}
-
-.small-quote {
-    font-size: 1.3rem;
-    margin: 20px 0;
-    padding: 15px 0 15px 20px;
-}
-
-/* Адаптивність для телефонів */
-@media (max-width: 768px) {
-    .pressure-container {
-        grid-template-columns: 1fr;
-        padding: 30px 20px;
-        text-align: center;
-        gap: 30px;
-    }
-    .pressure-text-wrapper {
-        text-align: center;
-    }
-    .pressure-img {
-        min-height: 250px;
-    }
-    .pressure-text-wrapper .small-quote {
-        padding: 20px 0;
-        border-left: none;
-        border-top: 2px solid var(--gold);
-        border-bottom: 2px solid var(--gold);
-    }
 }
