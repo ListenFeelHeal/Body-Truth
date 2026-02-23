@@ -83,18 +83,41 @@ if (phoneInputField) {
     });
 }
 
-// --- ФУНКЦІОНАЛ ОПЛАТИ (WAYFORPAY) ---
+// --- ФУНКЦІОНАЛ CRM (SENDPULSE EVENTS) ТА ОПЛАТИ ---
 const popupForm = document.querySelector('.popup-form');
 
 if (popupForm) {
-    popupForm.addEventListener('submit', function(event) {
-        event.preventDefault(); 
+    popupForm.addEventListener('submit', async function(event) {
+        event.preventDefault(); // Зупиняємо стандартне перезавантаження
         
-        // Можна отримати повний номер з кодом країни, якщо потрібно буде відправляти в Телеграм:
-        // const fullPhoneNumber = phoneInput.getNumber();
-        // const emailValue = emailInput.value;
+        const emailValue = document.getElementById('user-email').value;
+        const phoneValue = phoneInput.getNumber(); // Отримуємо номер з кодом
+        
+        // ВСТАВ СЮДИ СВОЄ ПОСИЛАННЯ З МЕНЕДЖЕРА ПОДІЙ SENDPULSE
+        const sendPulseEventUrl = "https://events.sendpulse.com/events/id/7cc034c090fb4866b3509f19abc80ae6/9215091";
 
-        // Перенаправляємо на WayForPay
+        // Формуємо дані для відправки
+        const requestData = {
+            "email": emailValue,
+            "phone": phoneValue
+        };
+
+        try {
+            // Відправляємо дані в SendPulse
+            await fetch(sendPulseEventUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData)
+            });
+            console.log("Дані успішно відправлені в SendPulse CRM");
+        } catch (error) {
+            console.error("Помилка відправки в SendPulse:", error);
+            // Навіть якщо сталася помилка з CRM, ми не блокуємо продаж
+        }
+
+        // Перенаправляємо клієнтку на WayForPay
         window.location.href = 'https://secure.wayforpay.com/button/b2669a557ef69';
     });
 }
