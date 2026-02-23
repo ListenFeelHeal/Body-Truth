@@ -90,16 +90,32 @@ if (popupForm) {
     popupForm.addEventListener('submit', async function(event) {
         event.preventDefault(); // Зупиняємо стандартне перезавантаження
         
-        const emailValue = document.getElementById('user-email').value;
-        const phoneValue = phoneInput.getNumber(); // Отримуємо номер з кодом
+        // Робимо ефект "завантаження" на кнопці, щоб людина не клацала двічі
+        const submitBtn = popupForm.querySelector('button[type="submit"]');
+        submitBtn.innerText = "ОБРОБЛЕННЯ...";
         
-        // ВСТАВ СЮДИ СВОЄ ПОСИЛАННЯ З МЕНЕДЖЕРА ПОДІЙ SENDPULSE
+        const emailValue = document.getElementById('user-email').value;
+        
+        // Отримуємо телефон безпечно
+        let phoneValue = "";
+        if (typeof phoneInput !== 'undefined' && typeof phoneInput.getNumber === 'function') {
+            phoneValue = phoneInput.getNumber(); // Беремо номер з міжнародним кодом
+        } else {
+            phoneValue = document.getElementById('user-phone').value;
+        }
+        
+        // Генеруємо дату у форматі YYYY-MM-DD, як просить SendPulse
+        const today = new Date();
+        const eventDate = today.toISOString().split('T')[0];
+
+        // Точне посилання з твого скріншоту
         const sendPulseEventUrl = "https://events.sendpulse.com/events/id/7cc034c090fb4866b3509f19abc80ae6/9215091";
 
-        // Формуємо дані для відправки
+        // Формуємо дані ТОЧНО так, як вимагають твої налаштування
         const requestData = {
             "email": emailValue,
-            "phone": phoneValue
+            "phone": phoneValue,
+            "event_date": eventDate
         };
 
         try {
@@ -107,17 +123,17 @@ if (popupForm) {
             await fetch(sendPulseEventUrl, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify(requestData)
             });
-            console.log("Дані успішно відправлені в SendPulse CRM");
+            console.log("Дані полетіли в CRM");
         } catch (error) {
-            console.error("Помилка відправки в SendPulse:", error);
-            // Навіть якщо сталася помилка з CRM, ми не блокуємо продаж
+            console.error("Помилка відправки:", error);
         }
 
-        // Перенаправляємо клієнтку на WayForPay
+        // Плавне перенаправлення на WayForPay
         window.location.href = 'https://secure.wayforpay.com/button/b2669a557ef69';
     });
 }
