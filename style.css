@@ -162,6 +162,40 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 40px 20p
 .small-boxes .time-box span { font-size: 1.8rem; }
 .small-boxes .time-separator { font-size: 1.8rem; margin-top: 5px; }
 
+/* ================= ПОКРАЩЕННЯ ФОРМИ (Email, Телефон, Бонус) ================= */
+.email-wrapper {
+    margin-bottom: 15px;
+}
+.popup-form .email-wrapper input {
+    margin-bottom: 8px; /* Менший відступ, щоб кнопки пошти були ближче */
+}
+.email-suggestions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.email-chip {
+    background: rgba(26, 26, 26, 0.08);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: 0.2s;
+    color: var(--bg-dark);
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+}
+.email-chip:hover {
+    background: rgba(26, 26, 26, 0.15);
+}
+.bonus-text {
+    margin-top: 15px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--bg-dark);
+    font-style: italic;
+}
 /* ================= АДАПТИВНІСТЬ ================= */
 @media (max-width: 768px) {
     .hero h1 { font-size: 2.8rem; }
