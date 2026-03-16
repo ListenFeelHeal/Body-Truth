@@ -320,3 +320,17 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 50px 20p
 .del-1 { transition-delay: 0.15s !important; }
 .del-2 { transition-delay: 0.3s !important; }
 .del-3 { transition-delay: 0.45s !important; }
+
+/* --- СТИЛЬ ДЛЯ ВЕРХНЬОГО БЛОКУ ПРОДАЖУ --- */
+.top-offer {
+    margin-top: -50px; /* Робимо так, щоб блок трохи "наїхав" на темний фон */
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1); /* Додаємо легку тінь для об'єму */
+}
+
+@media (max-width: 768px) {
+    .top-offer {
+        margin-top: -30px;
+    }
+}
