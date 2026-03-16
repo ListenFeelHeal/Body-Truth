@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Оплата успішна! | Body Exhale</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body { background: #161616; color: white; font-family: 'Montserrat', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; }
+        .card { background: #C2A373; padding: 40px; border-radius: 20px; max-width: 400px; width: 90%; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        h1 { font-size: 24px; margin-bottom: 20px; color: #161616; }
+        p { margin-bottom: 30px; color: #161616; font-weight: 500; }
+        .btn { display: inline-block; background: #161616; color: #C2A373; padding: 20px 30px; text-decoration: none; border-radius: 12px; font-weight: 800; text-transform: uppercase; transition: 0.3s; }
+    </style>
+
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1625849898561536');
+    fbq('track', 'PageView');
+    // ЦЕ ГОЛОВНЕ: Подія покупки
+    fbq('track', 'Purchase', {value: 399.00, currency: 'UAH'});
+    </script>
+</head>
+<body>
+    <div class="card">
+        <h1>ДЯКУЄМО ЗА ОПЛАТУ! 🎉</h1>
+        <p>Натисніть кнопку нижче, щоб отримати доступ до курсу в Telegram</p>
+        <a href="https://t.me/ListenFeelHeal_bot?start=ZGw6MzE4NzQ5" class="btn">ПОЧАТИ КУРС У TELEGRAM</a>
+    </div>
+</body>
+</html>
