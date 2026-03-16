@@ -4,13 +4,62 @@
     <meta charset="UTF-8">
     <title>Оплата успішна! | Body Exhale</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
     <style>
-        body { background: #161616; color: white; font-family: 'Montserrat', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; }
-        .card { background: #C2A373; padding: 40px; border-radius: 20px; max-width: 400px; width: 90%; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-        h1 { font-size: 24px; margin-bottom: 20px; color: #161616; }
-        p { margin-bottom: 30px; color: #161616; font-weight: 500; }
-        .btn { display: inline-block; background: #161616; color: #C2A373; padding: 20px 30px; text-decoration: none; border-radius: 12px; font-weight: 800; text-transform: uppercase; transition: 0.3s; }
+        /* Додаємо box-sizing, щоб відступи не ламали ширину блоку на телефоні */
+        * {
+            box-sizing: border-box;
+        }
+        body { 
+            background: #161616; 
+            color: white; 
+            font-family: 'Montserrat', sans-serif; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            text-align: center; 
+            padding: 20px; /* Захист від прилипання до країв екрану */
+        }
+        .card { 
+            background: #C2A373; 
+            padding: 40px 25px; /* Зменшили бокові відступи для мобільної версії */
+            border-radius: 20px; 
+            max-width: 400px; 
+            width: 100%; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3); 
+        }
+        h1 { 
+            font-size: 24px; 
+            margin-top: 0;
+            margin-bottom: 20px; 
+            color: #161616; 
+            font-weight: 700; /* Заголовки обов'язково жирним */
+        }
+        p { 
+            margin-bottom: 30px; 
+            color: #161616; 
+            font-weight: 500; 
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .btn { 
+            display: block; /* Кнопка на всю доступну ширину картки */
+            width: 100%;
+            background: #161616; 
+            color: #C2A373; 
+            padding: 18px 20px; 
+            text-decoration: none; 
+            border-radius: 12px; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            transition: 0.3s;
+            font-size: 14px;
+        }
+        .btn:hover {
+            background: #2a2a2a;
+        }
     </style>
 
     <script>
@@ -22,12 +71,18 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
+    
+    /* Ініціалізація вашого пікселя */
     fbq('init', '1625849898561536');
     fbq('track', 'PageView');
-    // ЦЕ ГОЛОВНЕ: Подія покупки
+    
+    /* ЦЕ ГОЛОВНЕ: Подія покупки, яка спрацює при завантаженні цієї сторінки */
     fbq('track', 'Purchase', {value: 399.00, currency: 'UAH'});
     </script>
-</head>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1625849898561536&ev=PageView&noscript=1"
+    /></noscript>
+    </head>
 <body>
     <div class="card">
         <h1>ДЯКУЄМО ЗА ОПЛАТУ! 🎉</h1>
