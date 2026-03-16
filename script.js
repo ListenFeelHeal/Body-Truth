@@ -129,6 +129,15 @@ if (popupForm) {
             console.error("Помилка відправки:", error);
         }
 
+        // --- ВІДПРАВЛЯЄМО ПОДІЮ У FACEBOOK PIXEL ---
+        if (typeof fbq === 'function') {
+            fbq('track', 'InitiateCheckout', {
+                value: 399.00,
+                currency: 'UAH'
+            });
+        }
+
+        // Перехід на касу
         window.location.href = 'https://secure.wayforpay.com/button/b2669a557ef69';
     });
 }
