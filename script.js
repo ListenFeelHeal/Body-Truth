@@ -1,9 +1,11 @@
-// --- ФУНКЦІОНАЛ ТАЙМЕРА (5 ГОДИН ІЗ ЗБЕРЕЖЕННЯМ) ---
+// --- ФУНКЦІОНАЛ ТАЙМЕРА (ЗАХИСТ ВІД 00:00:00) ---
 function initTimer() {
     let endTime = localStorage.getItem('courseTimerDirect');
-    if (!endTime) {
-        const now = new Date().getTime();
-        endTime = now + (5 * 60 * 60 * 1000); 
+    const now = new Date().getTime();
+    
+    // Якщо таймера немає, або час ВЖЕ вийшов (щоб не показувало нулі)
+    if (!endTime || parseInt(endTime, 10) <= now) {
+        endTime = now + (5 * 60 * 60 * 1000); // 5 годин
         localStorage.setItem('courseTimerDirect', endTime);
     } else {
         endTime = parseInt(endTime, 10);
@@ -11,13 +13,18 @@ function initTimer() {
     return endTime;
 }
 
-const endTime = initTimer();
+let endTime = initTimer();
 
 function updateTimers() {
     const now = new Date().getTime();
     let timeLeft = endTime - now;
 
-    if (timeLeft < 0) { timeLeft = 0; }
+    // Якщо час вийшов прямо зараз, поки юзер на сайті - перезапускаємо непомітно
+    if (timeLeft <= 0) { 
+        endTime = now + (5 * 60 * 60 * 1000);
+        localStorage.setItem('courseTimerDirect', endTime);
+        timeLeft = endTime - now;
+    }
 
     const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
     const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
@@ -26,10 +33,10 @@ function updateTimers() {
     function formatTime(time) { return time < 10 ? `0${time}` : time; }
 
     const timerElements = [
-    document.getElementById('landing-timer'), 
-    document.getElementById('landing-timer-top'), 
-    document.getElementById('popup-timer')
-];
+        document.getElementById('landing-timer'), 
+        document.getElementById('landing-timer-top'), // Новий верхній таймер
+        document.getElementById('popup-timer')
+    ];
 
     timerElements.forEach(timer => {
         if (timer) {
@@ -51,7 +58,6 @@ function openPopup() { modal.classList.add('active'); }
 function closePopup() { modal.classList.remove('active'); }
 
 closeBtn.addEventListener('click', closePopup);
-
 window.addEventListener('click', (event) => {
     if (event.target === modal) { closePopup(); }
 });
@@ -74,7 +80,7 @@ if (emailInput && emailChips.length > 0) {
     });
 }
 
-// --- ІНІЦІАЛІЗАЦІЯ ПРАПОРЦІВ ТА КОДІВ КРАЇН (intl-tel-input) ---
+// --- ІНІЦІАЛІЗАЦІЯ ПРАПОРЦІВ (intl-tel-input) ---
 const phoneInputField = document.querySelector("#user-phone");
 let phoneInput;
 
@@ -85,7 +91,7 @@ if (phoneInputField) {
     });
 }
 
-// --- ФУНКЦІОНАЛ CRM (SENDPULSE EVENTS) ТА ОПЛАТИ ---
+// --- ФУНКЦІОНАЛ CRM ТА ОПЛАТИ ---
 const popupForm = document.querySelector('.popup-form');
 
 if (popupForm) {
@@ -96,7 +102,6 @@ if (popupForm) {
         submitBtn.innerText = "ОБРОБЛЕННЯ...";
         
         const emailValue = document.getElementById('user-email').value;
-        
         let phoneValue = "";
         if (typeof phoneInput !== 'undefined' && typeof phoneInput.getNumber === 'function') {
             phoneValue = phoneInput.getNumber(); 
@@ -106,7 +111,6 @@ if (popupForm) {
         
         const today = new Date();
         const eventDate = today.toISOString().split('T')[0];
-
         const sendPulseEventUrl = "https://events.sendpulse.com/events/id/7cc034c090fb4866b3509f19abc80ae6/9215091";
 
         const requestData = {
@@ -118,13 +122,9 @@ if (popupForm) {
         try {
             await fetch(sendPulseEventUrl, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: JSON.stringify(requestData)
             });
-            console.log("Дані полетіли в CRM");
         } catch (error) {
             console.error("Помилка відправки:", error);
         }
@@ -133,24 +133,23 @@ if (popupForm) {
     });
 }
 
-// --- ЕФЕКТ PARALLAX ДЛЯ ФОТОГРАФІЇ СВІТЛАНИ ---
+// --- ЕФЕКТ PARALLAX ---
 window.addEventListener('scroll', function() {
     const parallaxImage = document.querySelector('.about-img');
     const wrapper = document.querySelector('.about-image-wrapper');
-    
     if (!parallaxImage || !wrapper) return;
 
     const rect = wrapper.getBoundingClientRect();
     const windowHeight = window.innerHeight;
 
     if (rect.top <= windowHeight && rect.bottom >= 0) {
-        const speed = 0.1; // Швидкість паралаксу
+        const speed = 0.08; 
         const yPos = (rect.top - windowHeight / 2) * speed;
         parallaxImage.style.transform = `scale(1.05) translateY(${yPos}px)`;
     }
 });
 
-// --- БРОНЬОВАНИЙ ЗАПУСК АНІМАЦІЙ (SCROLL REVEAL) ---
+// --- SCROLL REVEAL (БЕЗ ЗЛАМУ ФОНІВ) ---
 document.addEventListener("DOMContentLoaded", function() {
     setTimeout(() => {
         const observer = new IntersectionObserver((entries, obs) => {
@@ -160,14 +159,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     obs.unobserve(entry.target);
                 }
             });
-        }, { 
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1 
-        });
+        }, { root: null, rootMargin: '0px', threshold: 0.1 });
 
-        document.querySelectorAll('.hidden-block').forEach(el => {
-            observer.observe(el);
-        });
-    }, 100); 
+        document.querySelectorAll('.hidden-block').forEach(el => observer.observe(el));
+    }, 50); 
 });
