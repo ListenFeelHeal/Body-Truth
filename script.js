@@ -151,3 +151,29 @@ document.addEventListener("DOMContentLoaded", function() {
         observer.observe(reveal);
     });
 });
+// --- ЕФЕКТ PARALLAX ДЛЯ ФОТОГРАФІЇ СВІТЛАНИ ---
+window.addEventListener('scroll', function() {
+    const parallaxImage = document.querySelector('.about-img');
+    const wrapper = document.querySelector('.about-image-wrapper');
+    
+    // Якщо елементів немає на сторінці (щоб уникнути помилок)
+    if (!parallaxImage || !wrapper) return;
+
+    // Отримуємо позицію блоку відносно екрану
+    const rect = wrapper.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    // Перевіряємо, чи фотографія зараз у полі зору користувача
+    if (rect.top <= windowHeight && rect.bottom >= 0) {
+        
+        // Визначаємо швидкість паралаксу (0.05 - це дуже м'який, ледь помітний рух)
+        const speed = 0.05; 
+        
+        // Вираховуємо, на скільки пікселів треба зсунути фото
+        // Віднімаємо windowHeight / 2, щоб ефект був симетричним (в центрі екрану зсув 0)
+        const yPos = (rect.top - windowHeight / 2) * speed;
+        
+        // Застосовуємо зсув (не забуваючи про наш scale 1.05)
+        parallaxImage.style.transform = `scale(1.05) translateY(${yPos}px)`;
+    }
+});
