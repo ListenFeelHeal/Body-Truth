@@ -98,7 +98,20 @@ h1, h2, h3, h4 { font-weight: 800; }
 
 .about-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: center; }
 .about-image-wrapper { position: relative; width: 100%; max-width: 350px; margin: 0 auto; }
-.about-img { width: 100%; height: auto; border-radius: 15px; position: relative; z-index: 2; display: block; object-fit: cover; aspect-ratio: 3/4; background-color: #ddd; }
+.about-img { 
+    width: 100%; 
+    height: auto; 
+    border-radius: 15px; 
+    position: relative; 
+    z-index: 2; 
+    display: block; 
+    object-fit: cover; 
+    aspect-ratio: 3/4; 
+    background-color: #ddd;
+    /* --- НОВЕ ДЛЯ ПАРАЛАКСУ --- */
+    transform: scale(1.05); /* Робимо запас країв для руху */
+    will-change: transform; /* Кажемо браузеру, що це буде рухатись (для плавності) */
+}
 .image-frame { position: absolute; top: 15px; left: -15px; width: 100%; height: 100%; border: 2px solid var(--gold); border-radius: 15px; z-index: 1; }
 
 .about-text { text-align: left; }
