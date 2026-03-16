@@ -25,7 +25,11 @@ function updateTimers() {
 
     function formatTime(time) { return time < 10 ? `0${time}` : time; }
 
-    const timerElements = [document.getElementById('landing-timer'), document.getElementById('popup-timer')];
+    const timerElements = [
+    document.getElementById('landing-timer'), 
+    document.getElementById('landing-timer-top'), 
+    document.getElementById('popup-timer')
+];
 
     timerElements.forEach(timer => {
         if (timer) {
