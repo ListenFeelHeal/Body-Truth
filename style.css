@@ -76,36 +76,20 @@ h1, h2, h3, h4 { font-weight: 800; }
 .hero h1 span { color: var(--gold); }
 .subtitle { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-style: italic; margin-bottom: 20px; color: #E5E0D8; }
 .hero-desc { font-size: 1.1rem; max-width: 500px; margin: 0 auto 30px; opacity: 0.9; }
-/* Додай це в розділ HERO в style.css замість старого коду для лого */
 .site-logo {
-    max-width: 180px; /* Трохи зменшив розмір, для кола так краще */
+    max-width: 180px; 
     height: auto;
-    margin: 0 auto 30px; /* Центрування і відступ знизу */
+    margin: 0 auto 30px; 
     display: block;
-    
-    /* РОБИМО КРУГЛИМ */
     border-radius: 50%; 
-    
-    /* Додаємо тонку золоту рамку для краси */
     border: 2px solid var(--gold); 
-    
-    /* (Необов'язково) Невеликий відступ між рамкою і картинкою */
     padding: 5px; 
 }
 
-/* На мобільних адаптуємо розмір */
 @media (max-width: 768px) {
     .site-logo {
         max-width: 140px;
         margin-bottom: 25px;
-    }
-}
-
-/* На мобільних зробимо його трохи меншим */
-@media (max-width: 768px) {
-    .site-logo {
-        max-width: 160px;
-        margin-bottom: 20px;
     }
 }
 
@@ -255,13 +239,13 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 50px 20p
     border-color: var(--bg-dark);
 }
 
-/* --- СТИЛІ ДЛЯ ПЛАГІНУ ПРАПОРЦІВ (intl-tel-input) --- */
+/* --- СТИЛІ ДЛЯ ПЛАГІНУ ПРАПОРЦІВ --- */
 .phone-wrapper { margin-bottom: 15px; text-align: left; }
 .iti { width: 100%; }
 .iti__flag-container { border-radius: 8px 0 0 8px; }
 .iti input, .iti input[type=text], .iti input[type=tel] {
     width: 100%;
-    padding: 18px 18px 18px 60px !important; /* Місце під прапорець */
+    padding: 18px 18px 18px 60px !important; 
     border: none;
     border-radius: 8px;
     font-size: 1rem;
@@ -271,7 +255,7 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 50px 20p
     margin-bottom: 0 !important;
     background: #fff;
     color: var(--bg-dark);
-    text-align: left; /* Номер тепер зліва, бо там прапорець */
+    text-align: left; 
 }
 .iti__country-list { 
     text-align: left; 
@@ -297,10 +281,4 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 50px 20p
     .highlight-quote { border-left: none; border-top: 3px solid var(--gold); border-bottom: 3px solid var(--gold); padding: 20px 0; }
     .pressure-container { grid-template-columns: 1fr; padding: 30px 20px; text-align: center; gap: 30px; }
     .pressure-text-wrapper { text-align: center; }
-    .pressure-img { min-height: 250px; }
-    .pressure-text-wrapper .small-quote { padding: 20px 0; border-left: none; border-top: 2px solid var(--gold); border-bottom: 2px solid var(--gold); }
-    .audience-grid { grid-template-columns: 1fr; gap: 20px; }
-    .offer-block { margin: 20px 0; border-radius: 0; padding: 40px 15px; }
-    .massive-price { font-size: 3.5rem; }
-    .time-box { min-width: 70px; }
-}
+    .pressure-img
