@@ -116,14 +116,40 @@ h1, h2, h3, h4 { font-weight: 800; }
 .section-title { font-size: 2.2rem; margin-bottom: 30px; color: var(--bg-dark); text-transform: uppercase; }
 
 .about-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: center; }
-.about-image-wrapper { position: relative; width: 100%; max-width: 350px; margin: 0 auto; border-radius: 15px; overflow: hidden; }
-.about-img { width: 100%; height: auto; position: relative; z-index: 2; display: block; object-fit: cover; aspect-ratio: 3/4; transform: scale(1.05); will-change: transform; }
-.image-frame { position: absolute; top: 15px; left: -15px; width: 100%; height: 100%; border: 2px solid var(--gold); border-radius: 15px; z-index: 1; pointer-events: none; }
 
-.about-text { text-align: left; }
-.about-text p { margin-bottom: 15px; font-size: 1.05rem; }
-.highlight-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-style: italic; color: var(--gold); border-left: 3px solid var(--gold); padding-left: 20px; margin: 30px 0; line-height: 1.4; }
-.about-continuation p { font-size: 1.1rem; margin-bottom: 15px; }
+/* Прибрали "гільйотину" overflow: hidden */
+.about-image-wrapper { 
+    position: relative; 
+    width: 100%; 
+    max-width: 350px; 
+    margin: 0 auto; 
+}
+
+/* Повернули круглі кути самій фотографії */
+.about-img { 
+    width: 100%; 
+    height: auto; 
+    position: relative; 
+    z-index: 2; 
+    display: block; 
+    object-fit: cover; 
+    aspect-ratio: 3/4; 
+    border-radius: 20px; 
+    will-change: transform; 
+}
+
+/* Рамка тепер знову гарно виступає з-під фото */
+.image-frame { 
+    position: absolute; 
+    top: 20px; 
+    left: -20px; 
+    width: 100%; 
+    height: 100%; 
+    border: 2px solid var(--gold); 
+    border-radius: 20px; 
+    z-index: 1; 
+    pointer-events: none; 
+}
 
 /* ================= ФІЛОСОФІЯ ================= */
 .philosophy { background-color: var(--bg-dark); }
