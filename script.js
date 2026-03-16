@@ -129,51 +129,41 @@ if (popupForm) {
     });
 }
 
-// --- АНІМАЦІЯ ПОЯВИ БЛОКІВ ПРИ ПРОКРУТЦІ (SCROLL REVEAL) ---
-document.addEventListener("DOMContentLoaded", function() {
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.15
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    const reveals = document.querySelectorAll('.reveal');
-    reveals.forEach(reveal => {
-        observer.observe(reveal);
-    });
-});
 // --- ЕФЕКТ PARALLAX ДЛЯ ФОТОГРАФІЇ СВІТЛАНИ ---
 window.addEventListener('scroll', function() {
     const parallaxImage = document.querySelector('.about-img');
     const wrapper = document.querySelector('.about-image-wrapper');
     
-    // Якщо елементів немає на сторінці (щоб уникнути помилок)
     if (!parallaxImage || !wrapper) return;
 
-    // Отримуємо позицію блоку відносно екрану
     const rect = wrapper.getBoundingClientRect();
     const windowHeight = window.innerHeight;
 
-    // Перевіряємо, чи фотографія зараз у полі зору користувача
     if (rect.top <= windowHeight && rect.bottom >= 0) {
-        
-        // Визначаємо швидкість паралаксу (0.05 - це дуже м'який, ледь помітний рух)
-        const speed = 0.05; 
-        
-        // Вираховуємо, на скільки пікселів треба зсунути фото
-        // Віднімаємо windowHeight / 2, щоб ефект був симетричним (в центрі екрану зсув 0)
+        const speed = 0.1; // Швидкість паралаксу
         const yPos = (rect.top - windowHeight / 2) * speed;
-        
-        // Застосовуємо зсув (не забуваючи про наш scale 1.05)
         parallaxImage.style.transform = `scale(1.05) translateY(${yPos}px)`;
     }
+});
+
+// --- БРОНЬОВАНИЙ ЗАПУСК АНІМАЦІЙ (SCROLL REVEAL) ---
+document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(() => {
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show-block');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { 
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1 
+        });
+
+        document.querySelectorAll('.hidden-block').forEach(el => {
+            observer.observe(el);
+        });
+    }, 100); 
 });
