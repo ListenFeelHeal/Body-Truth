@@ -76,9 +76,7 @@ let phoneInput;
 
 if (phoneInputField) {
     phoneInput = window.intlTelInput(phoneInputField, {
-        // Улюблені країни, які будуть зверху списку
         preferredCountries: ["ua", "pl", "de", "us", "gb", "cz", "it", "es"],
-        // Підключаємо додаткові утиліти для форматування номеру
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
     });
 }
@@ -88,30 +86,25 @@ const popupForm = document.querySelector('.popup-form');
 
 if (popupForm) {
     popupForm.addEventListener('submit', async function(event) {
-        event.preventDefault(); // Зупиняємо стандартне перезавантаження
+        event.preventDefault(); 
         
-        // Робимо ефект "завантаження" на кнопці, щоб людина не клацала двічі
         const submitBtn = popupForm.querySelector('button[type="submit"]');
         submitBtn.innerText = "ОБРОБЛЕННЯ...";
         
         const emailValue = document.getElementById('user-email').value;
         
-        // Отримуємо телефон безпечно
         let phoneValue = "";
         if (typeof phoneInput !== 'undefined' && typeof phoneInput.getNumber === 'function') {
-            phoneValue = phoneInput.getNumber(); // Беремо номер з міжнародним кодом
+            phoneValue = phoneInput.getNumber(); 
         } else {
             phoneValue = document.getElementById('user-phone').value;
         }
         
-        // Генеруємо дату у форматі YYYY-MM-DD, як просить SendPulse
         const today = new Date();
         const eventDate = today.toISOString().split('T')[0];
 
-        // Точне посилання з твого скріншоту
         const sendPulseEventUrl = "https://events.sendpulse.com/events/id/7cc034c090fb4866b3509f19abc80ae6/9215091";
 
-        // Формуємо дані ТОЧНО так, як вимагають твої налаштування
         const requestData = {
             "email": emailValue,
             "phone": phoneValue,
@@ -119,7 +112,6 @@ if (popupForm) {
         };
 
         try {
-            // Відправляємо дані в SendPulse
             await fetch(sendPulseEventUrl, {
                 method: 'POST',
                 headers: {
@@ -133,7 +125,29 @@ if (popupForm) {
             console.error("Помилка відправки:", error);
         }
 
-        // Плавне перенаправлення на WayForPay
         window.location.href = 'https://secure.wayforpay.com/button/b2669a557ef69';
     });
 }
+
+// --- АНІМАЦІЯ ПОЯВИ БЛОКІВ ПРИ ПРОКРУТЦІ (SCROLL REVEAL) ---
+document.addEventListener("DOMContentLoaded", function() {
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    const reveals = document.querySelectorAll('.reveal');
+    reveals.forEach(reveal => {
+        observer.observe(reveal);
+    });
+});
