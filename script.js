@@ -215,36 +215,46 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     // =========================================================
-    // 8. МАГІЯ APPLE SCROLL (Зміна екранів у боті при читанні)
-    // =========================================================
-    const appleSteps = document.querySelectorAll('.apple-step');
-    const appleScreens = document.querySelectorAll('.phone-screen-img');
+// DRAG-TO-SCROLL ДЛЯ APP STORE КАРТОК (Тільки для мишки на ПК)
+// =========================================================
+document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('app-slider');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
 
-    if (appleSteps.length > 0 && appleScreens.length > 0) {
-        const stepObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    
-                    // 1. Робимо активним поточний текст
-                    appleSteps.forEach(s => s.classList.remove('active'));
-                    entry.target.classList.add('active');
-
-                    // 2. Отримуємо номер кроку
-                    const stepIndex = entry.target.getAttribute('data-step');
-                    
-                    // 3. Змінюємо картинку на телефоні
-                    appleScreens.forEach(screen => screen.classList.remove('active'));
-                    const targetScreen = document.getElementById(`screen-${stepIndex}`);
-                    if (targetScreen) {
-                        targetScreen.classList.add('active');
-                    }
-                }
-            });
-        }, { 
-            // Тригер спрацьовує, коли текст доходить до центру екрана
-            rootMargin: '-40% 0px -40% 0px' 
+    if(slider) {
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.classList.add('active');
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+            // Вимикаємо плавний скрол під час перетягування мишкою
+            slider.style.scrollSnapType = 'none'; 
+            slider.style.scrollBehavior = 'auto';
         });
 
-        appleSteps.forEach(step => stepObserver.observe(step));
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.classList.remove('active');
+            slider.style.scrollSnapType = 'x mandatory';
+            slider.style.scrollBehavior = 'smooth';
+        });
+
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.classList.remove('active');
+            // Повертаємо магнітний скрол
+            slider.style.scrollSnapType = 'x mandatory';
+            slider.style.scrollBehavior = 'smooth';
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; // Швидкість перетягування (x2)
+            slider.scrollLeft = scrollLeft - walk;
+        });
     }
 });
