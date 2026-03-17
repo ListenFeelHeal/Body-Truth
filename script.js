@@ -1,6 +1,26 @@
 document.addEventListener("DOMContentLoaded", function() { 
 
     // =========================================================
+    // ЕФЕКТ ДРУКУ ТЕКСТУ (ДЛЯ ГОЛОВНОГО ЕКРАНУ)
+    // =========================================================
+    const typeTarget = document.getElementById('typewriter');
+    if (typeTarget) {
+        const textToType = 'чому болить, коли “все нормально”';
+        let i = 0;
+        typeTarget.innerHTML = ''; // Очищаємо перед стартом
+        
+        function typeWriter() {
+            if (i < textToType.length) {
+                typeTarget.innerHTML += textToType.charAt(i);
+                i++;
+                setTimeout(typeWriter, 60); // Швидкість друку
+            }
+        }
+        // Запускаємо з невеликою затримкою, щоб встигла пройти анімація появи
+        setTimeout(typeWriter, 1200); 
+    }
+
+    // =========================================================
     // 1. АНІМАЦІЯ ПОЯВИ ПРИ СКРОЛІ (Reveal System)
     // =========================================================
     const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-zoom');
