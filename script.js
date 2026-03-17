@@ -55,25 +55,11 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }, false);
 
-
-    // =========================================================
-    // 3. МАСКА ТЕЛЕФОНУ (IMASK)
-    // =========================================================
-    const phoneInput = document.getElementById('user-phone');
-    if (phoneInput && typeof IMask !== 'undefined') {
-        const maskOptions = {
-            mask: '+{380} (00) 000-00-00',
-            lazy: false, 
-            placeholderChar: '_'
-        };
-        const mask = IMask(phoneInput, maskOptions);
-    }
-
 }); // КІНЕЦЬ DOMContentLoaded
 
 
 // =========================================================
-// 4. ФУНКЦІОНАЛ ТАЙМЕРА
+// 3. ФУНКЦІОНАЛ ТАЙМЕРА
 // =========================================================
 function initTimer() { 
     let endTime = localStorage.getItem('courseTimerDirect'); 
@@ -119,7 +105,7 @@ setInterval(updateTimers, 1000);
 
 
 // =========================================================
-// 5. ФУНКЦІОНАЛ POP-UP ВІКНА ТА ФОРМИ
+// 4. ФУНКЦІОНАЛ POP-UP ВІКНА ТА ФОРМИ (З КОДАМИ КРАЇН)
 // =========================================================
 const modal = document.getElementById('popup-modal'); 
 const closeBtn = document.getElementById('close-popup'); 
@@ -136,6 +122,16 @@ window.addEventListener('click', (event) => {
     if (event.target === modal) { closePopup(); } 
 }); 
 
+const phoneInputField = document.querySelector("#user-phone"); 
+let phoneInput; 
+
+if (phoneInputField && typeof window.intlTelInput !== 'undefined') { 
+    phoneInput = window.intlTelInput(phoneInputField, { 
+        preferredCountries: ["ua", "pl", "de", "us", "gb", "cz", "it", "es"], 
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js", 
+    }); 
+} 
+
 const popupForm = document.querySelector('.popup-form'); 
 if (popupForm) { 
     popupForm.addEventListener('submit', async function(event) { 
@@ -145,7 +141,14 @@ if (popupForm) {
         submitBtn.innerText = "ОБРОБЛЕННЯ..."; 
         
         const emailValue = document.getElementById('user-email').value; 
-        const phoneValue = document.getElementById('user-phone').value; 
+        let phoneValue = ""; 
+
+        // Беремо номер разом з кодом країни
+        if (typeof phoneInput !== 'undefined' && typeof phoneInput.getNumber === 'function') { 
+            phoneValue = phoneInput.getNumber();  
+        } else { 
+            phoneValue = document.getElementById('user-phone').value; 
+        } 
         
         const today = new Date(); 
         const eventDate = today.toISOString().split('T')[0]; 
@@ -176,7 +179,7 @@ if (popupForm) {
 } 
 
 // =========================================================
-// 6. ЕФЕКТ ПАРАЛАКСУ ДЛЯ ФОТО СВІТЛАНИ
+// 5. ЕФЕКТ ПАРАЛАКСУ ДЛЯ ФОТО СВІТЛАНИ
 // =========================================================
 window.addEventListener('scroll', function() { 
     const parallaxImage = document.querySelector('.trust-img'); 
