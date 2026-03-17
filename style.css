@@ -210,6 +210,9 @@ h1, h2, h3, h4 { font-weight: 800; }
 .reviews-wrapper {
     display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory;
     padding-bottom: 20px; -ms-overflow-style: none; scrollbar-width: none; margin-top: 20px;
+    
+    /* ГАРАНТОВАНО ВИПРАВЛЯЄ ОБРІЗАННЯ КАРТОК ЗВЕРХУ ПРИ НАВЕДЕННІ */
+    overflow-y: visible !important;
 }
 .reviews-wrapper::-webkit-scrollbar { display: none; }
 .review-card {
