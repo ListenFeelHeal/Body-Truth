@@ -1,10 +1,9 @@
-// --- ФУНКЦІОНАЛ ТАЙМЕРА ---
+// --- ТАЙМЕР ---
 function initTimer() {
     let endTime = localStorage.getItem('courseTimerDirect');
     const now = new Date().getTime();
-    
     if (!endTime || parseInt(endTime, 10) <= now) {
-        endTime = now + (5 * 60 * 60 * 1000); // 5 годин
+        endTime = now + (5 * 60 * 60 * 1000); 
         localStorage.setItem('courseTimerDirect', endTime);
     } else {
         endTime = parseInt(endTime, 10);
@@ -30,76 +29,50 @@ function updateTimers() {
 
     function formatTime(time) { return time < 10 ? `0${time}` : time; }
 
-    const timerElements = [
-        document.getElementById('landing-timer'), 
-        document.getElementById('landing-timer-top'),
-        document.getElementById('popup-timer')
-    ];
-
-    timerElements.forEach(timer => {
-        if (timer) {
-            timer.querySelector('.hours').textContent = formatTime(hours);
-            timer.querySelector('.minutes').textContent = formatTime(minutes);
-            timer.querySelector('.seconds').textContent = formatTime(seconds);
-        }
-    });
+    const timerElement = document.getElementById('landing-timer');
+    if (timerElement) {
+        timerElement.querySelector('.hours').textContent = formatTime(hours);
+        timerElement.querySelector('.minutes').textContent = formatTime(minutes);
+        timerElement.querySelector('.seconds').textContent = formatTime(seconds);
+    }
 }
-
-updateTimers();
 setInterval(updateTimers, 1000);
+updateTimers();
 
-// --- ФУНКЦІОНАЛ POP-UP ВІКНА ---
+// --- POPUP ---
 const modal = document.getElementById('popup-modal');
-const closeBtn = document.getElementById('close-popup');
-
 function openPopup() { modal.classList.add('active'); }
 function closePopup() { modal.classList.remove('active'); }
+document.getElementById('close-popup').addEventListener('click', closePopup);
+window.addEventListener('click', (e) => { if (e.target === modal) closePopup(); });
 
-if (closeBtn) { closeBtn.addEventListener('click', closePopup); }
-window.addEventListener('click', (event) => {
-    if (event.target === modal) { closePopup(); }
-});
+// --- РОЗУМНА STICKY-КНОПКА ---
+const stickyBar = document.getElementById('smart-sticky');
+const programSection = document.getElementById('program');
 
-// --- ІНІЦІАЛІЗАЦІЯ ПРАПОРЦІВ (intl-tel-input) ---
-const phoneInputField = document.querySelector("#user-phone");
-let phoneInput;
-
-if (phoneInputField) {
-    phoneInput = window.intlTelInput(phoneInputField, {
-        preferredCountries: ["ua", "pl", "de", "us", "gb", "cz", "it", "es"],
-        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-    });
-}
-
-// --- РОЗУМНА STICKY-КНОПКА (З'являється на блоці "Програма") ---
-window.addEventListener('scroll', function() {
-    const stickyBar = document.querySelector('.sticky-bar');
-    const programSection = document.querySelector('.program'); // Знаходимо секцію програми
-    
+window.addEventListener('scroll', () => {
     if (!stickyBar || !programSection) return;
-
-    // Визначаємо точку появи (коли верх секції "Програма" з'являється на екрані)
-    const triggerPoint = programSection.offsetTop - window.innerHeight + 150;
-
-    if (window.scrollY > triggerPoint) {
+    
+    // Кнопка з'являється, коли верх секції "Програма" доходить до середини екрану
+    const rect = programSection.getBoundingClientRect();
+    if (rect.top < window.innerHeight / 2) {
         stickyBar.classList.add('visible');
     } else {
         stickyBar.classList.remove('visible');
     }
 });
 
-// --- SCROLL REVEAL АНІМАЦІЇ ---
-document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(() => {
-        const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show-block');
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, { root: null, rootMargin: '0px', threshold: 0.1 });
+// --- ПЛАВНА АНІМАЦІЯ ПОЯВИ БЛОКІВ (REVEAL) ---
+document.addEventListener("DOMContentLoaded", () => {
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { rootMargin: "0px 0px -50px 0px", threshold: 0.1 });
 
-        document.querySelectorAll('.hidden-block').forEach(el => observer.observe(el));
-    }, 50); 
+    reveals.forEach(reveal => observer.observe(reveal));
 });
