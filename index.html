@@ -28,6 +28,7 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y); 
     })(window, document, "clarity", "script", "vws5f5cegl"); 
     </script> 
+    <script src="https://unpkg.com/feather-icons"></script>
 </head> 
 <body> 
 
@@ -166,7 +167,7 @@
             </div> 
             
             <div class="text-center mt-40 reveal-up">
-                <a href="#" class="btn btn-gold pulse" onclick="openPopup(); return false;">ЗАБРОНЮВАТИ МІСЦЕ ЗА 399 ГРН</a>
+                <a href="#" class="btn btn-gold pulse" onclick="openPopup(); return false;">ЗАБРОНЮВАТИ</a>
             </div>
         </div> 
     </section> 
@@ -231,17 +232,17 @@
                 
                 <div class="program-stack pressure-stack">
                     <div class="premium-card sticky-card hover-lift" style="--idx: 1;">
-                        <div class="p-icon">🕊️</div>
+                        <div class="p-icon"><i data-feather="feather"></i></div>
                         <h4>Немає “ти мусиш”</h4>
                         <p>Тільки м'якість та підтримка без почуття провини.</p>
                     </div>
                     <div class="premium-card sticky-card hover-lift" style="--idx: 2;">
-                        <div class="p-icon">🌱</div>
+                        <div class="p-icon"><i data-feather="sun"></i></div>
                         <h4>Простою мовою</h4>
                         <p>Без складних термінів. Зрозуміло про процеси вашого тіла.</p>
                     </div>
                     <div class="premium-card sticky-card hover-lift" style="--idx: 3; border: 2px solid var(--gold);">
-                        <div class="p-icon">🤝</div>
+                        <div class="p-icon"><i data-feather="heart"></i></div>
                         <h4>На вашому боці</h4>
                         <p>Припиняємо війну з тілом. Стаємо на свій бік.</p>
                     </div>
@@ -252,7 +253,7 @@
 
     <section class="reviews-section section-padding" style="background: var(--bg-dark); color: #fff;">
         <div class="container text-center reveal-up">
-            <h2 class="section-title text-light" style="margin-bottom: 50px;">ІСТОРІЇ ДІВЧАТ, ЯКІ ВЖЕ ПОЧУЛИ СВОЄ ТІЛО</h2>
+            <h2 class="section-title text-light" style="margin-bottom: 50px;">ВОНИ ВЖЕ ВІДЧУЛИ ЗМІНИ</h2>
             
             <div class="reviews-wrapper mt-40">
                 <div class="review-card premium-card hover-lift">
@@ -287,7 +288,7 @@
                         <span class="price-old">1200 грн</span>
                     </div> 
                     
-                    <a href="#" class="btn btn-gold huge-btn pulse mt-30 full-width" onclick="openPopup(); return false;">ПРИЄДНАТИСЯ ДО КУРСУ</a> 
+                    <a href="#" class="btn btn-gold huge-btn pulse mt-30 full-width" onclick="openPopup(); return false;">ХОЧУ НА КУРС</a> 
                     
                     <div class="timer-wrapper mt-40"> 
                         <p class="timer-label text-light">ДО ЗАКІНЧЕННЯ АКЦІЇ ЗАЛИШИЛОСЬ:</p> 
@@ -362,5 +363,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script> 
     <script src="script.js"></script> 
+    <script>
+      feather.replace();
+    </script>
 </body> 
 </html>
