@@ -31,7 +31,9 @@ function updateTimers() {
     function formatTime(time) { return time < 10 ? `0${time}` : time; }
 
     const timerElements = [
-        document.getElementById('landing-timer')
+        document.getElementById('landing-timer'), 
+        document.getElementById('landing-timer-top'),
+        document.getElementById('popup-timer')
     ];
 
     timerElements.forEach(timer => {
@@ -59,8 +61,15 @@ window.addEventListener('click', (event) => {
 });
 
 // --- ІНІЦІАЛІЗАЦІЯ ПРАПОРЦІВ (intl-tel-input) ---
-// (Ми видалили intlTelInput для простоти, якщо він потрібен - повернемо, 
-// але для преміум-вигляду проста форма працює краще)
+const phoneInputField = document.querySelector("#user-phone");
+let phoneInput;
+
+if (phoneInputField) {
+    phoneInput = window.intlTelInput(phoneInputField, {
+        preferredCountries: ["ua", "pl", "de", "us", "gb", "cz", "it", "es"],
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
+}
 
 // --- РОЗУМНА STICKY-КНОПКА (З'являється на блоці "Програма") ---
 window.addEventListener('scroll', function() {
