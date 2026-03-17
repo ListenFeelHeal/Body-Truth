@@ -170,3 +170,20 @@ document.addEventListener("DOMContentLoaded", function() {
         document.querySelectorAll('.hidden-block').forEach(el => observer.observe(el));
     }, 50); 
 });
+
+// --- РОЗУМНА STICKY-КНОПКА (З'являється на блоці "Програма") ---
+window.addEventListener('scroll', function() {
+    const stickyBar = document.querySelector('.sticky-bar');
+    const programSection = document.querySelector('.program'); // Знаходимо секцію програми
+    
+    if (!stickyBar || !programSection) return;
+
+    // Визначаємо точку появи (коли верх секції "Програма" з'являється на екрані)
+    const triggerPoint = programSection.offsetTop - window.innerHeight + 150;
+
+    if (window.scrollY > triggerPoint) {
+        stickyBar.classList.add('visible');
+    } else {
+        stickyBar.classList.remove('visible');
+    }
+});
