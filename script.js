@@ -55,53 +55,11 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }, false);
 
-
-    // =========================================================
-    // 3. DRAG-TO-SCROLL ДЛЯ APP STORE КАРТОК (Тільки для мишки на ПК)
-    // =========================================================
-    const slider = document.getElementById('app-slider');
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-
-    if(slider) {
-        slider.addEventListener('mousedown', (e) => {
-            isDown = true;
-            slider.classList.add('active');
-            startX = e.pageX - slider.offsetLeft;
-            scrollLeft = slider.scrollLeft;
-            slider.style.scrollSnapType = 'none'; 
-            slider.style.scrollBehavior = 'auto';
-        });
-
-        slider.addEventListener('mouseleave', () => {
-            isDown = false;
-            slider.classList.remove('active');
-            slider.style.scrollSnapType = 'x mandatory';
-            slider.style.scrollBehavior = 'smooth';
-        });
-
-        slider.addEventListener('mouseup', () => {
-            isDown = false;
-            slider.classList.remove('active');
-            slider.style.scrollSnapType = 'x mandatory';
-            slider.style.scrollBehavior = 'smooth';
-        });
-
-        slider.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - slider.offsetLeft;
-            const walk = (x - startX) * 2; 
-            slider.scrollLeft = scrollLeft - walk;
-        });
-    }
-
 }); // КІНЕЦЬ DOMContentLoaded
 
 
 // =========================================================
-// 4. ФУНКЦІОНАЛ ТАЙМЕРА
+// 3. ФУНКЦІОНАЛ ТАЙМЕРА
 // =========================================================
 function initTimer() { 
     let endTime = localStorage.getItem('courseTimerDirect'); 
@@ -147,7 +105,7 @@ setInterval(updateTimers, 1000);
 
 
 // =========================================================
-// 5. ФУНКЦІОНАЛ POP-UP ВІКНА ТА ФОРМИ
+// 4. ФУНКЦІОНАЛ POP-UP ВІКНА ТА ФОРМИ
 // =========================================================
 const modal = document.getElementById('popup-modal'); 
 const closeBtn = document.getElementById('close-popup'); 
@@ -220,7 +178,7 @@ if (popupForm) {
 } 
 
 // =========================================================
-// 6. ЕФЕКТ ПАРАЛАКСУ ДЛЯ ФОТО СВІТЛАНИ
+// 5. ЕФЕКТ ПАРАЛАКСУ ДЛЯ ФОТО СВІТЛАНИ
 // =========================================================
 window.addEventListener('scroll', function() { 
     const parallaxImage = document.querySelector('.trust-img'); 
