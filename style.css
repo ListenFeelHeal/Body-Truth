@@ -124,8 +124,52 @@ h1, h2, h3, h4 { font-weight: 800; }
 .eco-flex { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
 .bot-features-grid { display: flex; flex-direction: column; gap: 15px; }
 .bot-card { padding: 20px 25px; font-weight: 600; font-size: 1.05rem; text-align: left;}
-.phone-mockup { background: #111; padding: 15px; border-radius: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); max-width: 300px; margin: 0 auto; position: relative; }
-.mockup-img { width: 100%; height: auto; border-radius: 25px; display: block; }
+/* Композиція з двома телефонами */
+.phones-container {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+    height: 480px; 
+}
+
+.phone-mockup { 
+    background: #111; 
+    padding: 12px; 
+    border-radius: 35px; 
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2); 
+    position: absolute;
+    width: 240px;
+    transition: transform 0.4s ease;
+}
+
+/* Задній телефон */
+.back-phone {
+    top: 0;
+    right: 0;
+    transform: scale(0.9);
+    z-index: 1;
+    opacity: 0.8;
+}
+
+/* Передній телефон */
+.front-phone {
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    box-shadow: -15px 25px 50px rgba(0,0,0,0.3);
+}
+
+/* Ефект при наведенні миші на телефони */
+.phones-container:hover .front-phone { transform: translateY(-5px) scale(1.02); }
+.phones-container:hover .back-phone { transform: scale(0.95) translateX(-10px); opacity: 1; }
+
+.mockup-img { 
+    width: 100%; 
+    height: auto; 
+    border-radius: 25px; 
+    display: block; 
+}
 
 /* ================= АТМОСФЕРА БЕЗ ТИСКУ ================= */ 
 .pressure-container { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; align-items: center; } 
