@@ -3,7 +3,6 @@ function initTimer() {
     let endTime = localStorage.getItem('courseTimerDirect');
     const now = new Date().getTime();
     
-    // Якщо таймера немає, або час ВЖЕ вийшов (щоб не показувало нулі)
     if (!endTime || parseInt(endTime, 10) <= now) {
         endTime = now + (5 * 60 * 60 * 1000); // 5 годин
         localStorage.setItem('courseTimerDirect', endTime);
@@ -19,7 +18,6 @@ function updateTimers() {
     const now = new Date().getTime();
     let timeLeft = endTime - now;
 
-    // Якщо час вийшов прямо зараз, поки юзер на сайті - перезапускаємо непомітно
     if (timeLeft <= 0) { 
         endTime = now + (5 * 60 * 60 * 1000);
         localStorage.setItem('courseTimerDirect', endTime);
@@ -34,7 +32,6 @@ function updateTimers() {
 
     const timerElements = [
         document.getElementById('landing-timer'), 
-        document.getElementById('landing-timer-top'), // Новий верхній таймер
         document.getElementById('popup-timer')
     ];
 
