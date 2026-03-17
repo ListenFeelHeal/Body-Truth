@@ -173,7 +173,14 @@ h1, h2, h3, h4 { font-weight: 800; }
 
 /* ================= БЕЗ ТИСКУ ================= */ 
 .pressure-bento { display: grid; grid-template-columns: 1fr 1.3fr; gap: 40px; align-items: flex-start; max-width: 1000px; margin: 0 auto;}
-.pressure-image-wrapper { width: 100%; border-radius: var(--radius); overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.08); position: sticky; top: 15vh;} 
+.pressure-image-wrapper { 
+    width: 100%; 
+    border-radius: var(--radius); 
+    overflow: hidden; 
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08); 
+    position: relative !important; /* Вбиваємо липкість картинки */
+    top: auto !important; /* Скидаємо відступ від верху екрану */
+}
 .pressure-img { width: 100%; height: auto; object-fit: cover; display: block; aspect-ratio: 4/5;} 
 .pressure-stack-wrapper { text-align: left; }
 .pressure-stack { margin-top: 0; }
