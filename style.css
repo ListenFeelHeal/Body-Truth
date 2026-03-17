@@ -131,10 +131,28 @@ h1, h2, h3, h4 { font-weight: 800; }
 .program-stack, .pressure-stack { 
     display: flex; 
     flex-direction: column; 
-    padding-bottom: 150px; /* Додали місце знизу, щоб ефект накладання тривав довше під час скролу */
+    padding-bottom: 20px !important; /* Прибрали гігантську пустоту (було 150px) */
     position: relative; 
     max-width: 800px; 
     margin: 40px auto 0; 
+}
+
+.sticky-card { 
+    position: sticky; 
+    top: calc(12vh + (var(--idx) * 15px)); 
+    z-index: var(--idx); 
+    text-align: left; 
+    background: #fff;
+    padding: 35px !important;
+    box-shadow: 0 -15px 35px rgba(0,0,0,0.1) !important; 
+    border-top: 1px solid rgba(194, 163, 115, 0.2); 
+    border-radius: var(--radius);
+    margin-bottom: 50px; 
+}
+
+/* МАГІЯ ДЛЯ ОСТАННЬОЇ КАРТКИ: вбиваємо нижній відступ, щоб кнопка/наступна секція підтягнулась впритул */
+.sticky-card:last-child {
+    margin-bottom: 0 !important;
 }
 
 .sticky-card { 
