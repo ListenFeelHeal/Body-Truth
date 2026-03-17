@@ -288,6 +288,9 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     .modal-content { max-height: 85vh; padding: 35px 20px; } 
     .smart-sticky-bar { width: 95%; bottom: 15px; padding: 10px 15px; }
     .st-price { font-size: 1.1rem; }
+    .phones-container { max-width: 280px; height: 350px; }
+    .phone-mockup { width: 180px; padding: 8px; border-radius: 25px; }
+    .mockup-img { border-radius: 18px; }
 } 
 
 /* ================= АНІМАЦІЇ ПОЯВИ ================= */ 
