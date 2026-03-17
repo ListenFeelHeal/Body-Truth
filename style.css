@@ -116,76 +116,74 @@ h1, h2, h3, h4 { font-weight: 800; }
 .day-card p { font-size: 0.95rem; color: #555; margin-bottom: 15px; } 
 .practice { display: inline-block; background: var(--bg-light); padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; color: var(--bg-dark); } 
 
-/* ================= APP STORE CARDS (БОТ) ================= */
-.bot-showcase { background-color: var(--bg-light); overflow: hidden; }
-.app-cards-container { width: 100%; padding: 10px 0 40px 0; }
+/* ================= ПРОСТИЙ ТА ПРЕМІАЛЬНИЙ БОТ ================= */
+.bot-showcase { background-color: #ffffff; }
+.bot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
 
-.app-cards-wrapper {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    padding: 0 20px; 
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    cursor: grab; 
+.bot-info { text-align: left; }
+.bot-features-simple { display: flex; flex-direction: column; gap: 20px; }
+
+/* Дизайн плашок з описом кнопок */
+.feature-row { 
+    display: flex; 
+    align-items: flex-start; 
+    gap: 20px; 
+    background: var(--bg-light); 
+    padding: 20px 25px; 
+    border-radius: 20px; 
+    border: 1px solid rgba(0,0,0,0.03); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
-.app-cards-wrapper::-webkit-scrollbar { display: none; }
-.app-cards-wrapper:active { cursor: grabbing; }
-
-.app-card {
-    flex: 0 0 85vw; 
-    max-width: 340px;
-    height: 480px;
-    scroll-snap-align: center; 
-    position: relative;
-    overflow: hidden; 
-    background: #1A1A1A; 
-    border-radius: 30px;
-    padding: 35px 30px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-    border: 1px solid rgba(255,255,255,0.05);
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.4s ease;
+.feature-row:hover { 
+    transform: translateY(-3px); 
+    box-shadow: var(--shadow-soft); 
 }
-
-.app-card:hover { transform: translateY(-5px); }
-
-.app-card-text {
-    position: relative;
-    z-index: 2; 
-    text-align: left;
+.feature-row .f-icon { font-size: 2rem; line-height: 1; }
+.feature-row .f-text strong { 
+    display: block; 
+    font-size: 1.1rem; 
+    color: var(--bg-dark); 
+    margin-bottom: 5px; 
+    text-transform: uppercase; 
 }
-.app-card-text .card-icon { font-size: 2.5rem; margin-bottom: 15px; display: block;}
-.app-card-text h3 { color: var(--gold); font-size: 1.5rem; margin-bottom: 12px; line-height: 1.2; text-transform: uppercase;}
-.app-card-text p { color: #ccc; font-size: 1rem; font-weight: 400; text-transform: none; line-height: 1.5;}
-
-.app-card-visual {
-    position: absolute;
-    bottom: -60px; 
-    right: -40px;  
-    width: 240px;
-    z-index: 1;
+.feature-row .f-text span { 
+    font-size: 0.95rem; 
+    color: #666; 
+    font-weight: 400; 
+    text-transform: none;
+    line-height: 1.4;
 }
 
-.peek-phone {
-    width: 100%;
-    height: auto;
-    transform: rotate(-8deg);
-    filter: drop-shadow(-10px 15px 25px rgba(0,0,0,0.4));
-    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+/* Візуал: Робимо звичайний скріншот схожим на дорогий iPhone */
+.bot-visual { display: flex; justify-content: center; position: relative; }
+.single-phone-wrapper { 
+    position: relative; 
+    width: 100%; 
+    max-width: 320px; 
+    border-radius: 45px; /* Заокруглюємо кути скріншоту */
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.15); /* Дорога тінь */
+    border: 12px solid #161616; /* Імітація чорного корпусу телефону */
+    background-color: #161616;
+}
+.single-phone-img { 
+    width: 100%; 
+    display: block; 
+    height: auto; 
+    border-radius: 32px; /* Внутрішнє заокруглення екрана */
 }
 
-.app-card:hover .peek-phone {
-    transform: rotate(0deg) translateY(-15px);
-}
-
-@media (min-width: 900px) {
-    .app-cards-wrapper { justify-content: center; }
-    .app-card { flex: 0 0 340px; }
+/* АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ */
+@media (max-width: 768px) {
+    .bot-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+    .bot-info { text-align: center; }
+    .feature-row { text-align: left; padding: 15px; gap: 15px;}
+    .single-phone-wrapper { 
+        max-width: 260px; 
+        margin: 0 auto; 
+        border-width: 10px; /* Трохи тонша рамка телефону на мобільному */
+        border-radius: 40px;
+    }
 }
 
 /* ================= АТМОСФЕРА БЕЗ ТИСКУ ================= */ 
