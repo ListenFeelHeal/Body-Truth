@@ -3,6 +3,7 @@ function initTimer() {
     let endTime = localStorage.getItem('courseTimerDirect'); 
     const now = new Date().getTime(); 
     
+    // Якщо таймера немає, або час ВЖЕ вийшов
     if (!endTime || parseInt(endTime, 10) <= now) { 
         endTime = now + (5 * 60 * 60 * 1000); // 5 годин 
         localStorage.setItem('courseTimerDirect', endTime); 
@@ -18,6 +19,7 @@ function updateTimers() {
     const now = new Date().getTime(); 
     let timeLeft = endTime - now; 
 
+    // Якщо час вийшов прямо зараз, поки юзер на сайті - перезапускаємо
     if (timeLeft <= 0) {  
         endTime = now + (5 * 60 * 60 * 1000); 
         localStorage.setItem('courseTimerDirect', endTime); 
@@ -30,19 +32,13 @@ function updateTimers() {
 
     function formatTime(time) { return time < 10 ? `0${time}` : time; } 
 
-    const timerElements = [ 
-        document.getElementById('landing-timer'),  
-        document.getElementById('landing-timer-top'), 
-        document.getElementById('popup-timer') 
-    ]; 
-
-    timerElements.forEach(timer => { 
-        if (timer) { 
-            timer.querySelector('.hours').textContent = formatTime(hours); 
-            timer.querySelector('.minutes').textContent = formatTime(minutes); 
-            timer.querySelector('.seconds').textContent = formatTime(seconds); 
-        } 
-    }); 
+    // Оновлюємо таймер у нижньому блоці
+    const mainTimer = document.getElementById('landing-timer');
+    if (mainTimer) { 
+        mainTimer.querySelector('.hours').textContent = formatTime(hours); 
+        mainTimer.querySelector('.minutes').textContent = formatTime(minutes); 
+        mainTimer.querySelector('.seconds').textContent = formatTime(seconds); 
+    } 
 } 
 
 updateTimers(); 
@@ -59,24 +55,6 @@ closeBtn.addEventListener('click', closePopup);
 window.addEventListener('click', (event) => { 
     if (event.target === modal) { closePopup(); } 
 }); 
-
-// --- АВТОЗАПОВНЕННЯ EMAIL (КНОПКИ) --- 
-const emailInput = document.getElementById('user-email'); 
-const emailChips = document.querySelectorAll('.email-chip'); 
-
-if (emailInput && emailChips.length > 0) { 
-    emailChips.forEach(chip => { 
-        chip.addEventListener('click', function(e) { 
-            e.preventDefault();  
-            let val = emailInput.value; 
-            if (val.includes('@')) { 
-                val = val.split('@')[0]; 
-            } 
-            emailInput.value = val + this.innerText; 
-            emailInput.focus(); 
-        }); 
-    }); 
-} 
 
 // --- ІНІЦІАЛІЗАЦІЯ ПРАПОРЦІВ (intl-tel-input) --- 
 const phoneInputField = document.querySelector("#user-phone"); 
@@ -134,14 +112,15 @@ if (popupForm) {
             }); 
         } 
 
+        // Перехід на касу WayForPay
         window.location.href = 'https://secure.wayforpay.com/button/b2669a557ef69'; 
     }); 
 } 
 
-// --- ЕФЕКТ PARALLAX --- 
+// --- ЕФЕКТ PARALLAX ДЛЯ ФОТО СВІТЛАНИ --- 
 window.addEventListener('scroll', function() { 
-    const parallaxImage = document.querySelector('.about-img'); 
-    const wrapper = document.querySelector('.about-image-wrapper'); 
+    const parallaxImage = document.querySelector('.trust-img'); 
+    const wrapper = document.querySelector('.trust-image-wrapper'); 
     if (!parallaxImage || !wrapper) return; 
 
     const rect = wrapper.getBoundingClientRect(); 
@@ -154,7 +133,7 @@ window.addEventListener('scroll', function() {
     } 
 }); 
 
-// --- SCROLL REVEAL (БЕЗ ЗЛАМУ ФОНІВ) --- 
+// --- SCROLL REVEAL (Плавна поява блоків) --- 
 document.addEventListener("DOMContentLoaded", function() { 
     setTimeout(() => { 
         const observer = new IntersectionObserver((entries, obs) => { 
@@ -168,21 +147,41 @@ document.addEventListener("DOMContentLoaded", function() {
 
         document.querySelectorAll('.hidden-block').forEach(el => observer.observe(el)); 
     }, 50);  
-}); 
 
-// --- РОЗУМНИЙ STICKY BAR ЛОГІКА ---
-let lastScrollTop = 0;
-const stickyBarEl = document.getElementById('smartStickyBar');
+    // --- ПЛАВНИЙ СКРОЛ ДЛЯ КНОПКИ В HERO ---
+    document.querySelectorAll('a.smooth-scroll').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
 
-window.addEventListener('scroll', function() {
-    let st = window.pageYOffset || document.documentElement.scrollTop;
+    // --- РОЗУМНИЙ STICKY BAR (З'являється тільки на Програмі) ---
+    const stickyBarEl = document.getElementById('smartStickyBar');
+    const programSection = document.getElementById('program-trigger');
+    const finalOfferSection = document.getElementById('final-offer');
     
-    // Якщо скролимо вниз і ми вже нижче 400px від верху екрана
-    if (st > lastScrollTop && st > 400) {
-        stickyBarEl.classList.add('hidden');
-    } else {
-        // Якщо скролимо вгору
-        stickyBarEl.classList.remove('hidden');
-    }
-    lastScrollTop = st <= 0 ? 0 : st;
-}, false);
+    window.addEventListener('scroll', function() {
+        if (!programSection || !stickyBarEl) return;
+        
+        let st = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Визначаємо межі: з'являємось на програмі, ховаємось на фінальній ціні
+        let programTop = programSection.offsetTop - window.innerHeight / 2; 
+        let offerTop = finalOfferSection ? finalOfferSection.offsetTop - window.innerHeight : Infinity; 
+        
+        // Показувати тільки якщо ми нижче початку Програми, але вище фінального блоку з ціною
+        if (st > programTop && st < offerTop) {
+            stickyBarEl.classList.remove('sticky-hidden');
+        } else {
+            stickyBarEl.classList.add('sticky-hidden');
+        }
+    }, false);
+});
