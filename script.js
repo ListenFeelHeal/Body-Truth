@@ -1,41 +1,24 @@
 document.addEventListener("DOMContentLoaded", function() { 
 
     // =========================================================
-    // 1. АНІМАЦІЯ ДРУКУ (Typing Effect)
+    // 1. SCROLL REVEAL (Плавна поява блоків при скролі)
     // =========================================================
-    const textToType = "чому болить, коли “все нормально”";
-    const typeWriterElement = document.getElementById("typewriter");
-    let i = 0;
-    
-    function typeWriter() {
-        if (i < textToType.length && typeWriterElement) {
-            typeWriterElement.innerHTML += textToType.charAt(i);
-            i++;
-            setTimeout(typeWriter, 60); // Швидкість друку
-        }
-    }
-    // Запускаємо трохи з затримкою, щоб ефект був помітним після завантаження
-    setTimeout(typeWriter, 1000);
+    setTimeout(() => { 
+        const observer = new IntersectionObserver((entries, obs) => { 
+            entries.forEach(entry => { 
+                if (entry.isIntersecting) { 
+                    entry.target.classList.add('show-block'); 
+                    obs.unobserve(entry.target); 
+                } 
+            }); 
+        }, { root: null, rootMargin: '0px', threshold: 0.1 }); 
 
-
-    // =========================================================
-    // 2. SCROLL REVEAL (Плавна поява блоків при скролі)
-    // =========================================================
-    const revealElements = document.querySelectorAll('.reveal-up');
-    const revealObserver = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                obs.unobserve(entry.target);
-            }
-        });
-    }, { root: null, rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
-
-    revealElements.forEach(el => revealObserver.observe(el));
+        document.querySelectorAll('.hidden-block').forEach(el => observer.observe(el)); 
+    }, 50);  
 
 
     // =========================================================
-    // 3. ГЕЙМІФІКАЦІЯ ПРОГРАМИ (Accordion Logic)
+    // 2. АКОРДЕОН ПРОГРАМИ (Без видалення блоків)
     // =========================================================
     const accordions = document.querySelectorAll('.accordion-item');
     
@@ -44,37 +27,35 @@ document.addEventListener("DOMContentLoaded", function() {
         const content = acc.querySelector('.accordion-content');
         
         header.addEventListener('click', () => {
-            // Закриваємо всі інші (опціонально, розкоментуй якщо треба)
-            // accordions.forEach(other => {
-            //    if (other !== acc) {
-            //        other.classList.remove('active');
-            //        other.querySelector('.accordion-content').style.maxHeight = null;
-            //        other.querySelector('.acc-icon').innerText = '+';
-            //    }
-            // });
-
-            // Перемикаємо поточний
-            acc.classList.toggle('active');
-            const icon = acc.querySelector('.acc-icon');
+            const isActive = acc.classList.contains('active');
             
-            if (acc.classList.contains('active')) {
+            // Якщо хочеш, щоб інші закривались автоматично - розкоментуй цей блок
+            /*
+            accordions.forEach(other => {
+                other.classList.remove('active');
+                other.querySelector('.accordion-content').style.maxHeight = null;
+            });
+            */
+
+            // Плавно відкриваємо або закриваємо поточний
+            if (!isActive) {
+                acc.classList.add('active');
                 content.style.maxHeight = content.scrollHeight + "px";
-                icon.innerText = '−';
             } else {
+                acc.classList.remove('active');
                 content.style.maxHeight = null;
-                icon.innerText = '+';
             }
         });
     });
 
 
     // =========================================================
-    // 4. ПЛАВНИЙ СКРОЛ ДЛЯ КНОПОК
+    // 3. ПЛАВНИЙ СКРОЛ
     // =========================================================
     document.querySelectorAll('a.smooth-scroll, a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
-            if(targetId === "#" || targetId === "") return; 
+            if(targetId === "#") return; 
             
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
@@ -89,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     // =========================================================
-    // 5. РОЗУМНИЙ STICKY BAR
+    // 4. РОЗУМНИЙ STICKY BAR
     // =========================================================
     const stickyBarEl = document.getElementById('smartStickyBar');
     const programSection = document.getElementById('program-trigger');
@@ -113,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 // =========================================================
-// 6. ФУНКЦІОНАЛ ТАЙМЕРА
+// 5. ФУНКЦІОНАЛ ТАЙМЕРА
 // =========================================================
 function initTimer() { 
     let endTime = localStorage.getItem('courseTimerDirect'); 
@@ -159,7 +140,7 @@ setInterval(updateTimers, 1000);
 
 
 // =========================================================
-// 7. ФУНКЦІОНАЛ POP-UP ВІКНА ТА ФОРМИ (З КОДАМИ КРАЇН)
+// 6. ФУНКЦІОНАЛ POP-UP ВІКНА ТА ФОРМИ
 // =========================================================
 const modal = document.getElementById('popup-modal'); 
 const closeBtn = document.getElementById('close-popup'); 
@@ -232,7 +213,7 @@ if (popupForm) {
 } 
 
 // =========================================================
-// 8. ЕФЕКТ ПАРАЛАКСУ ДЛЯ ФОТО СВІТЛАНИ
+// 7. ЕФЕКТ ПАРАЛАКСУ ДЛЯ ФОТО СВІТЛАНИ
 // =========================================================
 window.addEventListener('scroll', function() { 
     const parallaxImage = document.querySelector('.trust-img'); 
