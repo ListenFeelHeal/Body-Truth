@@ -1,7 +1,7 @@
 /* ================= ЗМІННІ ТА БАЗА ================= */ 
 :root { 
-    --bg-light: #FAF8F5; /* Теплий кремовий колір */ 
-    --bg-dark: #161616;  /* Глибокий чорний */ 
+    --bg-light: #FAF8F5; 
+    --bg-dark: #161616;  
     --gold: #C2A373; 
     --gold-hover: #A88B5E; 
     --text-dark: #2C2C2C; 
@@ -12,10 +12,7 @@
 } 
 
 * { margin: 0; padding: 0; box-sizing: border-box; } 
-
-html {
-    scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body { 
     font-family: 'Montserrat', sans-serif; 
@@ -55,7 +52,6 @@ h1, h2, h3, h4 { font-weight: 800; }
 } 
 
 .btn:hover { transform: translateY(-3px); } 
-
 .btn-gold { background-color: var(--gold); color: var(--text-light); } 
 .btn-gold:hover { background-color: var(--gold-hover); box-shadow: 0 10px 20px rgba(194,163,115,0.3); } 
 .btn-dark { background-color: var(--bg-dark); color: var(--gold); } 
@@ -121,44 +117,32 @@ h1, h2, h3, h4 { font-weight: 800; }
 .practice { display: inline-block; background: var(--bg-light); padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; color: var(--bg-dark); } 
 
 /* ================= APP STORE CARDS (БОТ) ================= */
-.bot-showcase {
-    background-color: var(--bg-light);
-    overflow: hidden; /* Щоб картки могли виходити за межі екрана */
-}
+.bot-showcase { background-color: var(--bg-light); overflow: hidden; }
+.app-cards-container { width: 100%; padding: 10px 0 40px 0; }
 
-.app-cards-container {
-    width: 100%;
-    padding: 10px 0 40px 0;
-}
-
-/* Обгортка, що скролиться горизонтально */
 .app-cards-wrapper {
     display: flex;
     gap: 20px;
     overflow-x: auto;
-    /* МАГІЯ: Магнітний скрол як в iOS */
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    padding: 0 20px; /* Відступи по краях */
-    /* Ховаємо потворний скролбар */
+    padding: 0 20px; 
     -ms-overflow-style: none;
     scrollbar-width: none;
-    cursor: grab; /* Курсор для десктопа */
+    cursor: grab; 
 }
 .app-cards-wrapper::-webkit-scrollbar { display: none; }
 .app-cards-wrapper:active { cursor: grabbing; }
 
-/* Дизайн самої картки */
 .app-card {
-    /* На мобільному картка займає 85% екрана, показуючи шматок наступної */
     flex: 0 0 85vw; 
     max-width: 340px;
     height: 480px;
-    scroll-snap-align: center; /* Картка завжди магнітиться по центру */
+    scroll-snap-align: center; 
     position: relative;
-    overflow: hidden; /* Щоб телефон не виліз за рамки картки */
-    background: #1A1A1A; /* Темний преміум фон */
+    overflow: hidden; 
+    background: #1A1A1A; 
     border-radius: 30px;
     padding: 35px 30px;
     box-shadow: 0 20px 50px rgba(0,0,0,0.15);
@@ -170,21 +154,19 @@ h1, h2, h3, h4 { font-weight: 800; }
 
 .app-card:hover { transform: translateY(-5px); }
 
-/* Текст всередині картки */
 .app-card-text {
     position: relative;
-    z-index: 2; /* Текст завжди над телефоном */
+    z-index: 2; 
     text-align: left;
 }
 .app-card-text .card-icon { font-size: 2.5rem; margin-bottom: 15px; display: block;}
 .app-card-text h3 { color: var(--gold); font-size: 1.5rem; margin-bottom: 12px; line-height: 1.2; text-transform: uppercase;}
 .app-card-text p { color: #ccc; font-size: 1rem; font-weight: 400; text-transform: none; line-height: 1.5;}
 
-/* Візуал (Телефон, що визирає знизу-справа) */
 .app-card-visual {
     position: absolute;
-    bottom: -60px; /* Опускаємо нижче краю */
-    right: -40px;  /* Зсуваємо вправо */
+    bottom: -60px; 
+    right: -40px;  
     width: 240px;
     z-index: 1;
 }
@@ -192,25 +174,18 @@ h1, h2, h3, h4 { font-weight: 800; }
 .peek-phone {
     width: 100%;
     height: auto;
-    /* Нахиляємо телефон і даємо йому тінь */
     transform: rotate(-8deg);
     filter: drop-shadow(-10px 15px 25px rgba(0,0,0,0.4));
     transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* При наведенні телефон трохи піднімається і вирівнюється */
 .app-card:hover .peek-phone {
     transform: rotate(0deg) translateY(-15px);
 }
 
-/* АДАПТИВ ДЛЯ ДЕСКТОПА */
 @media (min-width: 900px) {
-    .app-cards-wrapper {
-        justify-content: center; /* На великому екрані картки стоять по центру */
-    }
-    .app-card {
-        flex: 0 0 340px; /* Фіксована ширина на ПК */
-    }
+    .app-cards-wrapper { justify-content: center; }
+    .app-card { flex: 0 0 340px; }
 }
 
 /* ================= АТМОСФЕРА БЕЗ ТИСКУ ================= */ 
@@ -318,21 +293,22 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
 .iti__country-list { text-align: left; font-family: 'Montserrat', sans-serif; font-weight: 500; border-radius: 12px; max-width: 300px; color: var(--bg-dark); box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: none; } 
 .secure-text { margin-top: 20px; font-size: 0.85rem; font-weight: 600; color: #666; } 
 
-/* ================= АДАПТИВНІСТЬ ================= */ 
+/* ================= АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ ================= */ 
 @media (max-width: 768px) { 
     .hero h1 { font-size: 2.8rem; } 
     .massive-price { font-size: 3.2rem; } 
     .massive-old { font-size: 1.5rem; } 
-    .trust-grid, .eco-flex, .pressure-container { grid-template-columns: 1fr; text-align: center; gap: 30px;} 
-    .trust-text, .bot-card { text-align: center; }
-    .phone-mockup { max-width: 260px; }
+    .trust-grid, .pressure-container { grid-template-columns: 1fr; text-align: center; gap: 30px;} 
+    .trust-text { text-align: center; }
     .time-box { min-width: 70px; } 
     .modal-content { max-height: 85vh; padding: 35px 20px; } 
     .smart-sticky-bar { width: 95%; bottom: 15px; padding: 10px 15px; }
     .st-price { font-size: 1.1rem; }
-    .phones-container { max-width: 280px; height: 350px; }
-    .phone-mockup { width: 180px; padding: 8px; border-radius: 25px; }
-    .mockup-img { border-radius: 18px; }
+    
+    /* Зменшуємо картки бота, щоб телефон не був велетенським */
+    .app-card { height: 420px; padding: 25px 20px; }
+    .app-card-visual { width: 180px; bottom: -30px; right: -20px; }
+    .app-card-text h3 { font-size: 1.3rem; }
 } 
 
 /* ================= АНІМАЦІЇ ПОЯВИ ================= */ 
