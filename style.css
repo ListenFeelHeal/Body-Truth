@@ -19,8 +19,8 @@ body {
     background-color: var(--bg-light); 
     color: var(--text-dark); 
     line-height: 1.6; 
-    overflow-x: hidden;
-} 
+    overflow-x: clip; /* ЗАМІНИЛИ hidden на clip, щоб картки почали приліпати */
+}
 
 .container { max-width: 900px; margin: 0 auto; padding: 0 20px; } 
 .text-center { text-align: center; } 
@@ -128,17 +128,26 @@ h1, h2, h3, h4 { font-weight: 800; }
 .trust-text-card { text-align: left; padding: 50px; }
 
 /* ================= STICKY STACK ================= */ 
-.program-stack { display: flex; flex-direction: column; padding-bottom: 60px; position: relative; max-width: 800px; margin: 40px auto 0; }
+.program-stack, .pressure-stack { 
+    display: flex; 
+    flex-direction: column; 
+    padding-bottom: 150px; /* Додали місце знизу, щоб ефект накладання тривав довше під час скролу */
+    position: relative; 
+    max-width: 800px; 
+    margin: 40px auto 0; 
+}
+
 .sticky-card { 
     position: sticky; 
-    top: calc(10vh + (var(--idx) * 12px)); 
+    top: calc(12vh + (var(--idx) * 15px)); /* Зупиняємо картки ближче до верху екрану */
+    z-index: var(--idx); /* Магія накладання: кожна наступна картка гарантовано лягає поверх попередньої */
     text-align: left; 
     background: #fff;
     padding: 35px !important;
-    box-shadow: 0 -10px 30px rgba(0,0,0,0.12) !important; 
+    box-shadow: 0 -15px 35px rgba(0,0,0,0.1) !important; /* М'яка преміальна тінь зверху */
     border-top: 1px solid rgba(194, 163, 115, 0.2); 
     border-radius: var(--radius);
-    margin-bottom: 15px; 
+    margin-bottom: 50px; /* Збільшили відстань, щоб вони не злипались миттєво */
 }
 .day-num { font-weight: 800; color: var(--gold); text-transform: uppercase; font-size: 0.9rem; margin-bottom: 10px; letter-spacing: 1px; } 
 .sticky-card h4 { font-size: 1.3rem; margin-bottom: 12px; color: var(--bg-dark); } 
@@ -274,6 +283,10 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
 
 /* ================= АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ (ВИПРАВЛЕНО) ================= */ 
 @media (max-width: 768px) { 
+    .sticky-card {
+        top: calc(8vh + (var(--idx) * 15px)); 
+        margin-bottom: 60px; /* Ще більше простору між картками на мобільному */
+    }
     .hero h1 { font-size: 2.8rem; } 
     .typewriter-wrapper { min-height: 5rem; } /* Місце для двох рядків друку */
     .subtitle { font-size: 1.8rem; }
