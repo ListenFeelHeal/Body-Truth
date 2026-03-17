@@ -3,7 +3,7 @@ function initTimer() {
     let endTime = localStorage.getItem('courseTimerDirect');
     const now = new Date().getTime();
     if (!endTime || parseInt(endTime, 10) <= now) {
-        endTime = now + (5 * 60 * 60 * 1000); 
+        endTime = now + (5 * 60 * 60 * 1000); // 5 годин
         localStorage.setItem('courseTimerDirect', endTime);
     } else {
         endTime = parseInt(endTime, 10);
@@ -43,8 +43,19 @@ updateTimers();
 const modal = document.getElementById('popup-modal');
 function openPopup() { modal.classList.add('active'); }
 function closePopup() { modal.classList.remove('active'); }
-document.getElementById('close-popup').addEventListener('click', closePopup);
+if (document.getElementById('close-popup')) {
+    document.getElementById('close-popup').addEventListener('click', closePopup);
+}
 window.addEventListener('click', (e) => { if (e.target === modal) closePopup(); });
+
+// --- ІНТЕРАКТИВНА ГАЛЕРЕЯ ЧАТ-БОТА (Нова функція) ---
+const phoneGallery = document.getElementById('phone-gallery');
+if (phoneGallery) {
+    phoneGallery.addEventListener('click', () => {
+        // Додаємо або прибираємо клас, який змінює місцями телефони
+        phoneGallery.classList.toggle('swapped');
+    });
+}
 
 // --- РОЗУМНА STICKY-КНОПКА ---
 const stickyBar = document.getElementById('smart-sticky');
@@ -53,8 +64,8 @@ const programSection = document.getElementById('program');
 window.addEventListener('scroll', () => {
     if (!stickyBar || !programSection) return;
     
-    // Кнопка з'являється, коли верх секції "Програма" доходить до середини екрану
     const rect = programSection.getBoundingClientRect();
+    // Кнопка з'являється, коли блок програми доходить до середини екрану
     if (rect.top < window.innerHeight / 2) {
         stickyBar.classList.add('visible');
     } else {
@@ -65,14 +76,19 @@ window.addEventListener('scroll', () => {
 // --- ПЛАВНА АНІМАЦІЯ ПОЯВИ БЛОКІВ (REVEAL) ---
 document.addEventListener("DOMContentLoaded", () => {
     const reveals = document.querySelectorAll(".reveal");
+    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                // Додаємо клас 'active', коли блок потрапляє на екран
                 entry.target.classList.add("active");
-                observer.unobserve(entry.target);
+                observer.unobserve(entry.target); // Більше не відстежуємо цей блок
             }
         });
-    }, { rootMargin: "0px 0px -50px 0px", threshold: 0.1 });
+    }, {
+        root: null, rootMargin: "0px 0px -50px 0px", // Невеликий відступ, щоб блок почав з'являтися раніше
+        threshold: 0.1 // Блок повинен бути на 10% на екрані
+    });
 
     reveals.forEach(reveal => observer.observe(reveal));
 });
