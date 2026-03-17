@@ -14,22 +14,20 @@ requestAnimationFrame(raf);
 // --- 2. GSAP (REVEAL ON SCROLL) ---
 gsap.registerPlugin(ScrollTrigger);
 
-// Синхронізація Lenis та GSAP
 lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add((time)=>{ lenis.raf(time * 1000) });
 gsap.ticker.lagSmoothing(0);
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Всі елементи з класом reveal-up
     const reveals = gsap.utils.toArray('.reveal-up');
     
     reveals.forEach((elem) => {
-        gsap.set(elem, { autoAlpha: 1 }); // Знімаємо hidden
+        gsap.set(elem, { autoAlpha: 1 }); 
         
         gsap.from(elem, {
             scrollTrigger: {
                 trigger: elem,
-                start: "top 85%", // Починається, коли елемент на 85% екрану
+                start: "top 85%",
                 toggleActions: "play none none none"
             },
             y: 40,
@@ -38,64 +36,50 @@ document.addEventListener("DOMContentLoaded", () => {
             ease: "power3.out"
         });
     });
-
-    // --- 3. LOTTIE АНІМАЦІЇ (МІКРОІНТЕРАКЦІЇ) ---
-    // Я використовую публічні посилання на гарні мінімалістичні анімації. 
-    // Ти зможеш замінити URL на свої власні JSON файли, якщо захочеш.
-    const lottieData = [
-        { id: 'lottie-pain', url: 'https://assets2.lottiefiles.com/packages/lf20_q5pk6p1k.json' }, // Пульс/Блискавка
-        { id: 'lottie-nausea', url: 'https://assets9.lottiefiles.com/packages/lf20_t2xgmroi.json' }, // Вихор
-        { id: 'lottie-cycle', url: 'https://assets8.lottiefiles.com/private_files/lf30_jlkegzxg.json' }, // Крапля/Квітка
-        { id: 'lottie-tension', url: 'https://assets2.lottiefiles.com/packages/lf20_rbhngjcx.json' } // Камінь/Замок
-    ];
-
-    lottieData.forEach(item => {
-        if(document.getElementById(item.id)) {
-            lottie.loadAnimation({
-                container: document.getElementById(item.id),
-                renderer: 'svg',
-                loop: true,
-                autoplay: true,
-                path: item.url 
-            });
-        }
-    });
 });
 
-// --- 4. SMART STICKY BAR (Розумна кнопка) ---
+// --- 3. SMART STICKY BAR (Точна логіка приховування/появи) ---
 const stickyBar = document.getElementById('smart-sticky');
-let lastScrollTop = 0;
+let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
     if (!stickyBar) return;
 
-    // Ховаємо, якщо скролимо вниз і ми нижче першого екрана
-    if (currentScroll > lastScrollTop && currentScroll > 500) {
+    // Якщо ми на самому верху сайту (перші 500px) - ховаємо
+    if (currentScroll < 500) {
         stickyBar.classList.add('hide');
     } 
-    // Показуємо, якщо скролимо вгору (або ми на самому верху)
+    // Якщо скролимо ВНИЗ (читаємо) - ховаємо
+    else if (currentScroll > lastScrollTop) {
+        stickyBar.classList.add('hide');
+    } 
+    // Якщо скролимо ВГОРУ (шукаємо меню/кнопку) - показуємо
     else {
         stickyBar.classList.remove('hide');
     }
+    
     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; 
 }, false);
 
-// --- 5. МАСКА ТЕЛЕФОНУ (IMASK) ---
-const phoneInput = document.getElementById('user-phone');
-if (phoneInput) {
-    const maskOptions = {
-        mask: '+{380} (00) 000-00-00',
-        lazy: false // Показує плейсхолдер маски одразу при кліку
-    };
-    const mask = IMask(phoneInput, maskOptions);
-}
+// --- 4. МАСКА ТЕЛЕФОНУ (СТАБІЛЬНИЙ IMASK) ---
+document.addEventListener("DOMContentLoaded", () => {
+    const phoneInput = document.getElementById('user-phone');
+    if (phoneInput) {
+        const maskOptions = {
+            mask: '+{380} (00) 000-00-00',
+            lazy: false, // Одразу показує +380 (__) ___-__-__
+            placeholderChar: '_'
+        };
+        const mask = IMask(phoneInput, maskOptions);
+    }
+});
 
-// --- 6. POPUP ---
+// --- 5. POPUP ---
 const modal = document.getElementById('popup-modal');
 function openPopup() { 
     modal.classList.add('active'); 
-    lenis.stop(); // Зупиняємо скрол фону
+    lenis.stop(); // Зупиняємо фоновий скрол
 }
 function closePopup() { 
     modal.classList.remove('active'); 
@@ -105,41 +89,3 @@ if (document.getElementById('close-popup')) {
     document.getElementById('close-popup').addEventListener('click', closePopup);
 }
 window.addEventListener('click', (e) => { if (e.target === modal) closePopup(); });
-
-// --- 7. ТАЙМЕР ---
-function initTimer() {
-    let endTime = localStorage.getItem('courseTimerDirect');
-    const now = new Date().getTime();
-    if (!endTime || parseInt(endTime, 10) <= now) {
-        endTime = now + (5 * 60 * 60 * 1000); 
-        localStorage.setItem('courseTimerDirect', endTime);
-    } else {
-        endTime = parseInt(endTime, 10);
-    }
-    return endTime;
-}
-let endTime = initTimer();
-
-function updateTimers() {
-    const now = new Date().getTime();
-    let timeLeft = endTime - now;
-    if (timeLeft <= 0) { 
-        endTime = now + (5 * 60 * 60 * 1000);
-        localStorage.setItem('courseTimerDirect', endTime);
-        timeLeft = endTime - now;
-    }
-    const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
-    const seconds = Math.floor((timeLeft / 1000) % 60);
-
-    function formatTime(time) { return time < 10 ? `0${time}` : time; }
-
-    const timerElement = document.getElementById('landing-timer');
-    if (timerElement) {
-        timerElement.querySelector('.hours').textContent = formatTime(hours);
-        timerElement.querySelector('.minutes').textContent = formatTime(minutes);
-        timerElement.querySelector('.seconds').textContent = formatTime(seconds);
-    }
-}
-setInterval(updateTimers, 1000);
-updateTimers();
