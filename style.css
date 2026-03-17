@@ -1,6 +1,6 @@
 /* ================= ЗМІННІ ТА БАЗА ================= */
 :root {
-    --bg-light: #FAF8F5; /* Чистий преміум фон */
+    --bg-light: #FAF8F5; /* Теплий кремовий */
     --bg-dark: #161616;  /* Глибокий чорний */
     --gold: #C2A373;
     --gold-hover: #A88B5E;
@@ -11,8 +11,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html {
-    scroll-behavior: smooth;
-    font-size: 16px;
+    scroll-behavior: smooth; /* Плавний скрол для кнопок */
 }
 
 body {
@@ -23,15 +22,15 @@ body {
     padding-bottom: 100px; /* Місце для sticky-кнопки */
 }
 
-.container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+.container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
 .text-center { text-align: center; }
 .text-light { color: var(--text-light); }
 .text-gold { color: var(--gold); }
-.section-padding { padding: 100px 0; } /* ПРЕМІУМ: КУПА ПОВІТРЯ */
+.section-padding { padding: 80px 0; }
 .mt-20 { margin-top: 20px; }
 .mt-40 { margin-top: 40px; }
 
-h1, h2, h3, h4 { font-weight: 800; text-transform: uppercase; }
+h1, h2, h3, h4 { font-weight: 800; }
 .gold-text { color: var(--gold); }
 
 /* ================= КНОПКИ ТА БОНУС ================= */
@@ -47,7 +46,6 @@ h1, h2, h3, h4 { font-weight: 800; text-transform: uppercase; }
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: center;
-    letter-spacing: 0.5px;
     width: 100%;
     max-width: 450px;
 }
@@ -69,116 +67,97 @@ h1, h2, h3, h4 { font-weight: 800; text-transform: uppercase; }
 /* ================= HERO ================= */
 .hero { background-color: var(--bg-dark); color: var(--text-light); padding: 80px 0 120px; }
 .pre-title { color: var(--gold); font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; font-size: 0.9rem; }
-.hero h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; }
+.hero h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 15px; }
 .hero h1 span { color: var(--gold); }
-.subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-style: italic; font-weight: 400; margin-bottom: 40px; color: #E5E0D8; text-transform: none; }
-.site-logo { max-width: 90px; height: auto; margin: 0 auto 30px; display: block; border-radius: 50%; border: 2px solid var(--gold); padding: 5px; }
+.subtitle { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; font-weight: 500; margin-bottom: 20px; color: #E5E0D8; text-transform: none;}
+.hero-desc { font-size: 1.1rem; max-width: 500px; margin: 0 auto 30px; opacity: 0.9; }
+.site-logo { max-width: 90px; height: auto; margin: 0 auto 20px; display: block; border-radius: 50%; border: 2px solid var(--gold); padding: 5px; }
 
-/* ================= БЛОК СИМПТОМІВ (ПРЕМІУМ ДИЗАЙН КАРТКИ) ================= */
-.symptoms { background-color: #ffffff; }
-.audience-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; }
-
-.symptoms-text { text-align: left; }
+/* ================= ПРО МЕНЕ & ФОТО ================= */
 .section-title { font-size: 2.2rem; margin-bottom: 30px; color: var(--bg-dark); }
-.symptoms-text p { margin-bottom: 15px; color: #555; }
-.author-intro-quote { font-style: italic; color: var(--gold); border-top: 1px solid rgba(194,163,115,0.2); border-bottom: 1px solid rgba(194,163,115,0.2); padding: 15px 0; margin-top: 25px; }
-
-/* ПРЕМІУМ ГРІД КАРТОК */
-.symptoms-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.symptom-card { 
-    background: var(--bg-light); 
-    padding: 25px; 
-    border-radius: 15px; 
-    border: 1px solid rgba(194,163,115,0.1); 
-    text-align: left; 
-    transition: 0.3s;
-}
-.symptom-card:hover { transform: translateY(-3px); border-color: var(--gold); }
-.symptom-card .icon { font-size: 1.8rem; display: block; margin-bottom: 15px; }
-.symptom-card h4 { font-size: 1.1rem; margin-bottom: 10px; color: var(--bg-dark); }
-.symptom-card p { font-size: 0.9rem; color: #666; font-weight: 400; line-height: 1.5; }
+.about-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: center; }
+.about-image-wrapper { position: relative; width: 100%; max-width: 350px; margin: 0 auto; }
+.about-img { width: 100%; height: auto; position: relative; z-index: 2; border-radius: 20px; aspect-ratio: 3/4; object-fit: cover; }
+.image-frame { position: absolute; top: 20px; left: -20px; width: 100%; height: 100%; border: 2px solid var(--gold); border-radius: 20px; z-index: 1; }
 
 /* ================= ФІЛОСОФІЯ ================= */
 .philosophy { background-color: var(--bg-dark); }
-.big-statement { font-size: 3rem; color: var(--gold); margin: 30px 0; }
+.big-statement { font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: var(--gold); font-style: italic; margin: 30px 0; }
 .learn-grid { display: flex; flex-direction: column; gap: 15px; max-width: 600px; margin: 0 auto; text-align: left; }
 .learn-item { background: rgba(255,255,255,0.05); color: var(--text-light); padding: 18px 25px; border-radius: 12px; border-left: 3px solid var(--gold); font-size: 1.05rem; }
 
 /* ================= ПРОГРАМА ================= */
 .program-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-.day-card { background: #fff; padding: 30px; border-radius: 15px; border: 1px solid rgba(0,0,0,0.05); text-align: left; transition: 0.3s ease; }
-.day-num { font-weight: 800; color: var(--gold); text-transform: uppercase; font-size: 0.9rem; margin-bottom: 10px; }
+.day-card { background: #fff; padding: 30px; border-radius: 15px; border: 1px solid rgba(0,0,0,0.05); text-align: left; }
+.day-num { font-weight: 800; color: var(--gold); font-size: 0.9rem; margin-bottom: 10px; }
 .day-card h4 { font-size: 1.25rem; margin-bottom: 12px; color: var(--bg-dark); }
 .day-card p { font-size: 0.95rem; color: #555; margin-bottom: 15px; font-weight: 400; text-transform: none; }
 .practice { display: inline-block; background: var(--bg-light); padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; color: var(--bg-dark); }
 .day-card-final { border: 2px solid var(--gold); background: #FAF8F2; }
 
-/* ================= БЛОК ПРЕЗЕНТАЦІЇ БОТА (ПРЕМІУМ ЧИСТИЙ ДИЗАЙН) ================= */
-.bot-showcase { background-color: #ffffff; }
-.bot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-
+/* ================= БЛОК ПРЕЗЕНТАЦІЇ БОТА (ПРЕМІУМ) ================= */
+.bot-showcase { background-color: var(--bg-dark); color: #fff; }
+.showcase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
 .bot-text { text-align: left; }
+.bot-text .section-title { color: #fff; margin-bottom: 20px; font-size: 2.5rem; }
+.bot-text p { color: #ccc; margin-bottom: 15px; }
+
 .bot-features-list { list-style: none; margin-top: 30px; }
 .bot-features-list li { 
     display: flex; 
-    align-items: center; 
+    align-items: flex-start; 
     gap: 15px; 
-    margin-bottom: 15px; 
-    font-size: 1.1rem; 
-    color: var(--bg-dark); 
-    font-weight: 600; 
-    text-transform: uppercase;
+    margin-bottom: 20px; 
+    font-size: 1.05rem; 
+    color: #eee; 
 }
-.bot-features-list .icon { font-size: 1.5rem; }
+.bot-features-list li strong { color: #fff; }
+.bot-features-list .icon { font-size: 1.5rem; margin-top: -3px; }
 
-/* ЧИСТІ PNG ПАРИТЬ НАД СТОІНКОЮ */
-.bot-images-showcase { 
-    position: relative; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    gap: 30px; /* Відступ між телефонами */
-}
-.bot-phone-1, .bot-phone-2 { 
-    width: 280px; /* Чіткий розмір */
-    height: auto; 
-    object-fit: contain; 
-    border: none; /* Жодних рамок */
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1)); /* М'яка преміум тінь */
+/* Каскад телефонів */
+.bot-images-wrapper { position: relative; }
+.bot-images-cascade { position: relative; width: 100%; height: 550px; }
+
+.bot-img-1, .bot-img-2 { 
+    position: absolute; 
+    border-radius: 30px; 
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4); 
+    width: 280px; 
+    height: auto;
 }
 
-/* ================= АТМОСФЕРА БЕЗ ТИСКУ (ОЧИЩЕНИЙ ПРЕМІУМ СТИЛЬ) ================= */
-.no-pressure { background-color: var(--bg-dark); padding: 0; }
+.bot-img-1 { top: 50px; left: 0; z-index: 1; filter: blur(1px); opacity: 0.9; }
+.bot-img-2 { top: 0; right: 30px; z-index: 2; }
+
+/* ================= АТМОСФЕРА ================= */
+.no-pressure { background-color: var(--bg-light); padding: 0; }
 .pressure-container { display: grid; grid-template-columns: 1fr; gap: 0; padding: 0; }
 .pressure-image-wrapper { width: 100%; height: 50vh; overflow: hidden; }
 .pressure-img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
-
-.pressure-text-wrapper { padding: 100px 20px; color: var(--text-light); max-width: 700px; margin: 0 auto; }
-.pressure-text-wrapper .section-title { color: var(--text-light); }
-.pressure-text-wrapper p { margin-bottom: 20px; font-size: 1.05rem; font-weight: 400; text-transform: none; }
+.pressure-text-wrapper { padding: 80px 20px; text-align: center; max-width: 700px; margin: 0 auto; }
+.small-quote { font-size: 1.4rem; margin: 25px 0; }
 
 /* ================= НИЖНІЙ ОФФЕР БЛОК (Темний) ================= */
 .offer-section { background-color: var(--bg-light); }
 .offer-card { background-color: var(--bg-dark); color: var(--text-light); border-radius: 25px; padding: 60px 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); max-width: 800px; margin: 0 auto; }
 .offer-title { font-size: 2rem; margin-bottom: 20px; }
 .massive-price { font-size: 4.5rem; font-weight: 900; margin-bottom: 30px; line-height: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; }
-.massive-old { font-size: 2rem; text-decoration: line-through; color: rgba(255,255,255,0.4); font-weight: 600; white-space: nowrap; transform: translateX(80px); }
+.massive-old { font-size: 2rem; text-decoration: line-through; color: rgba(255,255,255,0.4); transform: translateX(80px); }
 
 .timer-wrapper { margin-top: 40px; }
 .timer-label { font-weight: 800; margin-bottom: 15px; font-size: 1.1rem; }
-.box-timer { display: flex; justify-content: center; align-items: flex-start; gap: 10px; }
-.time-box { background: rgba(255,255,255,0.1); color: var(--text-light); border-radius: 12px; padding: 15px; min-width: 80px; display: flex; flex-direction: column; align-items: center; }
+.box-timer { display: flex; justify-content: center; gap: 10px; }
+.time-box { background: rgba(255,255,255,0.1); border-radius: 12px; padding: 15px; min-width: 80px; display: flex; flex-direction: column; align-items: center; }
 .time-box span { font-size: 2.5rem; font-weight: 800; line-height: 1; }
-.time-box small { font-size: 0.75rem; text-transform: uppercase; margin-top: 5px; color: var(--gold); font-weight: 600; }
-.time-separator { font-size: 2.5rem; font-weight: 800; margin-top: 5px; }
+.time-box small { font-size: 0.75rem; color: var(--gold); font-weight: 600; }
+.time-separator { font-size: 2.5rem; font-weight: 800; }
 
 /* ================= STICKY BAR ================= */
 .sticky-bar { 
     position: fixed; bottom: 0; left: 0; width: 100%; 
-    background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    padding: 15px 20px; box-shadow: 0 -10px 30px rgba(0,0,0,0.08); z-index: 9999;
-    text-align: center; border-top: 1px solid rgba(194, 163, 115, 0.2);
-    transform: translateY(150%); transition: transform 0.4s ease;
+    background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); 
+    padding: 15px 20px; z-index: 9999; text-align: center;
+    transform: translateY(100%); transition: transform 0.4s ease;
 }
 .sticky-bar.visible { transform: translateY(0); }
 .sticky-btn { margin: 0; max-width: 100%; padding: 18px 10px; font-size: 1.05rem; }
@@ -186,28 +165,26 @@ h1, h2, h3, h4 { font-weight: 800; text-transform: uppercase; }
 /* ================= POPUP ВІКНО ================= */
 .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 10000; justify-content: center; align-items: center; padding: 20px; }
 .modal-overlay.active { display: flex; }
-.modal-content { 
-    background: var(--bg-light); width: 100%; max-width: 420px; padding: 40px 30px; border-radius: 25px; 
-    position: relative; text-align: center; color: var(--bg-dark); 
-}
+.modal-content { background: var(--bg-light); max-width: 420px; padding: 40px 30px; border-radius: 25px; position: relative; text-align: center; color: var(--bg-dark); }
 .close-btn { position: absolute; top: 15px; right: 25px; font-size: 2.5rem; cursor: pointer; color: #888; }
 .modal-header h3 { font-size: 1.15rem; margin-bottom: 15px; font-weight: 700; color: var(--bg-dark); }
-.popup-form input { width: 100%; padding: 18px; border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; font-size: 1rem; font-family: 'Montserrat', sans-serif; font-weight: 600; margin-bottom: 15px; outline: none; }
-.popup-form input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(194,163,115,0.2); }
+.modal-price-area { margin-bottom: 25px; }
+.price-big { font-size: 3.2rem; font-weight: 900; color: var(--gold); }
+.price-crossed { font-size: 1.3rem; text-decoration: line-through; color: #999; font-weight: 700; }
+.popup-form input { width: 100%; padding: 18px; border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; font-size: 1rem; margin-bottom: 15px; }
 
 /* ================= АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ ================= */
 @media (max-width: 768px) {
     .hero h1 { font-size: 2.8rem; }
     .hero h1 span { font-size: 3.5rem; }
-    .symptoms, .bot-showcase { padding: 80px 0; }
-    .audience-grid, .bot-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-    .symptoms-text, .bot-text { text-align: center; }
-    
+    .about-grid, .showcase-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+    .about-text, .bot-text { text-align: center; }
+    .bot-features-list li { text-align: left; }
+    .bot-images-cascade { height: 450px; }
+    .bot-img-1, .bot-img-2 { width: 200px; }
     .massive-price { font-size: 3.5rem; }
     .massive-old { font-size: 1.6rem; transform: translateX(60px); }
-    
-    .bot-images-showcase { gap: 15px; }
-    .bot-phone-1, .bot-phone-2 { width: 150px; }
+    body { padding-bottom: 110px; }
 }
 
 /* ================= АНІМАЦІЇ ================= */
