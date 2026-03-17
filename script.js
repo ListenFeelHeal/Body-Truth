@@ -1,52 +1,36 @@
 document.addEventListener("DOMContentLoaded", function() { 
 
     // =========================================================
-    // 1. SCROLL REVEAL (Плавна поява блоків при скролі)
+    // 1. АНІМАЦІЯ ДРУКУ (Typing Effect)
     // =========================================================
-    setTimeout(() => { 
-        const observer = new IntersectionObserver((entries, obs) => { 
-            entries.forEach(entry => { 
-                if (entry.isIntersecting) { 
-                    entry.target.classList.add('show-block'); 
-                    obs.unobserve(entry.target); 
-                } 
-            }); 
-        }, { root: null, rootMargin: '0px', threshold: 0.1 }); 
-
-        document.querySelectorAll('.hidden-block').forEach(el => observer.observe(el)); 
-    }, 50);  
-
-
-    // =========================================================
-    // 2. АКОРДЕОН ПРОГРАМИ (Без видалення блоків)
-    // =========================================================
-    const accordions = document.querySelectorAll('.accordion-item');
+    const textToType = "чому болить, коли “все нормально”";
+    const typeWriterElement = document.getElementById("typewriter");
+    let i = 0;
     
-    accordions.forEach(acc => {
-        const header = acc.querySelector('.accordion-header');
-        const content = acc.querySelector('.accordion-content');
-        
-        header.addEventListener('click', () => {
-            const isActive = acc.classList.contains('active');
-            
-            // Якщо хочеш, щоб інші закривались автоматично - розкоментуй цей блок
-            /*
-            accordions.forEach(other => {
-                other.classList.remove('active');
-                other.querySelector('.accordion-content').style.maxHeight = null;
-            });
-            */
+    function typeWriter() {
+        if (i < textToType.length && typeWriterElement) {
+            typeWriterElement.innerHTML += textToType.charAt(i);
+            i++;
+            setTimeout(typeWriter, 60); 
+        }
+    }
+    setTimeout(typeWriter, 1000);
 
-            // Плавно відкриваємо або закриваємо поточний
-            if (!isActive) {
-                acc.classList.add('active');
-                content.style.maxHeight = content.scrollHeight + "px";
-            } else {
-                acc.classList.remove('active');
-                content.style.maxHeight = null;
+
+    // =========================================================
+    // 2. SCROLL REVEAL (Плавна поява блоків при скролі)
+    // =========================================================
+    const revealElements = document.querySelectorAll('.reveal-up');
+    const revealObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                obs.unobserve(entry.target);
             }
         });
-    });
+    }, { root: null, rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
 
 
     // =========================================================
@@ -55,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll('a.smooth-scroll, a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
-            if(targetId === "#") return; 
+            if(targetId === "#" || targetId === "") return; 
             
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
