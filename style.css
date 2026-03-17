@@ -116,74 +116,93 @@ h1, h2, h3, h4 { font-weight: 800; }
 .day-card p { font-size: 0.95rem; color: #555; margin-bottom: 15px; } 
 .practice { display: inline-block; background: var(--bg-light); padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; color: var(--bg-dark); } 
 
-/* ================= ПРОСТИЙ ТА ПРЕМІАЛЬНИЙ БОТ ================= */
-.bot-showcase { background-color: #ffffff; }
+/* ================= ПРЕМІАЛЬНИЙ БОТ (КАРТКИ) ================= */
+.bot-showcase { background-color: var(--bg-light); }
 .bot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
 
 .bot-info { text-align: left; }
-.bot-features-simple { display: flex; flex-direction: column; gap: 20px; }
+.bot-features-simple { display: flex; flex-direction: column; gap: 15px; }
 
-/* Дизайн плашок з описом кнопок */
+/* Дизайн красивих білих карток */
 .feature-row { 
     display: flex; 
-    align-items: flex-start; 
+    align-items: center; 
     gap: 20px; 
-    background: var(--bg-light); 
-    padding: 20px 25px; 
+    background: #ffffff; /* Чистий білий колір картки */
+    padding: 22px 25px; 
     border-radius: 20px; 
     border: 1px solid rgba(0,0,0,0.03); 
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.04); /* М'яка преміум тінь */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; 
 }
 .feature-row:hover { 
-    transform: translateY(-3px); 
-    box-shadow: var(--shadow-soft); 
+    transform: translateY(-5px); /* Легке підняття при наведенні */
+    box-shadow: 0 15px 40px rgba(194, 163, 115, 0.15); /* Золотиста тінь */
+    border-color: rgba(194, 163, 115, 0.3);
 }
-.feature-row .f-icon { font-size: 2rem; line-height: 1; }
+.feature-row .f-icon { font-size: 2.2rem; line-height: 1; flex-shrink: 0; }
 .feature-row .f-text strong { 
     display: block; 
     font-size: 1.1rem; 
     color: var(--bg-dark); 
     margin-bottom: 5px; 
-    text-transform: uppercase; 
+    text-transform: none;
 }
 .feature-row .f-text span { 
     font-size: 0.95rem; 
     color: #666; 
-    font-weight: 400; 
-    text-transform: none;
     line-height: 1.4;
+    display: block;
 }
 
-/* Візуал: Робимо звичайний скріншот схожим на дорогий iPhone */
+/* Візуал: Робимо твій скріншот bot-menu.png схожим на iPhone */
 .bot-visual { display: flex; justify-content: center; position: relative; }
 .single-phone-wrapper { 
     position: relative; 
     width: 100%; 
-    max-width: 320px; 
-    border-radius: 45px; /* Заокруглюємо кути скріншоту */
+    max-width: 300px; 
+    border-radius: 40px; 
     overflow: hidden;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.15); /* Дорога тінь */
-    border: 12px solid #161616; /* Імітація чорного корпусу телефону */
+    box-shadow: 0 30px 60px rgba(0,0,0,0.2); 
+    border: 10px solid #161616; /* Чорна рамка корпусу */
+    background-color: #161616; 
+}
+/* Чолка iPhone (динамічний острівець) для реалізму */
+.single-phone-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110px;
+    height: 25px;
     background-color: #161616;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    z-index: 10;
 }
 .single-phone-img { 
     width: 100%; 
     display: block; 
     height: auto; 
-    border-radius: 32px; /* Внутрішнє заокруглення екрана */
+    border-radius: 30px; /* Заокруглення самого екрана */
+    position: relative;
+    z-index: 1;
 }
 
 /* АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ */
 @media (max-width: 768px) {
     .bot-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
     .bot-info { text-align: center; }
-    .feature-row { text-align: left; padding: 15px; gap: 15px;}
+    .feature-row { text-align: left; padding: 20px; gap: 15px;}
     .single-phone-wrapper { 
         max-width: 260px; 
         margin: 0 auto; 
-        border-width: 10px; /* Трохи тонша рамка телефону на мобільному */
-        border-radius: 40px;
+        border-width: 8px;
+        border-radius: 35px;
     }
+    .single-phone-wrapper::before { width: 90px; height: 20px; }
+    .single-phone-img { border-radius: 25px; }
 }
 
 /* ================= АТМОСФЕРА БЕЗ ТИСКУ ================= */ 
