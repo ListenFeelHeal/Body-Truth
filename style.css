@@ -405,3 +405,29 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
         border-color: var(--gold);
     }
 }
+
+/* ================= АБСТРАКТНІ ІКОНКИ (ВЕКТОР) ================= */
+.icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+.icon-wrapper svg {
+    color: var(--gold);
+    stroke-width: 1.2px; /* Дуже тонкі, "дорогі" лінії */
+    transition: transform 0.4s ease;
+}
+.premium-card:hover .icon-wrapper svg {
+    transform: scale(1.05); /* Легке збільшення при наведенні */
+}
+.learn-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.learn-item svg {
+    color: var(--gold);
+    flex-shrink: 0;
+    stroke-width: 1.5px;
+}
