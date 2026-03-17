@@ -120,78 +120,103 @@ h1, h2, h3, h4 { font-weight: 800; }
 .day-card p { font-size: 0.95rem; color: #555; margin-bottom: 15px; } 
 .practice { display: inline-block; background: var(--bg-light); padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; color: var(--bg-dark); } 
 
-/* ================= ЕКОСИСТЕМА (БОТ) ================= */ 
-.eco-flex { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-.bot-features-grid { display: flex; flex-direction: column; gap: 15px; }
-.bot-card { padding: 20px 25px; font-weight: 600; font-size: 1.05rem; text-align: left;}
+/* ================= ЕКОСИСТЕМА (APPLE SCROLL) ================= */
+.apple-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 60px;
+    margin-top: 40px;
+    position: relative;
+}
 
-/* Композиція з двома телефонами (3D Сцена) */
-.phones-container {
+.apple-content {
+    flex: 1;
+    padding-bottom: 30vh; /* Даємо місце, щоб останній крок доскролився */
+}
+
+.apple-step {
+    min-height: 50vh; /* Висота одного кроку скролу */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0.3; /* Затемнюємо неактивні кроки */
+    transition: opacity 0.5s ease;
+    will-change: opacity;
+}
+.apple-step.active {
+    opacity: 1; /* Підсвічуємо активний крок */
+}
+
+/* Темна картка для контрасту з білим телефоном */
+.dark-card {
+    background: #1A1A1A;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
+/* Контейнер, який ПРИЛИПАЄ до екрана */
+.apple-sticky-visual {
+    flex: 1;
+    position: sticky;
+    top: 20vh; /* Відступ від верху екрана */
+    height: 70vh; /* Висота видимої зони */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.sticky-phone {
     position: relative;
     width: 100%;
-    max-width: 380px;
-    margin: 0 auto;
-    height: 480px; 
-    /* Вмикаємо 3D-простір */
-    perspective: 1000px;
-    cursor: pointer;
+    max-width: 320px;
+    aspect-ratio: 9/19;
 }
 
-.phone-mockup { 
+/* Картинки всередині телефону */
+.phone-screen-img {
     position: absolute;
-    width: 230px;
-    /* Плавна анімація для 3D переміщення */
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.6s ease, opacity 0.6s ease;
-    transform-style: preserve-3d;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    /* Твоя улюблена тінь для прозорих PNG */
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
 }
 
-.mockup-img { 
-    width: 100%; 
-    height: auto; 
-    display: block; 
-    /* МАГІЯ: drop-shadow замість box-shadow створює тінь по контуру PNG! */
-    filter: drop-shadow(0 25px 45px rgba(0,0,0,0.3));
-}
-
-/* Задній телефон (віддалений у 3D просторі) */
-.back-phone {
-    top: 5%;
-    right: 10px;
-    /* Відсуваємо назад (translateZ) і трохи повертаємо */
-    transform: translateZ(-80px) rotateY(-15deg) scale(0.9);
-    z-index: 1;
-    opacity: 0.7;
-    filter: blur(1.5px); /* Легкий розфокус для кіношної глибини */
-}
-
-/* Передній телефон (наближений) */
-.front-phone {
-    bottom: 5%;
-    left: 10px;
-    z-index: 2;
-    /* Висуваємо вперед */
-    transform: translateZ(50px) rotateY(10deg);
-}
-
-/* 3D ЕФЕКТ ПРИ НАВЕДЕННІ (Ховер) */
-.phones-container:hover .front-phone { 
-    /* Піднімається і повертається рівно */
-    transform: translateZ(90px) translateY(-15px) rotateY(0deg) scale(1.05); 
-}
-.phones-container:hover .back-phone { 
-    /* Виїжджає з-позаду і стає чітким */
-    transform: translateZ(0px) translateX(-40px) rotateY(0deg) scale(1); 
+.phone-screen-img.active {
     opacity: 1;
-    filter: blur(0px);
+    transform: translateY(0) scale(1);
 }
 
-/* АДАПТИВ ДЛЯ БОТА */
+/* ================= АДАПТИВНІСТЬ (МОБІЛЬНИЙ APPLE SCROLL) ================= */
 @media (max-width: 768px) {
-    .phones-container { max-width: 320px; height: 420px; }
-    .phone-mockup { width: 190px; }
-    /* На мобільному зменшуємо 3D-кут, бо екран вузький */
-    .back-phone { transform: translateZ(-50px) rotateY(-10deg) scale(0.9); top: 10%; right: 0;}
-    .front-phone { transform: translateZ(30px) rotateY(5deg); bottom: 10%; left: 0;}
+    .apple-layout { 
+        display: block; 
+    }
+    
+    /* Телефон прилипає зверху на мобільному */
+    .apple-sticky-visual {
+        position: sticky;
+        top: 80px; 
+        height: auto;
+        margin-bottom: 40px;
+        z-index: 1;
+    }
+    .sticky-phone { max-width: 240px; margin: 0 auto; }
+    
+    /* Текст скролиться ПОВЕРХ або ПІД телефоном */
+    .apple-content {
+        position: relative;
+        z-index: 2;
+        padding-bottom: 50px;
+    }
+    .apple-step {
+        min-height: 60vh; /* Кожна картка займає більше половини екрана */
+        padding: 20px 0;
+    }
 }
 
 /* ================= АТМОСФЕРА БЕЗ ТИСКУ ================= */ 
