@@ -1,17 +1,19 @@
 /* ================= CSS RESET & VARIABLES ================= */
 :root {
-    --bg-light: #FAF8F5; /* Чистий преміум фон */
-    --bg-dark: #121212;  /* Глибокий чорний */
+    --bg-light: #FAF8F5; 
+    --bg-dark: #121212;  
     --gold: #C2A373;
     --gold-hover: #A88B5E;
     --text-dark: #2C2C2C;
     --text-light: #FFFFFF;
-    /* GLASSMORPHISM */
     --glass-bg: rgba(250, 248, 245, 0.85); 
-    --glass-border: rgba(194,163,115,0.1);
+    --glass-border: rgba(194,163,115,0.15);
+    --shadow-soft: 0 10px 30px rgba(0,0,0,0.04);
+    --shadow-hover: 0 20px 40px rgba(194,163,115,0.15);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+/* Lenis бере на себе скрол, тому scroll-behavior: smooth тут не обов'язковий, але залишаємо для фолбеку */
 html { scroll-behavior: smooth; }
 
 body {
@@ -19,7 +21,6 @@ body {
     background-color: var(--bg-light);
     color: var(--text-dark);
     line-height: 1.6;
-    padding-bottom: 90px;
     overflow-x: hidden;
 }
 
@@ -28,24 +29,45 @@ body {
 .text-light { color: var(--text-light); }
 .text-gold { color: var(--gold); }
 .gold-text { color: var(--gold); }
-.section-padding { padding: 90px 0; }
+.section-padding { padding: 100px 0; }
 .mt-20 { margin-top: 20px; }
 .mt-40 { margin-top: 40px; }
 
 h1, h2, h3, h4 { font-weight: 800; text-transform: uppercase; }
 .section-title { font-size: 2.2rem; color: var(--bg-dark); margin-bottom: 20px; }
 
-/* ================= BUTTONS ================= */
+/* ================= SKELETON LOADERS ================= */
+.skeleton-wrapper {
+    position: relative;
+    overflow: hidden;
+    background-color: #e2e2e2;
+    border-radius: 20px;
+}
+.skeleton-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shimmer 1.5s infinite;
+}
+@keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+/* ================= BUTTONS & HOVERS (UI/UX) ================= */
 .btn {
     display: inline-block; padding: 22px 30px; font-size: 1.05rem; font-weight: 800;
     text-transform: uppercase; text-decoration: none; border-radius: 12px;
-    border: none; cursor: pointer; transition: 0.3s ease; text-align: center;
-    width: 100%; max-width: 450px; letter-spacing: 0.5px;
+    border: none; cursor: pointer; transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s;
+    text-align: center; width: 100%; max-width: 400px;
 }
-.btn:hover { transform: translateY(-3px); }
-.btn-gold { background-color: var(--gold); color: var(--text-light); }
-.btn-gold:hover { background-color: var(--gold-hover); box-shadow: 0 10px 20px rgba(194,163,115,0.3); }
+.btn-gold { background-color: var(--gold); color: #fff; }
 .btn-dark { background-color: var(--bg-dark); color: var(--gold); }
+
+/* Тактильне підняття карток (Feature #1 з коментаря) */
+.hover-lift { transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease; }
+.hover-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+}
 
 .pulse { animation: pulse-animation 2.5s infinite; }
 @keyframes pulse-animation {
@@ -54,177 +76,155 @@ h1, h2, h3, h4 { font-weight: 800; text-transform: uppercase; }
     100% { box-shadow: 0 0 0 0 rgba(194, 163, 115, 0); }
 }
 
+/* Імітація Lottie для іконок (плавна пульсація) */
+.lottie-simulate { display: inline-block; animation: soft-bounce 3s ease-in-out infinite; transform-origin: bottom center; }
+@keyframes soft-bounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1) translateY(-3px); } }
+
 /* ================= HERO ================= */
 .hero { background-color: var(--bg-dark); color: var(--text-light); padding: 80px 0 120px; }
-.site-logo { max-width: 90px; border-radius: 50%; border: 2px solid var(--gold); padding: 5px; margin-bottom: 20px; }
+.logo-wrapper { width: 90px; height: 90px; margin: 0 auto 20px; border-radius: 50%; }
+.site-logo { width: 100%; height: 100%; border-radius: 50%; border: 2px solid var(--gold); padding: 5px; object-fit: cover; }
 .pre-title { color: var(--gold); font-weight: 700; letter-spacing: 2px; font-size: 0.85rem; margin-bottom: 10px; }
 .pre-title.dark { color: var(--bg-dark); }
 .hero h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 15px; }
 .hero h1 span { color: var(--gold); }
-.subtitle { font-family: ' Montserrat', sans-serif; font-size: 1.4rem; font-weight: 500; margin-bottom: 20px; color: #E5E0D8; text-transform: none;}
+.subtitle { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; font-weight: 500; color: #E5E0D8; text-transform: none; }
 
-/* ================= СИМПТОМИ (BENTO BOX КАРТКИ) ================= */
+/* ================= СИМПТОМИ ================= */
 .symptoms { background-color: #ffffff; }
-.intro-text { max-width: 700px; margin: 0 auto; }
-.main-desc { font-size: 1.1rem; color: #555; }
-
-/* ПРЕМІУМ ГРІД КАРТОК */
-.bento-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+.bento-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
 .bento-card { 
     background: var(--bg-light); padding: 30px; border-radius: 20px; 
-    border: 1px solid rgba(0,0,0,0.05); text-align: left; transition: 0.3s;
+    border: 1px solid rgba(0,0,0,0.03); box-shadow: var(--shadow-soft); text-align: left;
 }
-.bento-card:hover { transform: translateY(-3px); border-color: var(--gold); }
-.bento-icon { font-size: 2rem; margin-bottom: 15px; }
+.bento-icon { font-size: 2.2rem; margin-bottom: 15px; }
 .bento-card h4 { font-size: 1.1rem; color: var(--bg-dark); margin-bottom: 10px; }
 .bento-card p { font-size: 0.95rem; color: #666; font-weight: 400; text-transform: none; }
+.quote-block { max-width: 700px; margin: 40px auto 0; padding: 30px; background: rgba(194,163,115,0.05); border-radius: 20px; }
 
-.quote-block { max-width: 700px; margin: 40px auto 0; padding: 30px; background: rgba(194,163,115,0.1); border-radius: 20px; }
+/* ================= SHAPE DIVIDER (Плавний перехід) ================= */
+.shape-divider { position: relative; width: 100%; overflow: hidden; line-height: 0; background: #ffffff; }
+.shape-divider svg { position: relative; display: block; width: calc(130% + 1.3px); height: 60px; transform: rotateY(180deg); }
+.shape-divider .shape-fill { fill: var(--bg-dark); }
 
 /* ================= ФІЛОСОФІЯ ================= */
-.philosophy { background-color: var(--bg-dark); }
+.philosophy { background-color: var(--bg-dark); padding-top: 20px; }
 .big-statement { font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: var(--gold); font-style: italic; margin: 20px 0; text-transform: none; }
-.learn-list { max-width: 600px; margin: 0 auto; text-align: left; display: flex; flex-direction: column; gap: 15px; }
-.learn-item { background: rgba(255,255,255,0.05); color: #eee; padding: 18px 25px; border-radius: 12px; border-left: 3px solid var(--gold); font-size: 1.05rem; }
 
-/* ================= СВІТЛАНА (ПОВЕРНЕННЯ) ================= */
+/* ================= СВІТЛАНА ================= */
+.about { background-color: var(--bg-light); }
 .audience-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: center; }
-.about-image-wrapper { position: relative; width: 100%; max-width: 350px; margin: 0 auto; }
-.about-img { width: 100%; height: auto; position: relative; z-index: 2; border-radius: 20px; aspect-ratio: 3/4; object-fit: cover; }
+.about-image-wrapper { position: relative; width: 100%; max-width: 350px; margin: 0 auto; aspect-ratio: 3/4; }
+.about-img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; position: relative; z-index: 2; }
 .image-frame { position: absolute; top: 20px; left: -20px; width: 100%; height: 100%; border: 2px solid var(--gold); border-radius: 20px; z-index: 1; }
-.about-text { text-align: left; max-width: 600px; }
-.about-text p { margin-bottom: 15px; color: #444; }
+.about-text { text-align: left; }
 
 /* ================= ПРОГРАМА ================= */
 .program-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-.day-card { background: #fff; padding: 30px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.04); text-align: left; transition: 0.3s; }
-.day-card:hover { transform: translateY(-3px); border-color: var(--gold); }
+.day-card { background: #fff; padding: 30px; border-radius: 20px; box-shadow: var(--shadow-soft); text-align: left; border: 1px solid rgba(0,0,0,0.02); }
 .day-num { font-weight: 800; color: var(--gold); font-size: 0.9rem; margin-bottom: 10px; }
 .day-card h4 { font-size: 1.25rem; margin-bottom: 12px; color: var(--bg-dark); }
-.day-card p { font-size: 0.95rem; color: #555; margin-bottom: 15px; font-weight: 400; text-transform: none; }
 .practice { display: inline-block; background: var(--bg-light); padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; }
 .day-card-final { border: 2px solid var(--gold); background: #FAF8F2; }
 
-/* ================= БОТ ШОУКЕЙС (ІНТЕРАКТИВ + BENTO) ================= */
-.bot-showcase { background-color: var(--bg-light); }
+/* ================= БОТ ШОУКЕЙС ================= */
+.bot-showcase { background-color: #ffffff; overflow: hidden; }
 .bot-bento-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 40px; align-items: center; }
-
-/* Текст перетворено на картку */
-.bot-text-bento { background: #fff; padding: 40px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); text-align: left; }
+.bot-text-bento { background: var(--bg-light); padding: 40px; border-radius: 25px; box-shadow: var(--shadow-soft); text-align: left; border: 1px solid rgba(0,0,0,0.03); }
 .bot-features-list { list-style: none; }
-.bot-features-list li { 
-    display: flex; align-items: center; gap: 15px; margin-bottom: 20px; 
-    font-size: 1.1rem; color: var(--bg-dark); font-weight: 600; text-transform: uppercase;
-}
+.bot-features-list li { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; font-size: 1.05rem; font-weight: 600; }
 .bot-features-list .icon { font-size: 1.8rem; }
 
-/* Інтерактивна галерея телефонів */
-.bot-visuals-bento { width: 100%; display: flex; justify-content: center; align-items: center; }
+/* Візуали Бота */
+.bot-visuals-bento { width: 100%; display: flex; justify-content: center; }
 .visual-wrapper { position: relative; width: 100%; max-width: 400px; aspect-ratio: 4/5; cursor: pointer; }
-
-/* ЧИСТІ PNG ПАРИТЬ НАД СТОІНКОЮ */
-.phone-img { 
-    position: absolute; width: 75%; height: auto; border: none; 
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15)); transition: all 0.5s ease;
-}
-
-/* Початкові позиції */
-.back-phone { top: 10%; left: 0; z-index: 1; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.1)) blur(1px); opacity: 0.9; }
+.phone-img { position: absolute; width: 75%; height: auto; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15)); transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+.back-phone { top: 10%; left: 0; z-index: 1; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.1)) blur(1.5px); opacity: 0.85; }
 .front-phone { bottom: 5%; right: 0; z-index: 2; }
+/* Hover Interaction */
+.visual-wrapper:hover .back-phone { transform: scale(1.05) translate(15px, -15px); opacity: 1; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15)) blur(0); z-index: 3; }
+.visual-wrapper:hover .front-phone { transform: scale(0.95) translate(-15px, 15px); filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1)) blur(1px); z-index: 1; }
+/* Floating animation (Імітація живої динаміки) */
+.float-anim { animation: floating 6s ease-in-out infinite; }
+.float-anim-reverse { animation: floating 6s ease-in-out infinite reverse; }
+@keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-/* Ефект наведення: "Живі блоки" */
-.visual-wrapper:hover .back-phone { transform: scale(1.05) translate(10px, -10px); }
-.visual-wrapper:hover .front-phone { transform: scale(1.05) translate(-10px, 10px); }
+/* ================= ВІДГУКИ ТА FAQ (SOCIAL PROOF) ================= */
+.testimonials { background: var(--bg-light); }
+.test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.test-card { background: #fff; padding: 30px; border-radius: 20px; box-shadow: var(--shadow-soft); text-align: left; }
+.stars { color: var(--gold); font-size: 1.2rem; margin-bottom: 15px; }
+.test-card p { font-style: italic; color: #444; margin-bottom: 15px; }
+.test-author { font-weight: 700; font-size: 0.9rem; color: var(--bg-dark); }
 
-/* Класи для JS: змінюємо місцями */
-.visual-wrapper.swapped .back-phone { top: auto; bottom: 5%; left: auto; right: 0; z-index: 2; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15)); blur(0); opacity: 1; }
-.visual-wrapper.swapped .front-phone { top: 10%; left: 0; bottom: auto; right: auto; z-index: 1; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.1)) blur(1px); opacity: 0.9; }
+.faq { background: #fff; }
+.faq-list { max-width: 700px; margin: 0 auto; text-align: left; }
+.faq-item { background: var(--bg-light); margin-bottom: 15px; border-radius: 15px; padding: 20px; cursor: pointer; border: 1px solid rgba(0,0,0,0.03); }
+.faq-item summary { font-weight: 700; font-size: 1.1rem; color: var(--bg-dark); outline: none; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+.faq-item summary::after { content: '+'; color: var(--gold); font-size: 1.5rem; font-weight: 400; transition: 0.3s; }
+.faq-item[open] summary::after { content: '−'; transform: rotate(180deg); }
+.faq-item p { margin-top: 15px; color: #555; padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.05); }
 
-/* ================= АТМОСФЕРА (BENTO GLASSMORPHISM) ================= */
+/* ================= БЕЗ ТИСКУ (GLASSMORPHISM) ================= */
 .no-pressure { background-color: var(--bg-light); padding: 0; }
-.pressure-container { display: grid; grid-template-columns: 1fr; gap: 0; padding: 0; }
-.pressure-image-wrapper { width: 100%; height: 50vh; overflow: hidden; }
-.pressure-img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
-.pressure-text-wrapper { padding: 0; max-width: 700px; margin: -50px auto 0; position: relative; z-index: 2; }
-
-/* Картка з матовим склом */
+.pressure-container { position: relative; width: 100%; min-height: 70vh; display: flex; align-items: center; justify-content: center; }
+.pressure-image-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+.pressure-img { width: 100%; height: 100%; object-fit: cover; }
+.pressure-text-wrapper { position: relative; z-index: 2; width: 100%; max-width: 800px; padding: 20px; }
 .pressure-glass-bento { 
-    background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
     padding: 60px 40px; border-radius: 25px; border: 1px solid var(--glass-border); 
-    box-shadow: 0 15px 50px rgba(0,0,0,0.1); 
-    /* "Живий" ефект при наведенні */
-    transition: transform 0.3s;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.15); 
 }
-.pressure-glass-bento:hover { transform: translateY(-5px); }
-
 .italic-sub { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-style: italic; color: #888; margin-bottom: 20px; text-transform: none; }
-.pressure-glass-bento p { margin-bottom: 15px; color: #444; font-size: 1.05rem; }
 
-/* ================= ОФФЕР БЛОК ================= */
+/* ================= ОФФЕР БЛОК (ЛІНІЙНА ЦІНА) ================= */
 .offer-section { background-color: var(--bg-dark); }
-.offer-card { background-color: #1A1A1A; border-radius: 25px; padding: 60px 20px; border: 1px solid rgba(255,255,255,0.05); }
-.offer-title { font-size: 2rem; margin-bottom: 20px; }
-.massive-price { font-size: 4rem; font-weight: 900; margin-bottom: 30px; display: flex; flex-direction: column; align-items: center; gap: 5px; }
-.massive-old { font-size: 2rem; text-decoration: line-through; color: rgba(255,255,255,0.4); transform: translateX(80px); }
-.massive-price span { text-transform: none; } /* Щоб UAH не було ВЕЛИКИМИ */
+.offer-card { background-color: #1A1A1A; border-radius: 25px; padding: 60px 20px; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
+.badge { display: inline-block; background: rgba(194,163,115,0.15); color: var(--gold); padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 20px; border: 1px solid rgba(194,163,115,0.3); }
 
-.timer-wrapper { margin-top: 40px; }
-.timer-label { font-weight: 800; margin-bottom: 15px; font-size: 1.1rem; }
-.box-timer { display: flex; justify-content: center; gap: 10px; }
-.time-box { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; min-width: 80px; }
-.time-box span { font-size: 2.5rem; font-weight: 800; color: #fff; }
-.time-box small { font-size: 0.75rem; color: var(--gold); font-weight: 600; text-transform: uppercase; }
-.time-separator { font-size: 2.5rem; font-weight: 800; color: rgba(255,255,255,0.1); }
+/* Лінійна ціна (Feature #2 з коментаря) */
+.linear-price { display: flex; justify-content: center; align-items: baseline; gap: 15px; flex-wrap: wrap; }
+.price-current { font-size: 3.5rem; font-weight: 900; color: var(--gold); line-height: 1; }
+.price-old { font-size: 1.4rem; text-decoration: line-through; color: rgba(255,255,255,0.4); font-weight: 600; }
+.modal-price .price-old { color: #999; }
 
-/* ================= ФУТЕР ================= */
-footer { background: var(--bg-dark); color: rgba(255,255,255,0.4); padding: 40px 20px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.8rem; }
+.secure-microcopy { font-size: 0.8rem; color: #888; font-weight: 500; }
+footer { background: var(--bg-dark); color: #777; padding: 40px 20px 100px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; }
+.legal-links a { color: #999; text-decoration: underline; margin: 0 10px; }
 
-/* ================= STICKY BAR (GLASSMORPHISM) ================= */
+/* ================= SMART STICKY BAR ================= */
 .sticky-bar { 
     position: fixed; bottom: 0; left: 0; width: 100%; 
-    background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
     padding: 15px 20px; z-index: 9999; text-align: center; border-top: 1px solid var(--glass-border);
-    /* Ховаємо кнопку */
-    transform: translateY(120%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.sticky-bar.visible { transform: translateY(0); }
+.sticky-bar.hide { transform: translateY(120%); } /* Ховаємо при скролі вниз */
 .sticky-btn { margin: 0; max-width: 100%; padding: 18px 10px; font-size: 1.05rem; }
 
 /* ================= POPUP ================= */
 .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(5px); }
 .modal-overlay.active { display: flex; }
 .modal-content { background: #fff; width: 100%; max-width: 400px; padding: 40px 30px; border-radius: 25px; position: relative; text-align: center; color: var(--bg-dark); }
-.close-btn { position: absolute; top: 15px; right: 25px; font-size: 2.5rem; cursor: pointer; color: #888; }
-.modal-header h3 { font-size: 1.15rem; margin-bottom: 15px; font-weight: 700; color: var(--bg-dark); }
-.modal-price-area { margin: 20px 0; }
-.price-big { font-size: 3.2rem; font-weight: 900; color: var(--gold); display: block; }
-.price-crossed { font-size: 1.3rem; text-decoration: line-through; color: #999; font-weight: 700; }
-.popup-form input { width: 100%; padding: 18px; border: 1px solid #ddd; border-radius: 12px; font-size: 1rem; font-family: 'Montserrat', sans-serif; font-weight: 600; text-align: center; margin-bottom: 15px; outline: none; }
-.popup-form input:focus { border-color: var(--gold); }
+.close-btn { position: absolute; top: 15px; right: 25px; font-size: 2.5rem; cursor: pointer; color: #888; transition: 0.3s; }
+.close-btn:hover { color: var(--bg-dark); transform: rotate(90deg); }
+.popup-form input { width: 100%; padding: 18px; border: 1px solid #ddd; border-radius: 12px; font-size: 1rem; font-family: inherit; margin-bottom: 15px; font-weight: 600; text-align: center; transition: 0.3s; }
+.popup-form input:focus { border-color: var(--gold); outline: none; box-shadow: 0 0 0 3px rgba(194,163,115,0.2); }
 
-/* ================= АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ ================= */
+/* ================= АДАПТИВНІСТЬ ================= */
 @media (max-width: 768px) {
-    .container { padding: 0 15px; }
     .hero h1 { font-size: 2.8rem; }
     .section-title { font-size: 1.8rem; }
-    .symptoms, .about, .philosophy, .program, .bot-showcase { padding: 60px 0; }
-    .audience-grid, .bot-bento-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
-    .about-text, .about-text p { text-align: center; }
-    .bento-grid, .program-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-    .bot-visuals-bento { max-width: 320px; margin: 0 auto; }
-    .bot-features-list li { font-size: 1rem; }
+    .audience-grid, .bot-bento-grid { grid-template-columns: 1fr; text-align: center; }
+    .about-text { text-align: center; }
+    .linear-price { flex-direction: column; align-items: center; gap: 5px; }
+    .price-current { font-size: 3rem; }
+    .shape-divider svg { height: 40px; }
     .pressure-glass-bento { padding: 40px 20px; }
-    .italic-sub { font-size: 1.4rem; }
-    .massive-price { font-size: 3.5rem; }
-    .massive-old { font-size: 1.6rem; transform: translateX(60px); }
-    .time-box { min-width: 70px; padding: 10px; }
-    .time-box span { font-size: 2rem; }
+    .bot-features-list li { text-align: left; }
 }
 
-/* ================= АНІМАЦІЇ ПОЯВИ БЛОКІВ ================= */
-.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
-.reveal.active { opacity: 1; transform: translateY(0); }
-.delay-1 { transition-delay: 0.1s; }
-.delay-2 { transition-delay: 0.2s; }
-.delay-3 { transition-delay: 0.3s; }
-.delay-4 { transition-delay: 0.4s; }
+/* ================= GSAP ПОЧАТКОВИЙ СТАН ================= */
+/* Елементи приховані до того, як GSAP їх анімує */
+.gsap-reveal { opacity: 0; visibility: hidden; }
