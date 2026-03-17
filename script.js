@@ -1,40 +1,37 @@
 document.addEventListener("DOMContentLoaded", function() { 
 
     // =========================================================
-    // 1. АНІМАЦІЯ ДРУКУ (Typing Effect)
+    // 1. АНІМАЦІЯ ПОЯВИ ПРИ СКРОЛІ (Reveal System)
     // =========================================================
-    const textToType = "чому болить, коли “все нормально”";
-    const typeWriterElement = document.getElementById("typewriter");
-    let i = 0;
-    
-    function typeWriter() {
-        if (i < textToType.length && typeWriterElement) {
-            typeWriterElement.innerHTML += textToType.charAt(i);
-            i++;
-            setTimeout(typeWriter, 60); 
-        }
-    }
-    setTimeout(typeWriter, 1000);
+    // Отримуємо всі елементи, які мають завантажувальні класи анімації
+    const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-zoom');
 
-
-    // =========================================================
-    // 2. SCROLL REVEAL (Плавна поява блоків при скролі)
-    // =========================================================
-    const revealElements = document.querySelectorAll('.reveal-up');
+    // Налаштування спостерігача
     const revealObserver = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('active');
+                // Додаємо клас, який запускає анімацію
+                entry.target.classList.add('active-reveal');
+                // Припиняємо спостереження за цим елементом
                 obs.unobserve(entry.target);
             }
         });
-    }, { root: null, rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
+    }, { 
+        root: null, 
+        rootMargin: '0px 0px -50px 0px', // Трохи заздалегідь запускаємо
+        threshold: 0.1 // Елемент має бути видно на 10%
+    });
 
-    revealElements.forEach(el => revealObserver.observe(el));
+    // Запускаємо спостереження
+    revealElements.forEach(el => {
+        // Додаємо базовий дата-атрибут для CSS
+        el.setAttribute('data-reveal', '');
+        revealObserver.observe(el);
+    });
 
 
     // =========================================================
-    // 3. ПЛАВНИЙ СКРОЛ
+    // 2. ПЛАВНИЙ СКРОЛ
     // =========================================================
     document.querySelectorAll('a.smooth-scroll, a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -54,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     // =========================================================
-    // 4. РОЗУМНИЙ STICKY BAR
+    // 3. РОЗУМНИЙ STICKY BAR
     // =========================================================
     const stickyBarEl = document.getElementById('smartStickyBar');
     const programSection = document.getElementById('program-trigger');
@@ -78,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 // =========================================================
-// 5. ФУНКЦІОНАЛ ТАЙМЕРА
+// 4. ФУНКЦІОНАЛ ТАЙМЕРА
 // =========================================================
 function initTimer() { 
     let endTime = localStorage.getItem('courseTimerDirect'); 
@@ -124,7 +121,7 @@ setInterval(updateTimers, 1000);
 
 
 // =========================================================
-// 6. ФУНКЦІОНАЛ POP-UP ВІКНА ТА ФОРМИ
+// 5. ФУНКЦІОНАЛ POP-UP ВІКНА ТА ФОРМИ (З КОДАМИ КРАЇН)
 // =========================================================
 const modal = document.getElementById('popup-modal'); 
 const closeBtn = document.getElementById('close-popup'); 
@@ -194,22 +191,4 @@ if (popupForm) {
 
         window.location.href = 'https://secure.wayforpay.com/button/b2669a557ef69'; 
     }); 
-} 
-
-// =========================================================
-// 7. ЕФЕКТ ПАРАЛАКСУ ДЛЯ ФОТО СВІТЛАНИ
-// =========================================================
-window.addEventListener('scroll', function() { 
-    const parallaxImage = document.querySelector('.trust-img'); 
-    const wrapper = document.querySelector('.trust-image-wrapper'); 
-    if (!parallaxImage || !wrapper) return; 
-
-    const rect = wrapper.getBoundingClientRect(); 
-    const windowHeight = window.innerHeight; 
-
-    if (rect.top <= windowHeight && rect.bottom >= 0) { 
-        const speed = 0.08;  
-        const yPos = (rect.top - windowHeight / 2) * speed; 
-        parallaxImage.style.transform = `scale(1.05) translateY(${yPos}px)`; 
-    } 
-});
+}
