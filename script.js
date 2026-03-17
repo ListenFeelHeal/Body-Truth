@@ -1,4 +1,4 @@
-// --- ФУНКЦІОНАЛ ТАЙМЕРА (ЗАХИСТ ВІД 00:00:00) ---
+// --- ФУНКЦІОНАЛ ТАЙМЕРА ---
 function initTimer() {
     let endTime = localStorage.getItem('courseTimerDirect');
     const now = new Date().getTime();
@@ -31,8 +31,7 @@ function updateTimers() {
     function formatTime(time) { return time < 10 ? `0${time}` : time; }
 
     const timerElements = [
-        document.getElementById('landing-timer'), 
-        document.getElementById('popup-timer')
+        document.getElementById('landing-timer')
     ];
 
     timerElements.forEach(timer => {
@@ -54,122 +53,14 @@ const closeBtn = document.getElementById('close-popup');
 function openPopup() { modal.classList.add('active'); }
 function closePopup() { modal.classList.remove('active'); }
 
-closeBtn.addEventListener('click', closePopup);
+if (closeBtn) { closeBtn.addEventListener('click', closePopup); }
 window.addEventListener('click', (event) => {
     if (event.target === modal) { closePopup(); }
 });
 
-// --- АВТОЗАПОВНЕННЯ EMAIL (КНОПКИ) ---
-const emailInput = document.getElementById('user-email');
-const emailChips = document.querySelectorAll('.email-chip');
-
-if (emailInput && emailChips.length > 0) {
-    emailChips.forEach(chip => {
-        chip.addEventListener('click', function(e) {
-            e.preventDefault(); 
-            let val = emailInput.value;
-            if (val.includes('@')) {
-                val = val.split('@')[0];
-            }
-            emailInput.value = val + this.innerText;
-            emailInput.focus();
-        });
-    });
-}
-
 // --- ІНІЦІАЛІЗАЦІЯ ПРАПОРЦІВ (intl-tel-input) ---
-const phoneInputField = document.querySelector("#user-phone");
-let phoneInput;
-
-if (phoneInputField) {
-    phoneInput = window.intlTelInput(phoneInputField, {
-        preferredCountries: ["ua", "pl", "de", "us", "gb", "cz", "it", "es"],
-        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-    });
-}
-
-// --- ФУНКЦІОНАЛ CRM ТА ОПЛАТИ ---
-const popupForm = document.querySelector('.popup-form');
-
-if (popupForm) {
-    popupForm.addEventListener('submit', async function(event) {
-        event.preventDefault(); 
-        
-        const submitBtn = popupForm.querySelector('button[type="submit"]');
-        submitBtn.innerText = "ОБРОБЛЕННЯ...";
-        
-        const emailValue = document.getElementById('user-email').value;
-        let phoneValue = "";
-        if (typeof phoneInput !== 'undefined' && typeof phoneInput.getNumber === 'function') {
-            phoneValue = phoneInput.getNumber(); 
-        } else {
-            phoneValue = document.getElementById('user-phone').value;
-        }
-        
-        const today = new Date();
-        const eventDate = today.toISOString().split('T')[0];
-        const sendPulseEventUrl = "https://events.sendpulse.com/events/id/7cc034c090fb4866b3509f19abc80ae6/9215091";
-
-        const requestData = {
-            "email": emailValue,
-            "phone": phoneValue,
-            "event_date": eventDate
-        };
-
-        try {
-            await fetch(sendPulseEventUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify(requestData)
-            });
-        } catch (error) {
-            console.error("Помилка відправки:", error);
-        }
-
-        // --- ВІДПРАВЛЯЄМО ПОДІЮ У FACEBOOK PIXEL ---
-        if (typeof fbq === 'function') {
-            fbq('track', 'InitiateCheckout', {
-                value: 399.00,
-                currency: 'UAH'
-            });
-        }
-
-        // Перехід на касу
-        window.location.href = 'https://secure.wayforpay.com/button/b2669a557ef69';
-    });
-}
-
-// --- ЕФЕКТ PARALLAX ---
-window.addEventListener('scroll', function() {
-    const parallaxImage = document.querySelector('.about-img');
-    const wrapper = document.querySelector('.about-image-wrapper');
-    if (!parallaxImage || !wrapper) return;
-
-    const rect = wrapper.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-
-    if (rect.top <= windowHeight && rect.bottom >= 0) {
-        const speed = 0.08; 
-        const yPos = (rect.top - windowHeight / 2) * speed;
-        parallaxImage.style.transform = `scale(1.05) translateY(${yPos}px)`;
-    }
-});
-
-// --- SCROLL REVEAL (БЕЗ ЗЛАМУ ФОНІВ) ---
-document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(() => {
-        const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show-block');
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, { root: null, rootMargin: '0px', threshold: 0.1 });
-
-        document.querySelectorAll('.hidden-block').forEach(el => observer.observe(el));
-    }, 50); 
-});
+// (Ми видалили intlTelInput для простоти, якщо він потрібен - повернемо, 
+// але для преміум-вигляду проста форма працює краще)
 
 // --- РОЗУМНА STICKY-КНОПКА (З'являється на блоці "Програма") ---
 window.addEventListener('scroll', function() {
@@ -186,4 +77,20 @@ window.addEventListener('scroll', function() {
     } else {
         stickyBar.classList.remove('visible');
     }
+});
+
+// --- SCROLL REVEAL АНІМАЦІЇ ---
+document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(() => {
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show-block');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { root: null, rootMargin: '0px', threshold: 0.1 });
+
+        document.querySelectorAll('.hidden-block').forEach(el => observer.observe(el));
+    }, 50); 
 });
