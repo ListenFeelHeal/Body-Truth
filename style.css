@@ -11,7 +11,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html {
-    scroll-behavior: smooth; /* Плавний скрол при натисканні на кнопку */
+    scroll-behavior: smooth;
 }
 
 body {
@@ -74,10 +74,8 @@ h1, h2, h3, h4 { font-weight: 800; }
 .pre-title { color: var(--gold); font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; font-size: 0.9rem; }
 .hero h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 15px; text-transform: uppercase; }
 .hero h1 span { color: var(--gold); }
-/* Підзаголовок зробили чистішим, без змішування стилів */
 .subtitle { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; font-weight: 500; margin-bottom: 20px; color: #E5E0D8; }
 .hero-desc { font-size: 1.1rem; max-width: 500px; margin: 0 auto 30px; opacity: 0.9; }
-/* Логотип зменшено вдвічі */
 .site-logo { max-width: 90px; height: auto; margin: 0 auto 20px; display: block; border-radius: 50%; border: 2px solid var(--gold); padding: 5px; }
 
 /* ================= ПРО МЕНЕ & ФОТО ================= */
@@ -131,12 +129,59 @@ h1, h2, h3, h4 { font-weight: 800; }
 .day-card p { font-size: 0.95rem; color: #555; margin-bottom: 15px; }
 .practice { display: inline-block; background: var(--bg-light); padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; color: var(--bg-dark); }
 
-/* ================= ФОРМАТ ТА РЕЗУЛЬТАТИ ================= */
-.format-flex { display: flex; gap: 30px; justify-content: space-between; flex-wrap: wrap; }
-.format-box, .results-box { flex: 1; min-width: 300px; background: #fff; padding: 40px; border-radius: 20px; border-top: 5px solid var(--gold); box-shadow: 0 15px 40px rgba(0,0,0,0.04); }
-.format-box h3, .results-box h3 { margin-bottom: 25px; font-size: 1.4rem; color: var(--bg-dark); }
-.format-box ul, .results-box ul { list-style: none; }
-.format-box li, .results-box li { margin-bottom: 15px; font-size: 1.05rem; }
+/* ================= БЛОК ПРЕЗЕНТАЦІЇ БОТА (ПРЕМІУМ) ================= */
+.bot-showcase { 
+    background-color: var(--bg-light); /* Кремовий фон, як ти просив! */
+    overflow: hidden; 
+}
+
+.audience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; } /* Використовуємо старий клас гріда */
+
+.bot-text {
+    text-align: left;
+    align-self: center;
+}
+
+.bot-text .section-title { margin-bottom: 20px; font-size: 2.5rem; }
+
+.bot-features-list { list-style: none; margin-top: 30px; }
+.bot-features-list li { 
+    display: flex; 
+    align-items: flex-start; 
+    gap: 15px; 
+    margin-bottom: 20px; 
+    font-size: 1.05rem; 
+    color: #444; 
+}
+.bot-features-list li strong { color: var(--bg-dark); }
+.bot-features-list .icon { font-size: 1.5rem; margin-top: -3px; }
+
+/* Каскад телефонів */
+.bot-images-wrapper { position: relative; }
+.bot-images-cascade { position: relative; width: 100%; height: 550px; }
+
+.bot-img-1, .bot-img-2 { 
+    position: absolute; 
+    border-radius: 30px; 
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15); 
+    width: 280px; 
+    height: auto;
+    will-change: transform;
+}
+
+.bot-img-1 { 
+    top: 50px; 
+    left: 0; 
+    z-index: 1; 
+    filter: blur(1px); 
+    opacity: 0.9;
+}
+
+.bot-img-2 { 
+    top: 0; 
+    right: 30px; 
+    z-index: 2; 
+}
 
 /* ================= АТМОСФЕРА ================= */
 .subtitle-text { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-style: italic; color: #888; margin-bottom: 20px; }
@@ -147,17 +192,6 @@ h1, h2, h3, h4 { font-weight: 800; }
 .pressure-text-wrapper .section-title { font-size: 2.2rem; }
 .mb-15 { margin-bottom: 15px; font-size: 1.05rem; color: #444; }
 .small-quote { font-size: 1.4rem; margin: 25px 0; padding: 15px 0 15px 20px; }
-
-/* ================= АУДИТОРІЯ ================= */
-.audience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-.audience-card { padding: 40px; border-radius: 20px; }
-.not-for-you { background: #FFF5F5; border: 1px solid rgba(255, 0, 0, 0.1); }
-.for-you { background: #F5FFF7; border: 1px solid rgba(0, 128, 0, 0.1); }
-.audience-card h3 { margin-bottom: 20px; font-size: 1.2rem; }
-.audience-card ul { list-style: none; padding-left: 10px; }
-.audience-card li { margin-bottom: 18px; position: relative; padding-left: 25px; font-size: 1.05rem; line-height: 1.5; }
-.not-for-you li::before { content: '•'; position: absolute; left: 0; color: #d9534f; font-size: 1.2rem; }
-.for-you li::before { content: '•'; position: absolute; left: 0; color: #5cb85c; font-size: 1.2rem; }
 
 /* ================= НИЖНІЙ ОФФЕР БЛОК (Темний) ================= */
 .offer-section { background-color: var(--bg-light); }
@@ -212,6 +246,7 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
 }
 
 .sticky-btn { margin: 0; max-width: 100%; padding: 18px 10px; font-size: 1.05rem; box-shadow: 0 5px 15px rgba(194,163,115,0.2); }
+
 /* ================= POPUP ВІКНО ================= */
 .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 10000; justify-content: center; align-items: center; padding: 20px; }
 .modal-overlay.active { display: flex; }
@@ -278,6 +313,14 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     .modal-content { max-height: 85vh; padding: 35px 20px; }
     
     body { padding-bottom: 110px; }
+
+    /* Адаптивність для бота */
+    .bot-text { text-align: center; margin-bottom: 50px; }
+    .bot-features-list li { text-align: left; }
+    .bot-images-cascade { height: 450px; }
+    .bot-img-1, .bot-img-2 { width: 200px; }
+    .bot-img-1 { top: 70px; left: 10px; }
+    .bot-img-2 { top: 0; right: 10px; }
 }
 
 /* ================= АНІМАЦІЇ ================= */
