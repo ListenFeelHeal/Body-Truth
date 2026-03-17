@@ -120,102 +120,96 @@ h1, h2, h3, h4 { font-weight: 800; }
 .day-card p { font-size: 0.95rem; color: #555; margin-bottom: 15px; } 
 .practice { display: inline-block; background: var(--bg-light); padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; color: var(--bg-dark); } 
 
-/* ================= ЕКОСИСТЕМА (APPLE SCROLL) ================= */
-.apple-layout {
+/* ================= APP STORE CARDS (БОТ) ================= */
+.bot-showcase {
+    background-color: var(--bg-light);
+    overflow: hidden; /* Щоб картки могли виходити за межі екрана */
+}
+
+.app-cards-container {
+    width: 100%;
+    padding: 10px 0 40px 0;
+}
+
+/* Обгортка, що скролиться горизонтально */
+.app-cards-wrapper {
     display: flex;
-    align-items: flex-start;
-    gap: 60px;
-    margin-top: 40px;
+    gap: 20px;
+    overflow-x: auto;
+    /* МАГІЯ: Магнітний скрол як в iOS */
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 20px; /* Відступи по краях */
+    /* Ховаємо потворний скролбар */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    cursor: grab; /* Курсор для десктопа */
+}
+.app-cards-wrapper::-webkit-scrollbar { display: none; }
+.app-cards-wrapper:active { cursor: grabbing; }
+
+/* Дизайн самої картки */
+.app-card {
+    /* На мобільному картка займає 85% екрана, показуючи шматок наступної */
+    flex: 0 0 85vw; 
+    max-width: 340px;
+    height: 480px;
+    scroll-snap-align: center; /* Картка завжди магнітиться по центру */
     position: relative;
-}
-
-.apple-content {
-    flex: 1;
-    padding-bottom: 30vh; /* Даємо місце, щоб останній крок доскролився */
-}
-
-.apple-step {
-    min-height: 50vh; /* Висота одного кроку скролу */
+    overflow: hidden; /* Щоб телефон не виліз за рамки картки */
+    background: #1A1A1A; /* Темний преміум фон */
+    border-radius: 30px;
+    padding: 35px 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    border: 1px solid rgba(255,255,255,0.05);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    opacity: 0.3; /* Затемнюємо неактивні кроки */
-    transition: opacity 0.5s ease;
-    will-change: opacity;
-}
-.apple-step.active {
-    opacity: 1; /* Підсвічуємо активний крок */
+    transition: transform 0.4s ease;
 }
 
-/* Темна картка для контрасту з білим телефоном */
-.dark-card {
-    background: #1A1A1A;
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-}
+.app-card:hover { transform: translateY(-5px); }
 
-/* Контейнер, який ПРИЛИПАЄ до екрана */
-.apple-sticky-visual {
-    flex: 1;
-    position: sticky;
-    top: 20vh; /* Відступ від верху екрана */
-    height: 70vh; /* Висота видимої зони */
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-.sticky-phone {
+/* Текст всередині картки */
+.app-card-text {
     position: relative;
-    width: 100%;
-    max-width: 320px;
-    aspect-ratio: 9/19;
+    z-index: 2; /* Текст завжди над телефоном */
+    text-align: left;
+}
+.app-card-text .card-icon { font-size: 2.5rem; margin-bottom: 15px; display: block;}
+.app-card-text h3 { color: var(--gold); font-size: 1.5rem; margin-bottom: 12px; line-height: 1.2; text-transform: uppercase;}
+.app-card-text p { color: #ccc; font-size: 1rem; font-weight: 400; text-transform: none; line-height: 1.5;}
+
+/* Візуал (Телефон, що визирає знизу-справа) */
+.app-card-visual {
+    position: absolute;
+    bottom: -60px; /* Опускаємо нижче краю */
+    right: -40px;  /* Зсуваємо вправо */
+    width: 240px;
+    z-index: 1;
 }
 
-/* Картинки всередині телефону */
-.phone-screen-img {
-    position: absolute;
-    top: 0;
-    left: 0;
+.peek-phone {
     width: 100%;
     height: auto;
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
-    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    /* Твоя улюблена тінь для прозорих PNG */
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
+    /* Нахиляємо телефон і даємо йому тінь */
+    transform: rotate(-8deg);
+    filter: drop-shadow(-10px 15px 25px rgba(0,0,0,0.4));
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.phone-screen-img.active {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+/* При наведенні телефон трохи піднімається і вирівнюється */
+.app-card:hover .peek-phone {
+    transform: rotate(0deg) translateY(-15px);
 }
 
-/* ================= АДАПТИВНІСТЬ (МОБІЛЬНИЙ APPLE SCROLL) ================= */
-@media (max-width: 768px) {
-    .apple-layout { 
-        display: block; 
+/* АДАПТИВ ДЛЯ ДЕСКТОПА */
+@media (min-width: 900px) {
+    .app-cards-wrapper {
+        justify-content: center; /* На великому екрані картки стоять по центру */
     }
-    
-    /* Телефон прилипає зверху на мобільному */
-    .apple-sticky-visual {
-        position: sticky;
-        top: 80px; 
-        height: auto;
-        margin-bottom: 40px;
-        z-index: 1;
-    }
-    .sticky-phone { max-width: 240px; margin: 0 auto; }
-    
-    /* Текст скролиться ПОВЕРХ або ПІД телефоном */
-    .apple-content {
-        position: relative;
-        z-index: 2;
-        padding-bottom: 50px;
-    }
-    .apple-step {
-        min-height: 60vh; /* Кожна картка займає більше половини екрана */
-        padding: 20px 0;
+    .app-card {
+        flex: 0 0 340px; /* Фіксована ширина на ПК */
     }
 }
 
