@@ -4,63 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Body Exhale | Жіноче тіло в стресі</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
-
-    <script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script> <script src="https://unpkg.com/imask"></script> <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '1625849898561536'); fbq('track', 'PageView');
     </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1625849898561536&ev=PageView&noscript=1"/></noscript>
 </head>
 <body>
 
     <header class="hero">
         <div class="container text-center">
-            <div class="skeleton-wrapper logo-wrapper gsap-reveal">
-                <img src="logo.jpg" alt="Body Exhale Logo" class="site-logo">
+            <div class="skeleton-wrapper logo-wrapper reveal-up">
+                <img src="logo.jpg" alt="Body Exhale Logo" class="site-logo" loading="lazy" onload="this.parentElement.classList.remove('skeleton-wrapper')">
             </div>
-            <p class="pre-title gsap-reveal">7-ДЕННИЙ МІНІ-КУРС ДЛЯ ЖІНОК</p>
-            <h1 class="gsap-reveal">ЖІНОЧЕ ТІЛО <br><span>В СТРЕСІ</span></h1>
-            <p class="subtitle gsap-reveal">чому болить, коли “все нормально”</p>
-            <a href="#symptoms" class="btn btn-gold pulse gsap-reveal mt-20">ЯК ДОПОМОГТИ ТІЛУ?</a>
+            <p class="pre-title reveal-up">7-ДЕННИЙ МІНІ-КУРС ДЛЯ ЖІНОК</p>
+            <h1 class="reveal-up">ЖІНОЧЕ ТІЛО <br><span>В СТРЕСІ</span></h1>
+            <p class="subtitle reveal-up">чому болить, коли “все нормально”</p>
+            <a href="#symptoms" class="btn btn-gold pulse reveal-up mt-20">ЯК ДОПОМОГТИ ТІЛУ?</a>
         </div>
     </header>
 
     <section id="symptoms" class="symptoms section-padding">
         <div class="container">
-            <div class="intro-text text-center gsap-reveal">
+            <div class="intro-text text-center reveal-up">
                 <h2 class="section-title">Знайомі відчуття?</h2>
                 <p class="main-desc">Лікарі кажуть: «у вас усе в нормі», але тіло кричить про інше.</p>
             </div>
             
             <div class="bento-grid mt-40">
-                <div class="bento-card hover-lift gsap-reveal">
-                    <div class="bento-icon lottie-simulate">⚡️</div>
+                <div class="bento-card hover-lift reveal-up">
+                    <div class="lottie-icon" id="lottie-pain"></div>
                     <h4>Тіло болить</h4>
                     <p>Стискається, німіє, з'являються дивні реакції.</p>
                 </div>
-                <div class="bento-card hover-lift gsap-reveal">
-                    <div class="bento-icon lottie-simulate">🌪</div>
+                <div class="bento-card hover-lift reveal-up">
+                    <div class="lottie-icon" id="lottie-nausea"></div>
                     <h4>Спазми та нудота</h4>
                     <p>Проблеми з ШКТ, клубок у горлі на фоні емоцій.</p>
                 </div>
-                <div class="bento-card hover-lift gsap-reveal">
-                    <div class="bento-icon lottie-simulate">🥀</div>
+                <div class="bento-card hover-lift reveal-up">
+                    <div class="lottie-icon" id="lottie-cycle"></div>
                     <h4>Важкий цикл</h4>
                     <p>Став непередбачуваним або болючим через нерви.</p>
                 </div>
-                <div class="bento-card hover-lift gsap-reveal">
-                    <div class="bento-icon lottie-simulate">🧱</div>
+                <div class="bento-card hover-lift reveal-up">
+                    <div class="lottie-icon" id="lottie-tension"></div>
                     <h4>Кам'яна напруга</h4>
                     <p>Живе в шиї, животі або зціплених щелепах.</p>
                 </div>
             </div>
 
-            <div class="quote-block text-center mt-40 gsap-reveal">
+            <div class="quote-block text-center mt-40 reveal-up">
                 <p>І найважче — це <strong>перестати довіряти собі</strong>. Коли тобі роками кажуть, що ти “накручуєш”.</p>
                 <p class="gold-text mt-20"><strong>Рішення — не лікувати тіло, а почути його.🤍</strong></p>
             </div>
@@ -74,7 +73,7 @@
     </div>
 
     <section class="philosophy section-padding">
-        <div class="container text-center gsap-reveal">
+        <div class="container text-center reveal-up">
             <p class="text-light">Це не лікування і не заміна лікарів. Це про звʼязок психіки і тіла.</p>
             <h2 class="big-statement">Біль — не ворог. Це сигнал.</h2>
         </div>
@@ -82,11 +81,11 @@
 
     <section id="author" class="about section-padding">
         <div class="container audience-grid"> 
-            <div class="skeleton-wrapper about-image-wrapper gsap-reveal">
-                <img src="1.jpg" alt="Світлана Дужик" class="about-img" onload="this.parentElement.classList.remove('skeleton-wrapper')">
+            <div class="skeleton-wrapper about-image-wrapper reveal-up">
+                <img src="1.jpg" alt="Світлана Дужик" class="about-img" loading="lazy" onload="this.parentElement.classList.remove('skeleton-wrapper')">
                 <div class="image-frame"></div>
             </div>
-            <div class="about-text gsap-reveal">
+            <div class="about-text reveal-up">
                 <h2 class="section-title">Я поруч.🤍</h2>
                 <p>Я, Світлана Дужик, створила цей курс не з позиції: «я експерт і знаю, як правильно». Я створила його з позиції: <strong>«я була там, де ти зараз»</strong>.</p>
                 <p>На цьому курсі ми не будемо "лікувати". Ми будемо <strong>слухати тіло. Без насильства. Без “зберися”.</strong></p>
@@ -96,39 +95,39 @@
 
     <section id="program" class="program section-padding">
         <div class="container">
-            <h2 class="section-title text-center gsap-reveal">Програма курсу (7 днів)</h2>
+            <h2 class="section-title text-center reveal-up">Програма курсу (7 днів)</h2>
             <div class="program-grid mt-40">
-                <div class="day-card hover-lift gsap-reveal">
+                <div class="day-card hover-lift reveal-up">
                     <div class="day-num">День 1</div>
                     <h4>Чому болить</h4>
                     <span class="practice">🟢 Сканування тіла</span>
                 </div>
-                <div class="day-card hover-lift gsap-reveal">
+                <div class="day-card hover-lift reveal-up">
                     <div class="day-num">День 2</div>
                     <h4>Зона контролю</h4>
                     <span class="practice">🟢 Розслаблення</span>
                 </div>
-                <div class="day-card hover-lift gsap-reveal">
+                <div class="day-card hover-lift reveal-up">
                     <div class="day-num">День 3</div>
                     <h4>Живіт і ШКТ</h4>
                     <span class="practice">🟢 Заземлення</span>
                 </div>
-                <div class="day-card hover-lift gsap-reveal">
+                <div class="day-card hover-lift reveal-up">
                     <div class="day-num">День 4</div>
                     <h4>Розслаблення</h4>
                     <span class="practice">🎧 Аудіо-релакс</span>
                 </div>
-                <div class="day-card hover-lift gsap-reveal">
+                <div class="day-card hover-lift reveal-up">
                     <div class="day-num">День 5</div>
                     <h4>Жіночий цикл</h4>
                     <span class="practice">🟢 Жіночий ритуал</span>
                 </div>
-                <div class="day-card hover-lift gsap-reveal">
+                <div class="day-card hover-lift reveal-up">
                     <div class="day-num">День 6</div>
                     <h4>Сигнали тіла</h4>
                     <p class="mt-20">Біль як мова.</p>
                 </div>
-                <div class="day-card hover-lift day-card-final gsap-reveal">
+                <div class="day-card hover-lift day-card-final reveal-up">
                     <div class="day-num">День 7</div>
                     <h4>Інтеграція</h4>
                     <span class="practice">🎧 Заспокійлива практика</span>
@@ -138,43 +137,58 @@
     </section>
 
     <section class="bot-showcase section-padding">
-        <div class="container text-center gsap-reveal">
+        <div class="container text-center reveal-up">
             <p class="pre-title dark">КИШЕНЬКОВИЙ ПСИХОЛОГ</p>
             <h2 class="section-title">ЕКОСИСТЕМА ПІДТРИМКИ</h2>
         </div>
 
         <div class="container bot-bento-grid mt-40">
-            <div class="bot-text-bento hover-lift gsap-reveal">
+            <div class="bot-text-bento hover-lift reveal-up">
                 <ul class="bot-features-list">
-                    <li><span class="icon lottie-simulate">🚨</span>Кнопка «SOS: Мені погано»</li>
-                    <li><span class="icon lottie-simulate">🧠</span>Самодіагностика та тести</li>
-                    <li><span class="icon lottie-simulate">🌿</span>Короткі щоденні практики</li>
-                    <li><span class="icon lottie-simulate">🎓</span>Бібліотека знань назавжди</li>
+                    <li><span class="icon">🚨</span>Кнопка «SOS: Мені погано»</li>
+                    <li><span class="icon">🧠</span>Самодіагностика та тести</li>
+                    <li><span class="icon">🌿</span>Короткі щоденні практики</li>
+                    <li><span class="icon">🎓</span>Бібліотека знань назавжди</li>
                 </ul>
             </div>
 
-            <div class="bot-visuals-bento gsap-reveal">
-                <div class="visual-wrapper" id="phone-gallery">
-                    <img src="bot-menu.png" alt="Telegram Bot" class="phone-img back-phone float-anim">
-                    <img src="bot-breathing.png" alt="SOS Breathing" class="phone-img front-phone float-anim-reverse">
+            <div class="bot-visuals-bento reveal-up">
+                <div class="phone-mockup">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="chat-scroll-container">
+                            <div class="chat-message bot">Привіт! Я — твій провідник до спокою. 🤍</div>
+                            <div class="chat-message user">Мені зараз дуже тривожно...</div>
+                            <div class="chat-message bot">Зробіть вдих. Ви в безпеці. Оберіть техніку нижче:</div>
+                            <div class="chat-button">💨 Квадратне дихання</div>
+                            <div class="chat-button">🌍 Заземлення 5-4-3-2-1</div>
+                            <div class="chat-message user">Відкриваю заземлення.</div>
+                            <div class="chat-message bot">Знайдіть 5 речей навколо себе, які ви можете побачити... 👀</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="testimonials section-padding">
-        <div class="container text-center gsap-reveal">
+        <div class="container text-center reveal-up">
             <h2 class="section-title">Що кажуть жінки</h2>
             <div class="test-grid mt-40">
-                <div class="test-card hover-lift">
+                <div class="test-card hover-lift reveal-up">
                     <div class="stars">★★★★★</div>
                     <p>"Вперше за рік я прокинулася без болю в щелепі. Практика заземлення з бота тепер мій рятівник на роботі."</p>
                     <span class="test-author">— Олена, 34 роки</span>
                 </div>
-                <div class="test-card hover-lift">
+                <div class="test-card hover-lift reveal-up">
                     <div class="stars">★★★★★</div>
-                    <p>"Лікарі казали пити заспокійливе, але тільки тут я зрозуміла, чому мій шлунок так реагує на стрес. Дякую!"</p>
+                    <p>"Лікарі казали пити заспокійливе, але тільки тут я зрозуміла, чому мій шлунок так реагує на стрес."</p>
                     <span class="test-author">— Марія, 28 років</span>
+                </div>
+                <div class="test-card hover-lift reveal-up">
+                    <div class="stars">★★★★★</div>
+                    <p>"Кнопка SOS у боті — це геніально. Вчора накрила паніка в метро, дихали разом з ботом. Попустило за 3 хвилини."</p>
+                    <span class="test-author">— Ірина, 41 рік</span>
                 </div>
             </div>
         </div>
@@ -182,11 +196,11 @@
 
     <section class="no-pressure section-padding">
         <div class="container pressure-container">
-            <div class="skeleton-wrapper pressure-image-wrapper gsap-reveal">
-                <img src="relax.jpg" alt="Спокій" class="pressure-img" onload="this.parentElement.classList.remove('skeleton-wrapper')">
+            <div class="skeleton-wrapper pressure-image-wrapper reveal-up">
+                <img src="relax.jpg" alt="Спокій" class="pressure-img" loading="lazy" onload="this.parentElement.classList.remove('skeleton-wrapper')">
             </div>
             
-            <div class="pressure-text-wrapper text-center gsap-reveal">
+            <div class="pressure-text-wrapper text-center reveal-up">
                 <div class="pressure-glass-bento hover-lift">
                     <h2 class="section-title">У цьому курсі немає тиску.</h2>
                     <p class="italic-sub">Немає “ти мусиш”. Немає сорому.</p>
@@ -197,7 +211,7 @@
     </section>
 
     <section class="faq section-padding">
-        <div class="container gsap-reveal">
+        <div class="container reveal-up">
             <h2 class="section-title text-center">Поширені запитання</h2>
             <div class="faq-list mt-40">
                 <details class="faq-item hover-lift">
@@ -210,7 +224,7 @@
                 </details>
                 <details class="faq-item hover-lift">
                     <summary>Як довго у мене буде доступ?</summary>
-                    <p>Матеріали та Telegram-бот залишаються з вами назавжди.</p>
+                    <p>Матеріали та Telegram-бот залишаються з вами назавжди, без абонплат.</p>
                 </details>
             </div>
         </div>
@@ -218,13 +232,13 @@
 
     <section class="offer-section section-padding">
         <div class="container text-center">
-            <div class="offer-card gsap-reveal">
+            <div class="offer-card reveal-up">
                 <div class="badge pulse">Обмежена пропозиція</div>
                 <h2 class="offer-title text-light mt-20">Доступ до курсу та Telegram-бота</h2>
                 
                 <div class="linear-price mt-20">
                     <span class="price-current">399 грн</span>
-                    <span class="price-old">замість 1200 грн</span>
+                    <span class="price-old">замість 1500 грн</span>
                 </div>
                 
                 <a href="#" class="btn btn-gold huge-btn pulse mt-20" onclick="openPopup(); return false;">ПРИЄДНАТИСЯ ДО КУРСУ</a>
@@ -234,27 +248,33 @@
     </section>
 
    <footer>
-        <div class="container text-center gsap-reveal">
+        <div class="container text-center reveal-up">
             <p class="copyright">© 2026 Body Exhale. Всі права захищено.</p>
         </div>
     </footer>
 
-    <div class="sticky-bar" id="smart-sticky">
-        <a href="#" class="btn btn-gold sticky-btn pulse" onclick="openPopup(); return false;">ЗАБРОНЮВАТИ МІСЦЕ ЗА 399 ГРН</a>
+    <div class="sticky-bar hide" id="smart-sticky">
+        <div class="sticky-content">
+            <div class="sticky-price">
+                <span class="s-price">399 грн</span>
+                <span class="s-old">1500 грн</span>
+            </div>
+            <a href="#" class="btn btn-gold sticky-btn pulse" onclick="openPopup(); return false;">ЗАБРОНЮВАТИ</a>
+        </div>
     </div>
 
     <div id="popup-modal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-btn" id="close-popup">×</span>
-            <div class="modal-header"><h3>Заповніть форму</h3></div>
+            <div class="modal-header"><h3>Оформлення доступу</h3></div>
             <div class="linear-price modal-price">
                 <span class="price-current">399 грн</span>
-                <span class="price-old">1200 грн</span>
+                <span class="price-old">замість 1500 грн</span>
             </div>
             <form class="popup-form mt-20">
                 <input type="email" id="user-email" placeholder="Ваш E-mail" required>
                 <input type="tel" id="user-phone" placeholder="+380 (__) ___-__-__" required>
-                <button type="submit" class="btn btn-dark full-width pulse mt-20">ПЕРЕЙТИ ДО ОПЛАТИ</button>
+                <button type="submit" class="btn btn-dark full-width pulse mt-20">ОПЛАТИТИ ДОСТУП</button>
             </form>
             <p class="secure-microcopy mt-20">🔒 Ваші дані надійно захищені шифруванням.</p>
         </div>
