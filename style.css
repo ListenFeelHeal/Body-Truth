@@ -124,51 +124,74 @@ h1, h2, h3, h4 { font-weight: 800; }
 .eco-flex { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
 .bot-features-grid { display: flex; flex-direction: column; gap: 15px; }
 .bot-card { padding: 20px 25px; font-weight: 600; font-size: 1.05rem; text-align: left;}
-/* Композиція з двома телефонами */
+
+/* Композиція з двома телефонами (3D Сцена) */
 .phones-container {
     position: relative;
     width: 100%;
     max-width: 380px;
     margin: 0 auto;
     height: 480px; 
+    /* Вмикаємо 3D-простір */
+    perspective: 1000px;
+    cursor: pointer;
 }
 
 .phone-mockup { 
-    background: #111; 
-    padding: 12px; 
-    border-radius: 35px; 
-    box-shadow: 0 20px 50px rgba(0,0,0,0.2); 
     position: absolute;
-    width: 240px;
-    transition: transform 0.4s ease;
+    width: 230px;
+    /* Плавна анімація для 3D переміщення */
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.6s ease, opacity 0.6s ease;
+    transform-style: preserve-3d;
 }
-
-/* Задній телефон */
-.back-phone {
-    top: 0;
-    right: 0;
-    transform: scale(0.9);
-    z-index: 1;
-    opacity: 0.8;
-}
-
-/* Передній телефон */
-.front-phone {
-    bottom: 0;
-    left: 0;
-    z-index: 2;
-    box-shadow: -15px 25px 50px rgba(0,0,0,0.3);
-}
-
-/* Ефект при наведенні миші на телефони */
-.phones-container:hover .front-phone { transform: translateY(-5px) scale(1.02); }
-.phones-container:hover .back-phone { transform: scale(0.95) translateX(-10px); opacity: 1; }
 
 .mockup-img { 
     width: 100%; 
     height: auto; 
-    border-radius: 25px; 
     display: block; 
+    /* МАГІЯ: drop-shadow замість box-shadow створює тінь по контуру PNG! */
+    filter: drop-shadow(0 25px 45px rgba(0,0,0,0.3));
+}
+
+/* Задній телефон (віддалений у 3D просторі) */
+.back-phone {
+    top: 5%;
+    right: 10px;
+    /* Відсуваємо назад (translateZ) і трохи повертаємо */
+    transform: translateZ(-80px) rotateY(-15deg) scale(0.9);
+    z-index: 1;
+    opacity: 0.7;
+    filter: blur(1.5px); /* Легкий розфокус для кіношної глибини */
+}
+
+/* Передній телефон (наближений) */
+.front-phone {
+    bottom: 5%;
+    left: 10px;
+    z-index: 2;
+    /* Висуваємо вперед */
+    transform: translateZ(50px) rotateY(10deg);
+}
+
+/* 3D ЕФЕКТ ПРИ НАВЕДЕННІ (Ховер) */
+.phones-container:hover .front-phone { 
+    /* Піднімається і повертається рівно */
+    transform: translateZ(90px) translateY(-15px) rotateY(0deg) scale(1.05); 
+}
+.phones-container:hover .back-phone { 
+    /* Виїжджає з-позаду і стає чітким */
+    transform: translateZ(0px) translateX(-40px) rotateY(0deg) scale(1); 
+    opacity: 1;
+    filter: blur(0px);
+}
+
+/* АДАПТИВ ДЛЯ БОТА */
+@media (max-width: 768px) {
+    .phones-container { max-width: 320px; height: 420px; }
+    .phone-mockup { width: 190px; }
+    /* На мобільному зменшуємо 3D-кут, бо екран вузький */
+    .back-phone { transform: translateZ(-50px) rotateY(-10deg) scale(0.9); top: 10%; right: 0;}
+    .front-phone { transform: translateZ(30px) rotateY(5deg); bottom: 10%; left: 0;}
 }
 
 /* ================= АТМОСФЕРА БЕЗ ТИСКУ ================= */ 
