@@ -3,32 +3,25 @@ document.addEventListener("DOMContentLoaded", function() {
     // =========================================================
     // 1. АНІМАЦІЯ ПОЯВИ ПРИ СКРОЛІ (Reveal System)
     // =========================================================
-    // Отримуємо всі елементи, які мають завантажувальні класи анімації
     const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-zoom');
 
-    // Налаштування спостерігача
     const revealObserver = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Додаємо клас, який запускає анімацію
                 entry.target.classList.add('active-reveal');
-                // Припиняємо спостереження за цим елементом
                 obs.unobserve(entry.target);
             }
         });
     }, { 
         root: null, 
-        rootMargin: '0px 0px -50px 0px', // Трохи заздалегідь запускаємо
-        threshold: 0.1 // Елемент має бути видно на 10%
+        rootMargin: '0px 0px -50px 0px',
+        threshold: 0.1
     });
 
-    // Запускаємо спостереження
     revealElements.forEach(el => {
-        // Додаємо базовий дата-атрибут для CSS
         el.setAttribute('data-reveal', '');
         revealObserver.observe(el);
     });
-
 
     // =========================================================
     // 2. ПЛАВНИЙ СКРОЛ
@@ -48,7 +41,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
-
 
     // =========================================================
     // 3. РОЗУМНИЙ STICKY BAR
@@ -71,8 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }, false);
 
-}); // КІНЕЦЬ DOMContentLoaded
-
+}); 
 
 // =========================================================
 // 4. ФУНКЦІОНАЛ ТАЙМЕРА
@@ -119,9 +110,8 @@ function updateTimers() {
 updateTimers(); 
 setInterval(updateTimers, 1000); 
 
-
 // =========================================================
-// 5. ФУНКЦІОНАЛ POP-UP ВІКНА ТА ФОРМИ (З КОДАМИ КРАЇН)
+// 5. ФУНКЦІОНАЛ POP-UP ВІКНА ТА ФОРМИ
 // =========================================================
 const modal = document.getElementById('popup-modal'); 
 const closeBtn = document.getElementById('close-popup'); 
