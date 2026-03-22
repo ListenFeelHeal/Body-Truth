@@ -396,18 +396,40 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     .time-box { min-width: 70px; } 
     .modal-content { max-height: 85vh; padding: 35px 20px; } 
     
-    /* Компактна капсула Sticky Bar для мобільного */
-    .smart-sticky-bar { bottom: 15px; padding: 8px 8px 8px 15px; border-radius: 50px; width: 95%; }
+   /* Компактна капсула Sticky Bar для мобільного (ВИПРАВЛЕНО) */
+    .smart-sticky-bar { 
+        bottom: 15px; 
+        padding: 8px 8px 8px 15px; 
+        border-radius: 50px; 
+        width: 95%; 
+    }
+    .sticky-content { 
+        flex-wrap: nowrap !important; /* Жорстко забороняємо перенос елементів */
+        gap: 8px;
+    }
+    .sticky-info { 
+        flex-shrink: 0; /* Забороняємо кнопці розчавити ліву частину */
+        min-width: max-content; /* Розмір точно по тексту */
+    }
     .st-price { font-size: 1.25rem; }
-    .sticky-btn { padding: 12px 20px !important; font-size: 0.85rem; }
+    .st-old { font-size: 0.85rem; }
     
-    .clean-phone-wrapper { max-width: 260px; margin: 0 auto; }
-    .bot-features-list { gap: 10px; padding: 0 10px; margin-top: 20px;}
-    .feature-row { text-align: left; padding: 18px; gap: 15px;}
-    .feature-row .f-text strong { font-size: 1rem; }
+    .st-timer-label { 
+        white-space: nowrap !important; /* Намертво приклеюємо вогник до слова АКЦІЯ */
+        font-size: 0.6rem;
+    }
+    .st-mini-timer { 
+        font-size: 0.8rem; 
+        padding: 2px 4px; 
+    }
     
-    .offer-card { padding: 40px 20px !important; }
-} 
+    .sticky-btn { 
+        padding: 12px 5px !important; /* Менші бокові відступи */
+        font-size: 0.85rem; 
+        flex-grow: 1; /* Кнопка займає залишок місця, а не диктує свої умови */
+        text-align: center;
+        width: auto;
+    }
 
 /* ================= АНІМАЦІЇ ПОЯВИ ================= */ 
 [data-reveal] { opacity: 0; transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1); will-change: opacity, transform; }
