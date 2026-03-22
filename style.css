@@ -55,18 +55,30 @@ h1, h2, h3, h4 { font-weight: 800; }
     width: 100%; max-width: 450px; letter-spacing: 0.5px; 
 } 
 .btn:hover { transform: translateY(-3px); } 
-.btn-gold { background-color: var(--gold); color: var(--text-light); } 
-.btn-gold:hover { background-color: var(--gold-hover); box-shadow: 0 10px 20px rgba(194,163,115,0.3); } 
+
+/* ПРЕМІУМ-ГРАДІЄНТ ДЛЯ ВСІХ КНОПОК САЙТУ */
+.btn-gold { 
+    background: linear-gradient(135deg, #D0B58D 0%, #A08151 100%); 
+    color: #161616 !important; /* Темний контрастний текст */
+    text-shadow: 0 1px 1px rgba(255,255,255,0.2); 
+} 
+.btn-gold:hover { 
+    background: linear-gradient(135deg, #DFC49C 0%, #AF8F5C 100%); 
+    box-shadow: 0 10px 25px rgba(160, 129, 81, 0.4); 
+    color: #000 !important;
+} 
+
 .btn-dark { background-color: var(--bg-dark); color: var(--gold); } 
 .btn-dark:hover { background-color: #000; box-shadow: 0 10px 20px rgba(0,0,0,0.3); } 
 .full-width { max-width: 100%; } 
 .huge-btn { font-size: 1.15rem; padding: 25px 20px; white-space: normal; } 
 
+/* ПУЛЬС ПІД НОВИЙ ГРАДІЄНТ */
 .pulse { animation: pulse-animation 2.5s infinite; } 
 @keyframes pulse-animation { 
-    0% { box-shadow: 0 0 0 0 rgba(194, 163, 115, 0.4); } 
-    70% { box-shadow: 0 0 0 15px rgba(194, 163, 115, 0); } 
-    100% { box-shadow: 0 0 0 0 rgba(194, 163, 115, 0); } 
+    0% { box-shadow: 0 0 0 0 rgba(208, 181, 141, 0.5); } 
+    70% { box-shadow: 0 0 0 15px rgba(208, 181, 141, 0); } 
+    100% { box-shadow: 0 0 0 0 rgba(208, 181, 141, 0); } 
 } 
 
 /* ================= КАРТКИ ================= */
@@ -520,22 +532,18 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     justify-content: center !important;
     align-items: center !important;
     flex: 1 1 auto !important;
-    /* ЯДЕРНЕ ЗАВДАННЯ №2 - Металевий ґрадієнт ПІД СТИЛЬ НАШОГО САЙТУ */
-    /* В основі колір сайту #C2A373, розтягнутий в ґрадієнт */
     background: linear-gradient(135deg, #D0B58D 0%, #A08151 100%) !important;
-    
-    color: #161616 !important; /* ТЕМНИЙ ВУГІЛЬНИЙ ТЕКСТ (ЗА ТВОЇМ ТЗ) */
+    color: #161616 !important; 
     font-weight: 800 !important;
     font-size: 1.05rem !important;
     text-transform: uppercase !important;
     letter-spacing: 1.5px !important;
-    /* Тонка, ледь помітна вертикальна лінія розділювача */
     border-left: 1px solid rgba(0, 0, 0, 0.1) !important;
     padding: 0 20px !important;
     text-align: center !important;
 }
 
-/* --- Мобільна адаптація ДЛЯ ЦЬОГО БЛОКУ --- */
+/* --- Мобільна адаптація ДЛЯ СТІКІ-БАРУ --- */
 @media (max-width: 768px) {
     .premium-action-bar {
         bottom: 15px !important;
