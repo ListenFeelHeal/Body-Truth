@@ -274,66 +274,6 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
 .disclaimer { font-size: 0.75rem; color: #666; text-align: justify; margin-bottom: 30px; } 
 .copyright { font-size: 0.8rem; color: #555; text-transform: uppercase; letter-spacing: 1px; } 
 
-/* ================= РОЗУМНИЙ STICKY BAR (ПРЕМІУМ КАПСУЛА) ================= */ 
-.smart-sticky-bar {  
-    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(0);
-    width: 92%; max-width: 600px; 
-    background: rgba(26, 26, 26, 0.90);  
-    backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); 
-    padding: 10px 10px 10px 20px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3); z-index: 9999; 
-    border-radius: 100px; 
-    border: 1px solid rgba(194, 163, 115, 0.3); 
-    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.5s ease;
-    opacity: 1; pointer-events: auto;
-} 
-.smart-sticky-bar.sticky-hidden { transform: translateX(-50%) translateY(150px); opacity: 0; pointer-events: none; }
-
-.sticky-content { 
-    display: flex; justify-content: space-between; align-items: center; 
-    width: 100%; gap: 10px;
-}
-
-/* Ліва частина: Ціна + Таймер */
-.sticky-info { 
-    display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
-    flex-shrink: 0; /* БРОНЯ: Забороняємо кнопці стискати цей блок */
-    min-width: max-content; /* Розмір суворо по ширині тексту */
-}
-
-/* Рядок ціни */
-.sticky-price-row { 
-    display: flex; align-items: baseline; gap: 8px; line-height: 1; 
-    white-space: nowrap !important; /* Жодного переносу цін */
-}
-.st-price { color: var(--gold); font-weight: 800; font-size: 1.4rem; display: inline-flex; align-items: baseline; }
-.st-currency { font-size: 0.6em; margin-left: 2px; vertical-align: super; font-weight: 700;}
-.st-old { color: rgba(255,255,255,0.4); text-decoration: line-through; font-size: 0.9rem; display: inline-flex; align-items: baseline; }
-.st-currency-old { font-size: 0.7em; margin-left: 2px; }
-
-/* Таймер під ціною */
-.sticky-timer-wrap { 
-    display: flex; align-items: center; gap: 6px; margin-top: 4px; 
-    white-space: nowrap !important; /* Жодного переносу таймера */
-    flex-wrap: nowrap !important; 
-}
-.st-timer-label { 
-    font-size: 0.65rem; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; 
-    white-space: nowrap !important; /* Намертво приклеюємо вогник до слова АКЦІЯ */
-    display: flex; align-items: center; gap: 3px;
-}
-.st-mini-timer { 
-    color: #fff; font-weight: 700; font-size: 0.85rem; font-variant-numeric: tabular-nums; 
-    background: rgba(194,163,115,0.2); padding: 2px 6px; border-radius: 6px; 
-    display: inline-block; white-space: nowrap;
-}
-
-/* Кнопка */
-.sticky-btn { 
-    padding: 14px 28px !important; font-size: 0.95rem; border-radius: 50px; 
-    white-space: nowrap; margin: 0; 
-}
-
 /* ================= POPUP ================= */ 
 .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 10000; justify-content: center; align-items: center; padding: 20px; } 
 .modal-overlay.active { display: flex; } 
@@ -410,40 +350,13 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     .time-box { min-width: 70px; } 
     .modal-content { max-height: 85vh; padding: 35px 20px; } 
     
-   /* Компактна капсула Sticky Bar для мобільного (ВИПРАВЛЕНО) */
-    .smart-sticky-bar { 
-        bottom: 15px; 
-        padding: 8px 8px 8px 15px; 
-        border-radius: 50px; 
-        width: 95%; 
-    }
-    .sticky-content { 
-        flex-wrap: nowrap !important; /* Жорстко забороняємо перенос елементів */
-        gap: 8px;
-    }
-    .sticky-info { 
-        flex-shrink: 0; /* Забороняємо кнопці розчавити ліву частину */
-        min-width: max-content; /* Розмір точно по тексту */
-    }
-    .st-price { font-size: 1.25rem; }
-    .st-old { font-size: 0.85rem; }
+    .clean-phone-wrapper { max-width: 260px; margin: 0 auto; }
+    .bot-features-list { gap: 10px; padding: 0 10px; margin-top: 20px;}
+    .feature-row { text-align: left; padding: 18px; gap: 15px;}
+    .feature-row .f-text strong { font-size: 1rem; }
     
-    .st-timer-label { 
-        white-space: nowrap !important; /* Намертво приклеюємо вогник до слова АКЦІЯ */
-        font-size: 0.6rem;
-    }
-    .st-mini-timer { 
-        font-size: 0.8rem; 
-        padding: 2px 4px; 
-    }
-    
-    .sticky-btn { 
-        padding: 12px 5px !important; /* Менші бокові відступи */
-        font-size: 0.85rem; 
-        flex-grow: 1; /* Кнопка займає залишок місця, а не диктує свої умови */
-        text-align: center;
-        width: auto;
-    }
+    .offer-card { padding: 40px 20px !important; }
+}
 
 /* ================= АНІМАЦІЇ ПОЯВИ ================= */ 
 [data-reveal] { opacity: 0; transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1); will-change: opacity, transform; }
@@ -517,4 +430,76 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     color: var(--gold);
     flex-shrink: 0;
     stroke-width: 1.5px;
+}
+
+/* ================= РОЗУМНИЙ STICKY BAR (ЯДЕРНИЙ ВАРІАНТ) ================= */ 
+.smart-sticky-bar {  
+    position: fixed !important; bottom: 20px !important; left: 50% !important; transform: translateX(-50%) translateY(0) !important;
+    width: 92% !important; max-width: 600px !important; 
+    background: rgba(26, 26, 26, 0.95) !important;  
+    backdrop-filter: blur(15px) !important; -webkit-backdrop-filter: blur(15px) !important; 
+    padding: 10px 15px 10px 20px !important;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3) !important; z-index: 9999 !important; 
+    border-radius: 100px !important; 
+    border: 1px solid rgba(194, 163, 115, 0.3) !important; 
+    transition: transform 0.5s ease, opacity 0.5s ease !important;
+    opacity: 1 !important; pointer-events: auto !important;
+} 
+.smart-sticky-bar.sticky-hidden { transform: translateX(-50%) translateY(150px) !important; opacity: 0 !important; pointer-events: none !important; }
+
+.sticky-content { 
+    display: flex !important; flex-direction: row !important;
+    justify-content: space-between !important; align-items: center !important; 
+    width: 100% !important; gap: 15px !important;
+    flex-wrap: nowrap !important; /* ЗАБОРОНА ПЕРЕНОСУ */
+}
+
+.sticky-info { 
+    display: flex !important; flex-direction: column !important; 
+    align-items: flex-start !important; justify-content: center !important;
+    flex: 0 0 auto !important; /* БРОНЯ ВІД СТИСКАННЯ КНОПКОЮ */
+    min-width: max-content !important; 
+}
+
+.sticky-price-row { 
+    display: flex !important; flex-direction: row !important;
+    align-items: baseline !important; gap: 8px !important; 
+    white-space: nowrap !important; line-height: 1 !important;
+}
+.st-price { color: var(--gold) !important; font-weight: 800 !important; font-size: 1.5rem !important; display: inline-flex !important; align-items: baseline !important; }
+.st-currency { font-size: 0.6em !important; margin-left: 2px !important; vertical-align: super !important; font-weight: 700 !important;}
+.st-old { color: rgba(255,255,255,0.4) !important; text-decoration: line-through !important; font-size: 0.95rem !important; display: inline-flex !important; align-items: baseline !important; }
+.st-currency-old { font-size: 0.7em !important; margin-left: 2px !important; }
+
+.sticky-timer-wrap { 
+    display: flex !important; flex-direction: row !important;
+    align-items: center !important; gap: 6px !important; 
+    margin-top: 4px !important; white-space: nowrap !important; 
+}
+.st-timer-label { 
+    font-size: 0.7rem !important; color: #aaa !important; text-transform: uppercase !important; letter-spacing: 0.5px !important; font-weight: 600 !important; 
+    display: inline-block !important; white-space: nowrap !important;
+}
+.st-mini-timer { 
+    color: #fff !important; font-weight: 700 !important; font-size: 0.85rem !important; font-variant-numeric: tabular-nums !important; 
+    background: rgba(194,163,115,0.2) !important; padding: 3px 8px !important; border-radius: 6px !important; 
+    display: inline-block !important; white-space: nowrap !important;
+}
+
+.sticky-btn { 
+    padding: 14px 20px !important; font-size: 0.95rem !important; 
+    border-radius: 50px !important; white-space: nowrap !important; 
+    margin: 0 !important; flex: 1 1 auto !important; 
+    text-align: center !important; max-width: 250px !important;
+}
+
+/* Мобільна адаптація ДЛЯ СТІКІ-БАРУ */
+@media (max-width: 768px) {
+    .smart-sticky-bar { bottom: 15px !important; padding: 10px 10px 10px 15px !important; width: 95% !important; }
+    .sticky-content { gap: 10px !important; }
+    .st-price { font-size: 1.35rem !important; }
+    .st-old { font-size: 0.85rem !important; }
+    .st-timer-label { font-size: 0.65rem !important; }
+    .st-mini-timer { font-size: 0.8rem !important; padding: 2px 6px !important; }
+    .sticky-btn { padding: 12px 10px !important; font-size: 0.85rem !important; min-width: 120px !important; }
 }
