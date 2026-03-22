@@ -432,7 +432,7 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     stroke-width: 1.5px;
 }
 
-/* ================= МОНОЛІТНА ПРЕМІУМ ПАНЕЛЬ (ТОП-РІВЕНЬ) ================= */
+/* ================= МОНОЛІТНА ПРЕМІУМ ПАНЕЛЬ (ЗА ТВОЇМ ТЗ) ================= */
 .premium-action-bar {
     position: fixed !important;
     bottom: 20px !important;
@@ -440,9 +440,9 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     transform: translateX(-50%) translateY(0) !important;
     display: flex !important;
     width: 92% !important;
-    max-width: 420px !important; /* Компактна капсула, як у Скріні 1 */
+    max-width: 420px !important; /* Компактна капсула */
     height: 90px !important; /* Фіксована висота для пропорцій */
-    background-color: #000000 !important; /* Глибокий вугільно-чорний для лівої частини */
+    background-color: #000000 !important; /* Чорний фон для контрасту цін */
     border-radius: 25px !important; /* Ідеальна капсула */
     box-shadow: 0 25px 60px rgba(0,0,0,0.6) !important;
     overflow: hidden !important; /* Жорстко обрізає ґрадієнт по кутах */
@@ -476,17 +476,17 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     min-width: 130px !important;
 }
 
-/* Ціни (Ієрархія як на Скріні 1) */
+/* Ціни (Ієрархія: Закреслена -> Поточна) */
 .pab-old-price {
     color: rgba(255,255,255,0.4) !important; /* Тонкий сірий */
-    font-weight: 300 !important; /* Тонка вага (Преміум-гарнітура) */
+    font-weight: 300 !important; /* Тонка вага */
     font-size: 0.95rem !important;
     text-decoration: line-through !important; /* Закреслена */
     line-height: 1 !important;
 }
 .pab-price {
     color: var(--gold) !important; /* Золотий з сайту */
-    font-weight: 800 !important; /* Максимально bold */
+    font-weight: 800 !important; /* bold */
     font-size: 1.8rem !important; /* Велика */
     line-height: 1 !important;
     letter-spacing: -1px !important;
@@ -499,7 +499,7 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     margin-left: 2px !important;
 }
 
-/* Таймер (Знизу, як на Скріні 1) */
+/* Таймер (Ззнизу, чистий, без крапок) */
 .pab-timer {
     color: var(--gold) !important; /* Теж золотий для монолітності стилю сайту */
     font-weight: 400 !important;
@@ -520,9 +520,11 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     justify-content: center !important;
     align-items: center !important;
     flex: 1 1 auto !important;
-    /* Металевий золотий ґрадієнт під стиль сайту (Скрін 1) */
-    background: linear-gradient(135deg, #D4AF37 0%, #AA8011 100%) !important;
-    color: #161616 !important; /* Темний вугільний текст для доступності */
+    /* ЯДЕРНЕ ЗАВДАННЯ №2 - Металевий ґрадієнт ПІД СТИЛЬ НАШОГО САЙТУ */
+    /* В основі колір сайту #C2A373, розтягнутий в ґрадієнт */
+    background: linear-gradient(135deg, #D0B58D 0%, #A08151 100%) !important;
+    
+    color: #161616 !important; /* ТЕМНИЙ ВУГІЛЬНИЙ ТЕКСТ (ЗА ТВОЇМ ТЗ) */
     font-weight: 800 !important;
     font-size: 1.05rem !important;
     text-transform: uppercase !important;
