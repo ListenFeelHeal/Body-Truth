@@ -122,12 +122,21 @@ function updateTimers() {
 
     function formatTime(time) { return time < 10 ? `0${time}` : time; } 
 
+    // 1. Оновлюємо головний великий таймер
     const mainTimer = document.getElementById('landing-timer');
     if (mainTimer) { 
         mainTimer.querySelector('.hours').textContent = formatTime(hours); 
         mainTimer.querySelector('.minutes').textContent = formatTime(minutes); 
         mainTimer.querySelector('.seconds').textContent = formatTime(seconds); 
     } 
+    
+    // 2. Оновлюємо новий міні-таймер у липкій панелі (Sticky Bar)
+    const miniTimer = document.getElementById('sticky-mini-timer');
+    if (miniTimer) {
+        miniTimer.querySelector('.m-hours').textContent = formatTime(hours);
+        miniTimer.querySelector('.m-minutes').textContent = formatTime(minutes);
+        miniTimer.querySelector('.m-seconds').textContent = formatTime(seconds);
+    }
 } 
 
 updateTimers(); 
