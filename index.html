@@ -384,15 +384,21 @@
         </div> 
     </footer> 
 
-    <div class="smart-sticky-bar sticky-hidden" id="smartStickyBar"> 
+   <div class="smart-sticky-bar sticky-hidden" id="smartStickyBar"> 
         <div class="sticky-content">
             <div class="sticky-text">
                 <span class="st-price">399 грн</span>
                 <span class="st-old" style="text-decoration: line-through;">1500 грн</span>
             </div>
+            <div class="sticky-timer-wrap">
+                <span class="st-timer-label">Залишилось:</span>
+                <div id="sticky-mini-timer" class="st-mini-timer">
+                    <span class="m-hours">00</span>:<span class="m-minutes">00</span>:<span class="m-seconds">00</span>
+                </div>
+            </div>
             <a href="#" class="btn btn-gold sticky-btn pulse" onclick="openPopup(); return false;">ЗАБРОНЮВАТИ</a> 
         </div>
-    </div> 
+    </div>
 
     <div id="popup-modal" class="modal-overlay"> 
         <div class="modal-content"> 
