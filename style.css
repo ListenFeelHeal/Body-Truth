@@ -431,3 +431,65 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     flex-shrink: 0;
     stroke-width: 1.5px;
 }
+
+/* ================= МІНІ-ТАЙМЕР У STICKY BAR ================= */
+.sticky-timer-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(194, 163, 115, 0.1);
+    border: 1px solid rgba(194, 163, 115, 0.3);
+    border-radius: 8px;
+    padding: 4px 12px;
+    margin: 0 10px; /* Відступи від ціни та кнопки */
+}
+.st-timer-label {
+    font-size: 0.65rem;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1;
+    margin-bottom: 2px;
+}
+.st-mini-timer {
+    color: var(--gold);
+    font-weight: 800;
+    font-size: 1.1rem;
+    line-height: 1;
+    font-variant-numeric: tabular-nums; /* Щоб цифри не "стрибали" */
+}
+
+/* Коригування для мобільної версії (встав це всередину @media (max-width: 768px)) */
+@media (max-width: 768px) {
+    .sticky-content {
+        flex-wrap: wrap; /* Дозволяємо перенесення на новий рядок */
+        justify-content: center; /* Центруємо все */
+        gap: 10px;
+    }
+    .sticky-text {
+        flex-direction: row; /* Ціна в один рядок на мобільному */
+        align-items: baseline;
+        gap: 10px;
+        width: 100%;
+        justify-content: center;
+    }
+    .st-price { font-size: 1.3rem; }
+    .st-old { font-size: 1rem; }
+    
+    .sticky-timer-wrap {
+        margin: 0; /* Прибираємо бокові відступи */
+        flex-direction: row; /* На мобільному лейбл і час в один рядок */
+        gap: 8px;
+        padding: 6px 15px;
+        background: transparent;
+        border: none;
+    }
+    .st-timer-label { margin-bottom: 0; font-size: 0.75rem; }
+    .st-mini-timer { font-size: 1rem; }
+    
+    .sticky-btn {
+        width: 100%; /* Кнопка на всю ширину на мобільному */
+        max-width: none;
+    }
+}
