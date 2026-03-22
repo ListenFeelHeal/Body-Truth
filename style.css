@@ -432,16 +432,16 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     stroke-width: 1.5px;
 }
 
-/* ================= РОЗУМНИЙ STICKY BAR (ЯДЕРНИЙ ВАРІАНТ) ================= */ 
+/* ================= РОЗУМНИЙ STICKY BAR (ТОП-РІВЕНЬ) ================= */ 
 .smart-sticky-bar {  
     position: fixed !important; bottom: 20px !important; left: 50% !important; transform: translateX(-50%) translateY(0) !important;
     width: 92% !important; max-width: 600px !important; 
-    background: rgba(26, 26, 26, 0.95) !important;  
-    backdrop-filter: blur(15px) !important; -webkit-backdrop-filter: blur(15px) !important; 
-    padding: 10px 15px 10px 20px !important;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3) !important; z-index: 9999 !important; 
+    background: rgba(26, 26, 26, 0.85) !important;  
+    backdrop-filter: blur(20px) !important; -webkit-backdrop-filter: blur(20px) !important; 
+    padding: 8px 8px 8px 25px !important; /* Акуратний баланс: зліва простір, справа кнопка впритул */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4) !important; z-index: 9999 !important; 
     border-radius: 100px !important; 
-    border: 1px solid rgba(194, 163, 115, 0.3) !important; 
+    border: 1px solid rgba(255, 255, 255, 0.08) !important; /* Тонка скляна межа */
     transition: transform 0.5s ease, opacity 0.5s ease !important;
     opacity: 1 !important; pointer-events: auto !important;
 } 
@@ -450,15 +450,16 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
 .sticky-content { 
     display: flex !important; flex-direction: row !important;
     justify-content: space-between !important; align-items: center !important; 
-    width: 100% !important; gap: 15px !important;
-    flex-wrap: nowrap !important; /* ЗАБОРОНА ПЕРЕНОСУ */
+    width: 100% !important; gap: 0 !important; 
+    flex-wrap: nowrap !important;
 }
 
-.sticky-info { 
+.sticky-info-group { 
     display: flex !important; flex-direction: column !important; 
     align-items: flex-start !important; justify-content: center !important;
-    flex: 0 0 auto !important; /* БРОНЯ ВІД СТИСКАННЯ КНОПКОЮ */
-    min-width: max-content !important; 
+    flex: 0 0 auto !important; 
+    min-width: max-content !important;
+    padding-right: 15px !important; 
 }
 
 .sticky-price-row { 
@@ -466,24 +467,36 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     align-items: baseline !important; gap: 8px !important; 
     white-space: nowrap !important; line-height: 1 !important;
 }
-.st-price { color: var(--gold) !important; font-weight: 800 !important; font-size: 1.5rem !important; display: inline-flex !important; align-items: baseline !important; }
-.st-currency { font-size: 0.6em !important; margin-left: 2px !important; vertical-align: super !important; font-weight: 700 !important;}
-.st-old { color: rgba(255,255,255,0.4) !important; text-decoration: line-through !important; font-size: 0.95rem !important; display: inline-flex !important; align-items: baseline !important; }
+/* Ціна біла, а значок гривні - золотий. Це виглядає дуже дорого */
+.st-price { color: #fff !important; font-weight: 800 !important; font-size: 1.5rem !important; display: inline-flex !important; align-items: baseline !important; letter-spacing: -1px !important;}
+.st-currency { font-size: 0.6em !important; margin-left: 2px !important; vertical-align: super !important; font-weight: 600 !important; color: var(--gold) !important;}
+.st-old { color: rgba(255,255,255,0.3) !important; text-decoration: line-through !important; font-size: 0.95rem !important; display: inline-flex !important; align-items: baseline !important; }
 .st-currency-old { font-size: 0.7em !important; margin-left: 2px !important; }
 
-.sticky-timer-wrap { 
+/* Таймер без рамок, чиста типографіка */
+.st-unified-timer { 
     display: flex !important; flex-direction: row !important;
     align-items: center !important; gap: 6px !important; 
     margin-top: 4px !important; white-space: nowrap !important; 
+    color: var(--gold) !important; font-weight: 700 !important; font-size: 0.85rem !important; font-variant-numeric: tabular-nums !important;
+    letter-spacing: 1px !important;
 }
-.st-timer-label { 
-    font-size: 0.7rem !important; color: #aaa !important; text-transform: uppercase !important; letter-spacing: 0.5px !important; font-weight: 600 !important; 
-    display: inline-block !important; white-space: nowrap !important;
+
+/* Пульсуюча червона крапка */
+.pulse-dot {
+    width: 6px !important; height: 6px !important; 
+    background-color: #ff3b30 !important; 
+    border-radius: 50% !important;
+    display: inline-block !important;
+    animation: pulse-red 1.5s infinite !important;
 }
-.st-mini-timer { 
-    color: #fff !important; font-weight: 700 !important; font-size: 0.85rem !important; font-variant-numeric: tabular-nums !important; 
-    background: rgba(194,163,115,0.2) !important; padding: 3px 8px !important; border-radius: 6px !important; 
-    display: inline-block !important; white-space: nowrap !important;
+@keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(255,59,48, 0.7); } 70% { box-shadow: 0 0 0 6px rgba(255,59,48, 0); } 100% { box-shadow: 0 0 0 0 rgba(255,59,48, 0); } }
+
+/* Тонка лінія розділювача */
+.sticky-divider {
+    width: 1px !important; height: 35px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    margin-right: 15px !important;
 }
 
 .sticky-btn { 
@@ -493,13 +506,12 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     text-align: center !important; max-width: 250px !important;
 }
 
-/* Мобільна адаптація ДЛЯ СТІКІ-БАРУ */
+/* Мобільна адаптація */
 @media (max-width: 768px) {
-    .smart-sticky-bar { bottom: 15px !important; padding: 10px 10px 10px 15px !important; width: 95% !important; }
-    .sticky-content { gap: 10px !important; }
-    .st-price { font-size: 1.35rem !important; }
+    .smart-sticky-bar { bottom: 15px !important; padding: 6px 6px 6px 20px !important; width: 95% !important; }
+    .st-price { font-size: 1.4rem !important; }
     .st-old { font-size: 0.85rem !important; }
-    .st-timer-label { font-size: 0.65rem !important; }
-    .st-mini-timer { font-size: 0.8rem !important; padding: 2px 6px !important; }
-    .sticky-btn { padding: 12px 10px !important; font-size: 0.85rem !important; min-width: 120px !important; }
+    .st-unified-timer { font-size: 0.8rem !important; }
+    .sticky-divider { margin-right: 10px !important; height: 30px !important; }
+    .sticky-btn { padding: 14px 10px !important; font-size: 0.85rem !important; min-width: 130px !important; }
 }
