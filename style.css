@@ -432,7 +432,7 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     stroke-width: 1.5px;
 }
 
-/* ================= МОНОЛІТНА ПРЕМІУМ ПАНЕЛЬ ================= */
+/* ================= МОНОЛІТНА ПРЕМІУМ ПАНЕЛЬ (ТОП-РІВЕНЬ) ================= */
 .premium-action-bar {
     position: fixed !important;
     bottom: 20px !important;
@@ -440,12 +440,12 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     transform: translateX(-50%) translateY(0) !important;
     display: flex !important;
     width: 92% !important;
-    max-width: 420px !important; /* Компактна, як в додатках */
-    height: 85px !important; /* Фіксована висота для ідеальних пропорцій */
-    background-color: #1A1A1A !important;
-    border-radius: 22px !important; /* Округлі кути */
-    box-shadow: 0 25px 50px rgba(0,0,0,0.5) !important;
-    overflow: hidden !important; /* Обрізає внутрішні фони по заокругленнях */
+    max-width: 420px !important; /* Компактна капсула, як у Скріні 1 */
+    height: 90px !important; /* Фіксована висота для пропорцій */
+    background-color: #000000 !important; /* Глибокий вугільно-чорний для лівої частини */
+    border-radius: 25px !important; /* Ідеальна капсула */
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6) !important;
+    overflow: hidden !important; /* Жорстко обрізає ґрадієнт по кутах */
     cursor: pointer !important;
     z-index: 9999 !important;
     border: 1px solid rgba(255,255,255,0.08) !important;
@@ -453,6 +453,7 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     opacity: 1 !important;
     pointer-events: auto !important;
 }
+/* Легкий ефект при наведенні для всієї панелі */
 .premium-action-bar:hover {
     filter: brightness(1.08) !important;
     transform: translateX(-50%) translateY(-3px) !important;
@@ -470,25 +471,26 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     justify-content: center !important;
     align-items: flex-start !important;
     padding: 0 25px !important;
-    background-color: #1A1A1A !important; /* Глибокий вугільно-сірий */
+    background-color: #000000 !important; /* Чорний фон для контрасту цін */
     flex: 0 0 auto !important;
-    min-width: 120px !important;
+    min-width: 130px !important;
 }
 
+/* Ціни (Ієрархія як на Скріні 1) */
+.pab-old-price {
+    color: rgba(255,255,255,0.4) !important; /* Тонкий сірий */
+    font-weight: 300 !important; /* Тонка вага (Преміум-гарнітура) */
+    font-size: 0.95rem !important;
+    text-decoration: line-through !important; /* Закреслена */
+    line-height: 1 !important;
+}
 .pab-price {
-    color: var(--gold) !important;
-    font-weight: 800 !important;
-    font-size: 1.65rem !important;
+    color: var(--gold) !important; /* Золотий з сайту */
+    font-weight: 800 !important; /* Максимально bold */
+    font-size: 1.8rem !important; /* Велика */
     line-height: 1 !important;
     letter-spacing: -1px !important;
-}
-.pab-old-price {
-    color: #7A7A7E !important; /* Спокійний сірий */
-    font-weight: 400 !important;
-    font-size: 0.85rem !important;
-    text-decoration: line-through !important;
-    margin-top: 5px !important;
-    line-height: 1 !important;
+    margin: 3px 0 !important;
 }
 .pab-currency {
     font-size: 0.6em !important;
@@ -497,20 +499,19 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     margin-left: 2px !important;
 }
 
+/* Таймер (Знизу, як на Скріні 1) */
 .pab-timer {
-    color: #A1A1A6 !important; /* Світліший сірий для читабельності */
-    font-weight: 300 !important; /* Тонка вага */
-    font-size: 0.8rem !important;
-    margin-top: 8px !important;
+    color: var(--gold) !important; /* Теж золотий для монолітності стилю сайту */
+    font-weight: 400 !important;
+    font-size: 0.9rem !important;
     font-variant-numeric: tabular-nums !important;
     letter-spacing: 0.5px !important;
     display: flex !important;
     align-items: center !important;
+    line-height: 1 !important;
 }
 .pab-timer .colon {
     margin: 0 4px !important; /* Рівномірні пробіли навколо двокрапок */
-    position: relative !important;
-    top: -1px !important;
 }
 
 /* --- Права колонка (Дія) --- */
@@ -518,39 +519,36 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    flex: 1 1 auto !important; /* Займає весь вільний простір */
-    background: linear-gradient(135deg, #D4AF37 0%, #AA8011 100%) !important; /* Золотисто-бежевий металік */
-    color: #161616 !important; /* Темний вугільний для потужного контрасту */
+    flex: 1 1 auto !important;
+    /* Металевий золотий ґрадієнт під стиль сайту (Скрін 1) */
+    background: linear-gradient(135deg, #D4AF37 0%, #AA8011 100%) !important;
+    color: #161616 !important; /* Темний вугільний текст для доступності */
     font-weight: 800 !important;
     font-size: 1.05rem !important;
     text-transform: uppercase !important;
-    letter-spacing: 1px !important;
-    border-left: 1px solid rgba(0, 0, 0, 0.15) !important; /* Тонка темна лінія розділювача */
-    padding: 0 15px !important;
+    letter-spacing: 1.5px !important;
+    /* Тонка, ледь помітна вертикальна лінія розділювача */
+    border-left: 1px solid rgba(0, 0, 0, 0.1) !important;
+    padding: 0 20px !important;
     text-align: center !important;
 }
 
-/* --- Мобільна адаптація --- */
+/* --- Мобільна адаптація ДЛЯ ЦЬОГО БЛОКУ --- */
 @media (max-width: 768px) {
     .premium-action-bar {
         bottom: 15px !important;
         width: 95% !important;
-        height: 80px !important;
+        height: 85px !important;
         border-radius: 20px !important;
     }
     .pab-info {
         padding: 0 20px !important;
     }
-    .pab-price {
-        font-size: 1.5rem !important;
-    }
-    .pab-old-price {
-        font-size: 0.8rem !important;
-    }
-    .pab-timer {
-        font-size: 0.75rem !important;
-    }
+    .pab-old-price { font-size: 0.9rem !important; }
+    .pab-price { font-size: 1.6rem !important; }
+    .pab-timer { font-size: 0.85rem !important; }
     .pab-action {
         font-size: 0.95rem !important;
+        padding: 0 15px !important;
     }
 }
