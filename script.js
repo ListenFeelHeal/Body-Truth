@@ -89,12 +89,14 @@ document.addEventListener("DOMContentLoaded", function() {
 // 4. ФУНКЦІОНАЛ ТАЙМЕРА
 // =========================================================
 function initTimer() { 
-    let endTime = localStorage.getItem('courseTimerDirect'); 
+    // Використовуємо новий ключ, щоб таймер оновився у всіх, хто вже був на сайті
+    let endTime = localStorage.getItem('courseTimer47'); 
     const now = new Date().getTime(); 
     
     if (!endTime || parseInt(endTime, 10) <= now) { 
-        endTime = now + (5 * 60 * 60 * 1000); 
-        localStorage.setItem('courseTimerDirect', endTime); 
+        // 47 хвилин * 60 секунд * 1000 мілісекунд
+        endTime = now + (47 * 60 * 1000); 
+        localStorage.setItem('courseTimer47', endTime); 
     } else { 
         endTime = parseInt(endTime, 10); 
     } 
@@ -108,8 +110,9 @@ function updateTimers() {
     let timeLeft = endTime - now; 
 
     if (timeLeft <= 0) {  
-        endTime = now + (5 * 60 * 60 * 1000); 
-        localStorage.setItem('courseTimerDirect', endTime); 
+        // 47 хвилин * 60 секунд * 1000 мілісекунд
+        endTime = now + (47 * 60 * 1000); 
+        localStorage.setItem('courseTimer47', endTime); 
         timeLeft = endTime - now; 
     } 
 
@@ -128,7 +131,7 @@ function updateTimers() {
 } 
 
 updateTimers(); 
-setInterval(updateTimers, 1000); 
+setInterval(updateTimers, 1000);
 
 // =========================================================
 // 5. ФУНКЦІОНАЛ POP-UP ВІКНА ТА ФОРМИ
