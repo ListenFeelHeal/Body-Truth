@@ -341,9 +341,25 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
 .premium-action-bar.sticky-hidden { transform: translateX(-50%) translateY(150px) !important; opacity: 0 !important; pointer-events: none !important; }
 .pab-info { display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: flex-start !important; padding: 0 25px !important; background-color: var(--bg-dark) !important; flex: 0 0 auto !important; min-width: 130px !important; }
 .pab-old-price { color: rgba(255,255,255,0.4) !important; font-weight: 300 !important; font-size: 0.95rem !important; text-decoration: line-through !important; line-height: 1 !important; }
-.pab-price { color: var(--gold) !important; font-weight: 800 !important; font-size: 1.8rem !important; line-height: 1 !important; letter-spacing: -1px !important; margin: 3px 0 !important; }
+.pab-price { 
+    color: #FFFFFF !important; 
+    font-weight: 800 !important; 
+    font-size: 1.8rem !important; 
+    line-height: 1 !important; 
+    letter-spacing: -1px !important; 
+    margin: 3px 0 !important; 
+}
 .pab-currency { font-size: 0.6em !important; vertical-align: super !important; font-weight: 700 !important; margin-left: 2px !important; }
-.pab-timer { color: var(--gold) !important; font-weight: 400 !important; font-size: 0.9rem !important; font-variant-numeric: tabular-nums !important; letter-spacing: 0.5px !important; display: flex !important; align-items: center !important; line-height: 1 !important; }
+.pab-timer { 
+    color: #FFFFFF !important; 
+    font-weight: 400 !important; 
+    font-size: 0.9rem !important; 
+    font-variant-numeric: tabular-nums !important; 
+    letter-spacing: 0.5px !important; 
+    display: flex !important; 
+    align-items: center !important; 
+    line-height: 1 !important; 
+}
 .pab-timer .colon { margin: 0 4px !important; }
 .pab-action { display: flex !important; justify-content: center !important; align-items: center !important; flex: 1 1 auto !important; background: linear-gradient(135deg, #D0B58D 0%, #A08151 100%) !important; color: #161616 !important; font-weight: 800 !important; font-size: 1.05rem !important; text-transform: uppercase !important; letter-spacing: 1.5px !important; border-left: 1px solid rgba(0, 0, 0, 0.1) !important; padding: 0 20px !important; text-align: center !important; }
 
