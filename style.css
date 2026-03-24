@@ -300,37 +300,37 @@ h1, h2, h3, h4 { font-weight: 800; }
 } 
 .check-icon { color: var(--gold); width: 24px; height: 24px; flex-shrink: 0; }
 
-/* ================= ДОВІРА (Я ПОРУЧ) - ФІНАЛЬНИЙ ВАРІАНТ ================= */
+/* ================= ДОВІРА (СВІТЛАНА) - PREMIUM BLEND ================= */
 .trust-section {
     background-color: var(--bg-light);
     padding: 80px 0;
 }
 
-.trust-card {
-    padding: 0 !important; 
-    background-color: var(--bg-dark) !important; 
-    border-radius: var(--radius) !important;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.3) !important;
+.svitlana-trust-card {
+    background-color: var(--bg-dark); 
+    border-radius: var(--radius);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.3);
     position: relative;
-    overflow: hidden !important; /* ВАЖЛИВО: закриваємо контент, щоб градієнт не вилазив */
+    overflow: hidden; /* Закриває контент */
     display: flex;
     align-items: stretch;
+    width: 100%;
 }
 
-/* МАГІЯ: Ефект розмазування низу (градієнт) */
-.trust-card::after {
+/* Легкий градієнт для глибини знизу картки */
+.svitlana-trust-card::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 70px;
+    height: 120px; 
     background: linear-gradient(to top, rgba(95, 116, 106, 1) 0%, rgba(95, 116, 106, 0) 100%);
     pointer-events: none;
-    z-index: 15; /* Перекриває низ фотографії */
+    z-index: 15; 
 }
 
-.trust-split-grid {
+.svitlana-trust-grid {
     display: flex;
     width: 100%;
     align-items: stretch;
@@ -338,96 +338,106 @@ h1, h2, h3, h4 { font-weight: 800; }
 }
 
 /* --- ТЕКСТ --- */
-.trust-content-side {
-    flex: 1 1 60% !important; 
-    padding: 60px 40px 60px 60px !important; 
+.svitlana-content {
+    flex: 1 1 55%; 
+    padding: 60px 20px 60px 60px; 
     text-align: left;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    z-index: 20; /* Текст завжди над градієнтом */
+    z-index: 20; 
 }
 
-.text-gold-accent {
-    background: linear-gradient(135deg, #E2CBAA 0%, #C2A373 50%, #A08151 100%) !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    display: inline-block !important;
-    font-size: 2.2rem !important;
-    margin-bottom: 25px !important;
+.svitlana-title {
+    background: linear-gradient(135deg, #E2CBAA 0%, #C2A373 50%, #A08151 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    font-size: 2.2rem;
+    margin-bottom: 25px;
     text-transform: uppercase;
     font-weight: 800;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)) !important; 
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); 
 }
 
-.trust-description p {
-    color: #F0F4F2 !important; 
-    font-size: 1.05rem !important;
-    margin-bottom: 20px !important;
-    line-height: 1.6 !important;
+.svitlana-desc p {
+    color: #F0F4F2; 
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
     font-weight: 400;
 }
-.trust-description p strong {
-    font-weight: 700 !important;
-    color: #FFFFFF !important;
+.svitlana-desc p strong {
+    font-weight: 700;
+    color: #FFFFFF;
 }
 
-/* --- ФОТО --- */
-.trust-image-side {
-    flex: 0 0 40% !important; 
-    width: 350px !important; 
-    position: relative !important;
-    display: flex !important;
-    justify-content: center !important; 
-    align-items: flex-end !important; /* Жорстко притискаємо фото до низу */
-    padding: 0 !important;
+/* --- ФОТО (ПРЕМІУМ-ІНТЕГРАЦІЯ) --- */
+.svitlana-image {
+    flex: 0 0 45%; /* Більше місця для фото */
+    position: relative;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: flex-end; /* Заземлює фото */
+    padding: 0;
     z-index: 10;
 }
 
-.trust-face-img {
-    width: auto !important;
-    max-width: 100% !important;
-    height: auto !important;
-    max-height: 450px !important; /* Запобіжник висоти */
-    display: block !important;
-    object-fit: contain !important;
-    object-position: bottom center !important; 
-    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.4)) !important; 
+.svitlana-img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 550px; /* Збільшили ліміт для масштабу */
+    display: block;
+    object-fit: contain;
+    object-position: bottom right; 
+    
+    /* МАГІЯ 1: Збільшуємо фотографію і прив'язуємо до правого нижнього кута */
+    transform: scale(1.15); 
+    transform-origin: bottom right; 
+
+    /* МАГІЯ 2: Складна тінь, яка падає ліворуч від фігури */
+    filter: drop-shadow(-15px 10px 25px rgba(0,0,0,0.5)); 
+    
+    /* МАГІЯ 3: Органічне розчинення фотографії (Mask Image) */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%);
 }
 
-/* ================= МОБІЛЬНА АДАПТАЦІЯ (ПРАВИЛЬНА ІЄРАРХІЯ) ================= */
+/* ================= МОБІЛЬНА ВЕРСІЯ (Я ПОРУЧ) ================= */
 @media (max-width: 768px) {
-    .trust-card {
-        flex-direction: column !important; 
+    .svitlana-trust-card { flex-direction: column; }
+    .svitlana-trust-grid { flex-direction: column; }
+
+    /* Текст ЗВЕРХУ */
+    .svitlana-content {
+        order: 1; 
+        padding: 40px 25px 10px 25px; 
+        text-align: center;
     }
+    .svitlana-title { font-size: 1.8rem; margin-bottom: 20px; }
+    .svitlana-desc p { font-size: 1rem; margin-bottom: 15px; text-align: center; }
 
-    .trust-split-grid {
-        flex-direction: column !important;
-        display: flex !important;
+    /* Фото ЗНИЗУ */
+    .svitlana-image {
+        order: 2; 
+        width: 100%;
+        min-height: 280px; 
+        margin-top: 10px;
     }
-
-    /* 1. ТЕКСТ ЗВЕРХУ */
-    .trust-content-side {
-        order: 1 !important; /* Текст йде першим */
-        padding: 40px 25px 10px 25px !important; 
-        text-align: center !important;
-    }
-
-    .text-gold-accent { font-size: 1.8rem !important; margin-bottom: 20px !important; }
-    .trust-description p { font-size: 1rem !important; margin-bottom: 15px !important; text-align: center !important;}
-
-    /* 2. ФОТО ЗНИЗУ */
-    .trust-image-side {
-        order: 2 !important; /* Фото йде другим, притиснуте до низу */
-        width: 100% !important;
-        min-height: 250px !important; 
-        margin-top: 0 !important; 
-    }
-
-    .trust-face-img {
-        max-width: 90% !important;
-        max-height: 320px !important; 
-        margin: 0 auto !important;
+    .svitlana-img {
+        max-width: 95%;
+        max-height: 350px; 
+        margin: 0 auto;
+        
+        /* Змінюємо точку прив'язки масштабу на центр для телефону */
+        transform: scale(1.1);
+        transform-origin: bottom center;
+        object-position: bottom center;
+        
+        /* Трохи піднімаємо початок розчинення для мобільного */
+        -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
+        mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
     }
 }
 
@@ -928,123 +938,5 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     .pab-action {
         font-size: 0.95rem !important;
         padding: 0 15px !important;
-    }
-}
-
-/* ================= ДОВІРА (СВІТЛАНА) - ІЗОЛЬОВАНИЙ КОД ================= */
-.svitlana-trust-card {
-    background-color: var(--bg-dark); 
-    border-radius: var(--radius);
-    box-shadow: 0 25px 60px rgba(0,0,0,0.3);
-    position: relative;
-    overflow: hidden; /* Закриває контент, щоб градієнт не вилазив */
-    display: flex;
-    align-items: stretch;
-    width: 100%;
-}
-
-/* МАГІЯ 1: Ефект розмазування низу (градієнт) */
-.svitlana-trust-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 80px; /* Висота розмазування */
-    background: linear-gradient(to top, rgba(95, 116, 106, 1) 0%, rgba(95, 116, 106, 0) 100%);
-    pointer-events: none;
-    z-index: 15; /* Лежить поверх низу фотографії */
-}
-
-.svitlana-trust-grid {
-    display: flex;
-    width: 100%;
-    align-items: stretch;
-    justify-content: space-between;
-}
-
-/* --- ТЕКСТ --- */
-.svitlana-content {
-    flex: 1 1 60%; 
-    padding: 60px 40px 60px 60px; 
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    z-index: 20; 
-}
-
-.svitlana-title {
-    background: linear-gradient(135deg, #E2CBAA 0%, #C2A373 50%, #A08151 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block;
-    font-size: 2.2rem;
-    margin-bottom: 25px;
-    text-transform: uppercase;
-    font-weight: 800;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); 
-}
-
-.svitlana-desc p {
-    color: #F0F4F2; 
-    font-size: 1.05rem;
-    margin-bottom: 20px;
-    line-height: 1.6;
-    font-weight: 400;
-}
-.svitlana-desc p strong {
-    font-weight: 700;
-    color: #FFFFFF;
-}
-
-/* --- ФОТО --- */
-.svitlana-image {
-    flex: 0 0 40%; 
-    width: 350px; 
-    position: relative;
-    display: flex;
-    justify-content: center; 
-    align-items: flex-end; /* Заземлює фото */
-    padding: 0;
-    z-index: 10;
-}
-
-/* МАГІЯ 2: 3D Тінь по контуру людини */
-.svitlana-img {
-    width: auto;
-    max-width: 100%;
-    height: auto;
-    max-height: 450px; 
-    display: block;
-    object-fit: contain;
-    object-position: bottom center; 
-    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5)); /* Глибока 3D тінь */
-}
-
-/* ================= МОБІЛЬНА ВЕРСІЯ ================= */
-@media (max-width: 768px) {
-    .svitlana-trust-card { flex-direction: column; }
-    .svitlana-trust-grid { flex-direction: column; }
-
-    /* Текст ЗВЕРХУ */
-    .svitlana-content {
-        order: 1; 
-        padding: 40px 25px 10px 25px; 
-        text-align: center;
-    }
-    .svitlana-title { font-size: 1.8rem; margin-bottom: 20px; }
-    .svitlana-desc p { font-size: 1rem; margin-bottom: 15px; text-align: center; }
-
-    /* Фото ЗНИЗУ */
-    .svitlana-image {
-        order: 2; 
-        width: 100%;
-        min-height: 250px; 
-    }
-    .svitlana-img {
-        max-width: 90%;
-        max-height: 320px; 
-        margin: 0 auto;
     }
 }
