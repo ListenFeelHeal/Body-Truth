@@ -144,6 +144,91 @@ h1, h2, h3, h4 { font-weight: 800; }
 .subtitle::after { content: '|'; animation: blink 1s step-end infinite; color: var(--gold); }
 @keyframes blink { 50% { opacity: 0; } }
 
+/* ================= ДЕКОР ГОЛОВНОГО ЕКРАНУ (HERO) ================= */
+.hero { 
+    background-color: var(--bg-dark); 
+    color: var(--text-light); 
+    padding: 60px 0 120px; 
+    position: relative; 
+    overflow: hidden; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+
+.hero-content {
+    position: relative;
+    z-index: 10; 
+}
+
+/* ПРЕМІАЛЬНА CSS-ТІНЬ (Замість картинки) */
+.hero-vignette {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.4) 100%);
+    z-index: 1;
+    pointer-events: none; 
+}
+
+/* Загальні стилі для квітів */
+.hero-decor {
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.4)); 
+}
+
+/* Звисаюча гілка справа зверху (flower-1.png) */
+.flower-top-right {
+    width: 320px;
+    top: -40px;
+    right: -30px;
+    transform-origin: top right; 
+    animation: sway-branch 7s ease-in-out infinite;
+}
+
+/* Гілка зліва знизу (flower-2.png) */
+.flower-bottom-left {
+    width: 350px;
+    bottom: -60px;
+    left: -50px;
+    transform-origin: bottom left;
+    animation: sway-branch 9s ease-in-out infinite reverse;
+}
+
+/* Золотий градієнт для "В СТРЕСІ" */
+.gold-gradient-text {
+    background: linear-gradient(135deg, #E2CBAA 0%, #C2A373 50%, #A08151 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4)); 
+    font-weight: 900;
+}
+
+/* Анімація легкого похитування */
+@keyframes sway-branch {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(4deg); }
+}
+
+/* Адаптація для мобільних */
+@media (max-width: 768px) {
+    .flower-top-right {
+        width: 180px;
+        top: -20px;
+        right: -20px;
+    }
+    .flower-bottom-left {
+        width: 200px;
+        bottom: -30px;
+        left: -30px;
+    }
+}
+
 /* ================= ЗНАЙОМІ ВІДЧУТТЯ ================= */ 
 .section-title { font-size: 2.2rem; margin-bottom: 30px; color: var(--bg-dark); text-transform: uppercase; line-height: 1.2; } 
 .subtitle-text { font-size: 1.2rem; color: #666; max-width: 700px; margin: 0 auto; }
