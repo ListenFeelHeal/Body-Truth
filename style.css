@@ -503,13 +503,13 @@ body.loading-lock {
     overflow: hidden !important;
 }
 
-/* ================= ОНОВЛЕНІ ТА ВИПРАВЛЕНІ СТИЛІ ДЛЯ ПРОГРАМИ (БЕЗ НАКЛАДАННЯ ТА З КОНТРАСТОМ) ================= */
+/* ================= ОНОВЛЕНІ СТИЛІ ПРОГРАМИ (СУЦІЛЬНИЙ ФОН ТА ВЕЛИКІ КАРТИНКИ) ================= */
 
-/* Сама картка дня: темно-зелена секція, дещо світліша картка */
+/* Сама картка дня: робимо СУЦІЛЬНИЙ колір, щоб картки не просвічувалися при накладанні! */
 .day-card.sticky-card.day-card--program {
-    background-color: rgba(255, 255, 255, 0.05) !important; /* Напівпрозорий білий, щоб відірвати від зеленого фону секції */
-    border-top: 1px solid rgba(194, 163, 115, 0.3) !important;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5) !important;
+    background-color: #697F74 !important; /* Суцільний зелений, трохи світліший за фон сайту */
+    border-top: 1px solid rgba(194, 163, 115, 0.4) !important;
+    box-shadow: 0 -15px 30px rgba(0,0,0,0.15) !important;
     display: flex !important;
     flex-direction: row;
     align-items: center;
@@ -518,106 +518,89 @@ body.loading-lock {
     border-radius: var(--radius) !important;
 }
 
-/* Збільшена картинка: значно більша на десктопі */
+/* Збільшуємо картинки та прибираємо пустий простір навколо них */
 .day-program-img {
-    width: 180px; 
-    height: 180px;
+    width: 200px !important; 
+    height: 200px !important;
     object-fit: contain;
     flex-shrink: 0;
-    /* Я прибрав фільтр, щоб вона не була 'дивною'. Найкраще - це замінити файли на білі. */
+    transform: scale(1.3); /* Штучно наближаємо картинку, щоб вона здавалася більшою */
 }
 
 /* Блок тексту справа */
 .day-program-content {
     flex: 1;
     text-align: left !important;
+    z-index: 2; /* Щоб текст був завжди над картинкою */
 }
 
-/* 'День X' - тепер перлинно-білий на темному фоні */
+/* Колір "День X" */
 .day-card--program .day-num--pearl {
-    color: #F8F4EF !important; /* Pearl/Ivory white */
-    font-weight: 700;
+    color: #F8F4EF !important; 
+    font-weight: 800;
 }
-/* Колір дня для 7-го світлого дня залишаємо золотим */
-.day-card--program-final .day-num--pearl {
+.day-card--program-final .day-num--gold {
     color: var(--gold) !important;
+    font-weight: 800;
 }
 
-/* Змінюємо кольори тексту всередині темної картки */
-.day-card--program h4 {
-    color: #FFFFFF !important;
-}
-.day-card--program p {
-    color: rgba(255,255,255,0.8) !important;
-    font-size: 1.05rem !important;
-    margin-bottom: 20px !important;
-}
+/* Колір заголовків та абзаців */
+.day-card--program h4 { color: #FFFFFF !important; font-size: 1.5rem !important; }
+.day-card--program p { color: rgba(255,255,255,0.9) !important; font-size: 1.05rem !important; margin-bottom: 25px !important; }
 
-/* Етикетка практики: СВІТЛА на темній картці (1-6 дні) */
+/* Етикетка практики: СВІТЛА на темній картці (1-6 дні) - 100% контраст */
 .day-card--program .practice--light {
-    background: #FFFFFF !important; /* Білий фон */
-    color: var(--bg-dark) !important; /* Темно-зелений текст */
-    border: none !important;
-    padding: 10px 18px;
-    font-size: 1rem;
-    font-weight: 600;
-    display: inline-block;
-    border-radius: 8px;
+    background: #FFFFFF !important; 
+    color: #2C2C2C !important; 
+    border: 2px solid #E2CBAA !important;
+    padding: 10px 18px !important;
+    font-size: 0.95rem !important;
+    font-weight: 800 !important;
+    border-radius: 10px !important;
+    display: inline-block !important;
 }
 
 /* Етикетка практики: ТЕМНА на світлій картці (7 день) */
 .day-card--program-final .practice--dark {
-    background: var(--bg-dark) !important; /* Темно-зелений фон */
-    color: #FFFFFF !important; /* Білий текст */
+    background: var(--bg-dark) !important; 
+    color: #FFFFFF !important; 
     border: none !important;
-    padding: 10px 18px;
-    font-size: 1rem;
-    font-weight: 600;
-    display: inline-block;
-    border-radius: 8px;
+    padding: 10px 18px !important;
+    font-size: 0.95rem !important;
+    font-weight: 800 !important;
+    border-radius: 10px !important;
+    display: inline-block !important;
 }
 
-/* Спеціальні стилі для 7-го світлого дня */
+/* Стилі для 7-го світлого дня */
 .day-card--program-final {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
     text-align: left !important;
     gap: 30px;
+    padding: 30px !important;
 }
-.day-card--program-final h4 {
-    color: var(--bg-dark) !important;
-}
-.day-card--program-final p {
-    color: var(--bg-dark) !important;
-}
+.day-card--program-final h4 { color: var(--bg-dark) !important; font-size: 1.5rem !important; }
+.day-card--program-final p { color: #444 !important; font-size: 1.05rem !important; margin-bottom: 25px !important;}
 
-/* --- АДАПТАЦІЯ ДЛЯ МОБІЛЬНИХ ТЕЛЕФОНІВ (< 600px) - ВИПРАВЛЕНО НАКЛАДАННЯ --- */
+/* --- АДАПТАЦІЯ ДЛЯ МОБІЛЬНИХ ТЕЛЕФОНІВ --- */
 @media (max-width: 600px) {
-    /* Картка: Картинка тепер НАД текстом, БЕЗ transform */
     .day-card.sticky-card.day-card--program,
-    .day-card--program-final {
-        flex-direction: column !important; /* Стовпчик */
-        text-align: center;
-        gap: 15px;
-        padding: 25px 20px !important;
-        top: calc(8vh + (var(--idx) * 15px)); /* Відступ для стікі */
-    }
-    
-    /* Збільшена картинка на мобільному */
-    .day-program-img {
-        width: 120px; 
-        height: 120px;
-        margin-bottom: 15px;
-    }
-    
-    .day-program-content {
+    .day-card.sticky-card.day-card--program-final {
+        flex-direction: column !important; /* Ставимо картинку над текстом */
         text-align: center !important;
-        padding: 0 !important;
-        margin: 0 !important;
+        padding: 30px 20px !important;
+        gap: 10px;
+        top: calc(10vh + (var(--idx) * 12px)); /* Відступ при липкому скролі */
     }
     
-    /* Відновлюємо накладання бота */
-    #bot-section .clean-phone-wrapper,
-    #bot-section .bot-features-list {
-        padding: 0 !important;
-        margin: 0 !important;
+    .day-program-img {
+        width: 140px !important; 
+        height: 140px !important;
+        transform: scale(1.3); /* Збільшуємо на телефоні */
+        margin-bottom: 5px;
     }
+    
+    .day-program-content { text-align: center !important; }
 }
