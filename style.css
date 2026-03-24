@@ -79,7 +79,7 @@ h1, h2, h3, h4 { font-weight: 800; }
     100% { box-shadow: 0 0 0 0 rgba(208, 181, 141, 0); } 
 } 
 
-/* ================= КАРТКИ ================= */
+/* ================= КАРТКИ (ОНОВЛЕНО З ГЛИБОКОЮ ТІННЮ ДЛЯ ТЕМНИХ) ================= */
 .premium-card {
     background: #fff; border-radius: var(--radius); padding: 40px 30px; 
     box-shadow: var(--shadow-soft); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -89,13 +89,22 @@ h1, h2, h3, h4 { font-weight: 800; }
 .hover-lift { transition: transform 0.4s ease, box-shadow 0.4s ease; }
 .hover-lift:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: rgba(194,163,115,0.2);}
 
+/* Темні картки (включно з блоком болю) */
 .premium-card--dark, 
 .premium-card--dark.sticky-card { 
     background-color: var(--bg-dark) !important; 
-    border-color: rgba(255,255,255,0.1) !important; 
+    border-color: rgba(194, 163, 115, 0.3) !important; /* Золота рамка для преміальності */
     overflow: hidden !important; 
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3) !important; /* ДОДАНО ГЛИБОКУ ТІНЬ */
 }
-.premium-card--dark:hover { box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+.premium-card--dark.sticky-card {
+    margin-bottom: 0 !important; /* Щоб не стрибали при налипанні */
+}
+/* Вимикаємо підйом при наведенні для липких темних карток, фіксуємо тінь */
+.premium-card--dark:hover { 
+    transform: translateY(0) !important; 
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3) !important; 
+}
 
 .premium-card--dark.premium-card-split::after {
     content: '';
@@ -113,7 +122,7 @@ h1, h2, h3, h4 { font-weight: 800; }
 .premium-card--dark h3, 
 .premium-card--dark h4 { 
     color: #FFFFFF !important; 
-    letter-spacing: 1px;
+    letter-spacing: 0px !important; /* Узгоджено з Montserrat */
 }
 .premium-card--dark p, 
 .premium-card--dark span { 
@@ -123,6 +132,13 @@ h1, h2, h3, h4 { font-weight: 800; }
     color: #E2CBAA !important; 
 }
 .premium-card--gold-border { border: 2px solid var(--gold); box-shadow: 0 15px 40px rgba(194,163,115,0.1); }
+
+/* Адаптація відступів налипання для мобільних */
+@media (max-width: 600px) {
+    .premium-card--dark.premium-card-split.sticky-card {
+        top: calc(10vh + (var(--idx) * 12px)) !important;
+    }
+}
 
 /* ================= HERO ================= */ 
 .hero { 
