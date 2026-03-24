@@ -503,134 +503,143 @@ body.loading-lock {
     overflow: hidden !important;
 }
 
-/* ================= ОНОВЛЕНІ СТИЛІ ПРОГРАМИ (СУЦІЛЬНИЙ ФОН ТА ВЕЛИКІ КАРТИНКИ) ================= */
+/* ================= ОНОВЛЕНІ СТИЛІ ПРОГРАМИ (ГЛИБИНА ТА ПРЕМІАЛЬНІСТЬ) ================= */
 
-/* Сама картка дня: робимо СУЦІЛЬНИЙ колір, щоб картки не просвічувалися при накладанні! */
+/* Сама картка дня: робимо її помітно темнішою за фон секції + додаємо об'єм */
 .day-card.sticky-card.day-card--program {
-    background-color: #697F74 !important; /* Суцільний зелений, трохи світліший за фон сайту */
-    border-top: 1px solid rgba(194, 163, 115, 0.4) !important;
-    box-shadow: 0 -15px 30px rgba(0,0,0,0.15) !important;
+    /* Глибокий темний градієнт, щоб відірвати від фону */
+    background: linear-gradient(145deg, #4A5C52 0%, #35453D 100%) !important; 
+    border: 1px solid rgba(194, 163, 115, 0.3) !important; /* Тонка елегантна золота рамка */
+    box-shadow: 0 25px 50px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05) !important; /* Глибока тінь */
     display: flex !important;
     flex-direction: row;
     align-items: center;
-    gap: 30px;
-    padding: 30px !important;
+    gap: 40px;
+    padding: 40px !important;
     border-radius: var(--radius) !important;
 }
 
-/* Збільшуємо картинки та прибираємо пустий простір навколо них */
+/* Картинки */
 .day-program-img {
     width: 200px !important; 
     height: 200px !important;
     object-fit: contain;
     flex-shrink: 0;
-    transform: scale(1.3); /* Штучно наближаємо картинку, щоб вона здавалася більшою */
+    transform: scale(1.3); 
 }
 
 /* Блок тексту справа */
 .day-program-content {
     flex: 1;
     text-align: left !important;
-    z-index: 2; /* Щоб текст був завжди над картинкою */
+    z-index: 2; 
 }
 
-/* Колір "День X" */
+/* НАПИС "ДЕНЬ 1": Робимо золотим, дрібним і з великими відступами (як в глянці) */
 .day-card--program .day-num--pearl {
-    color: #F8F4EF !important; 
-    font-weight: 800;
-}
-.day-card--program-final .day-num--gold {
-    color: var(--gold) !important;
-    font-weight: 800;
-}
-
-/* Колір заголовків та абзаців */
-.day-card--program h4 { color: #FFFFFF !important; font-size: 1.5rem !important; }
-.day-card--program p { color: rgba(255,255,255,0.9) !important; font-size: 1.05rem !important; margin-bottom: 25px !important; }
-
-/* Етикетка практики: СВІТЛА на темній картці (1-6 дні) - 100% контраст */
-.day-card--program .practice--light {
-    background: #FFFFFF !important; 
-    color: #2C2C2C !important; 
-    border: 2px solid #E2CBAA !important;
-    padding: 10px 18px !important;
-    font-size: 0.95rem !important;
-    font-weight: 800 !important;
-    border-radius: 10px !important;
-    display: inline-block !important;
+    color: var(--gold) !important; 
+    font-weight: 700 !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 2.5px !important;
+    text-transform: uppercase !important;
+    margin-bottom: 10px !important;
 }
 
-/* Етикетка практики: ТЕМНА на світлій картці (7 день) */
-.day-card--program-final .practice--dark {
-    background: var(--bg-dark) !important; 
+/* ЗАГОЛОВОК: Використовуємо преміальний шрифт із засічками (Cormorant Garamond) */
+.day-card--program h4 { 
+    font-family: 'Cormorant Garamond', serif !important;
     color: #FFFFFF !important; 
-    border: none !important;
-    padding: 10px 18px !important;
-    font-size: 0.95rem !important;
-    font-weight: 800 !important;
-    border-radius: 10px !important;
-    display: inline-block !important;
+    font-size: 2.2rem !important; /* Робимо більшим */
+    font-weight: 600 !important;
+    letter-spacing: 0.5px !important;
+    line-height: 1.1 !important;
+    margin-bottom: 12px !important;
 }
 
-/* Стилі для 7-го світлого дня */
+/* ОПИС: Теплий світло-сірий колір, щоб не бив по очах чисто білим */
+.day-card--program p { 
+    color: #E5E0D8 !important; 
+    font-size: 1.1rem !important; 
+    font-weight: 400 !important;
+    line-height: 1.6 !important;
+    margin-bottom: 25px !important; 
+}
+
+/* ЕТИКЕТКА ПРАКТИКИ: Витончена округла форма */
+.day-card--program .practice--light {
+    background: transparent !important; 
+    color: #FFFFFF !important; 
+    border: 1px solid rgba(255,255,255,0.4) !important;
+    padding: 8px 22px !important;
+    font-size: 0.95rem !important;
+    font-weight: 400 !important;
+    border-radius: 50px !important; /* Робить ідеальну "пігулку" */
+    display: inline-block !important;
+    letter-spacing: 0.5px;
+}
+
+/* Стилі для 7-го світлого дня (щоб він теж виглядав гармонійно) */
 .day-card--program-final {
     display: flex !important;
     flex-direction: row;
     align-items: center;
     text-align: left !important;
-    gap: 30px;
-    padding: 30px !important;
+    gap: 40px;
+    padding: 40px !important;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15) !important;
 }
-.day-card--program-final h4 { color: var(--bg-dark) !important; font-size: 1.5rem !important; }
-.day-card--program-final p { color: #444 !important; font-size: 1.05rem !important; margin-bottom: 25px !important;}
+.day-card--program-final .day-num--gold {
+    color: var(--gold) !important; 
+    font-weight: 700 !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 2.5px !important;
+    text-transform: uppercase !important;
+    margin-bottom: 10px !important;
+}
+.day-card--program-final h4 { 
+    font-family: 'Cormorant Garamond', serif !important;
+    color: var(--bg-dark) !important; 
+    font-size: 2.2rem !important; 
+    font-weight: 600 !important;
+}
+.day-card--program-final p { 
+    color: #444 !important; 
+    font-size: 1.1rem !important; 
+    margin-bottom: 25px !important;
+}
+.day-card--program-final .practice--dark {
+    background: transparent !important; 
+    color: var(--bg-dark) !important; 
+    border: 1px solid var(--bg-dark) !important;
+    padding: 8px 22px !important;
+    font-size: 0.95rem !important;
+    font-weight: 500 !important;
+    border-radius: 50px !important;
+    display: inline-block !important;
+}
 
 /* --- АДАПТАЦІЯ ДЛЯ МОБІЛЬНИХ ТЕЛЕФОНІВ --- */
 @media (max-width: 600px) {
     .day-card.sticky-card.day-card--program,
     .day-card.sticky-card.day-card--program-final {
-        flex-direction: column !important; /* Ставимо картинку над текстом */
+        flex-direction: column !important; 
         text-align: center !important;
-        padding: 30px 20px !important;
-        gap: 10px;
-        top: calc(10vh + (var(--idx) * 12px)); /* Відступ при липкому скролі */
+        padding: 35px 25px !important;
+        gap: 15px;
+        top: calc(10vh + (var(--idx) * 12px)) !important; 
     }
     
     .day-program-img {
         width: 140px !important; 
         height: 140px !important;
-        transform: scale(1.3); /* Збільшуємо на телефоні */
-        margin-bottom: 5px;
+        transform: scale(1.3); 
+        margin-bottom: 15px;
     }
     
     .day-program-content { text-align: center !important; }
-}
-
-/* ================= ФІКС НАЛИПАННЯ ТА СТРИБКІВ КАРТОК ================= */
-
-/* Робимо стабільний контейнер з фіксованою відстанню (gap) */
-.program-stack, .pressure-stack { 
-    display: flex !important; 
-    flex-direction: column !important; 
-    gap: 50px !important; /* Стабільна відстань між картками замість margin */
-    padding-bottom: 100px !important; /* Даємо великий запас місця внизу, щоб 7 картка мала куди скролитися */
-}
-
-/* Прибираємо margin, який ламав "липкість" */
-.sticky-card {
-    margin-bottom: 0 !important; /* ВАЖЛИВО! */
-    will-change: transform; /* Допомагає браузеру не "смикати" картку під час скролу */
-}
-
-/* Додаткова адаптація для мобільного, щоб картки не з'їдали весь екран */
-@media (max-width: 600px) {
-    .program-stack, .pressure-stack {
-        gap: 40px !important;
-        padding-bottom: 80px !important;
-    }
     
-    /* Зменшуємо крок налипання зверху на телефоні */
-    .day-card.sticky-card.day-card--program,
-    .day-card.sticky-card.day-card--program-final {
-        top: calc(8vh + (var(--idx) * 10px)) !important; 
+    /* Трохи зменшуємо шрифт для мобільних */
+    .day-card--program h4, .day-card--program-final h4 {
+        font-size: 1.8rem !important;
     }
 }
