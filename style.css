@@ -940,7 +940,7 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     }
 }
 
-/* ================= НОВИЙ БЛОК АВТОРА (100% ФІКС ТА БРОНЯ) ================= */
+/* ================= НОВИЙ БЛОК АВТОРА (АБСОЛЮТНА БРОНЯ БЕЗ ФЛЕКСУ НА КОМПІ) ================= */
 .lfh-author-section { 
     background-color: var(--bg-light); 
     padding: 80px 0; 
@@ -951,11 +951,13 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     background-color: var(--bg-dark) !important;
     border-radius: var(--radius) !important;
     box-shadow: 0 25px 60px rgba(0,0,0,0.3) !important;
-    position: relative;
-    overflow: hidden !important; /* БРОНЯ: Ховаємо все, що вилазить за межі картки */
-    display: flex;
-    align-items: stretch;
+    position: relative !important;
+    overflow: hidden !important; 
+    
+    /* ВИМИКАЄМО ФЛЕКС! Робимо звичайним блоком */
+    display: block !important; 
     width: 100%;
+    min-height: 420px; /* Стабільна висота картки */
 }
 
 /* Градієнт, що розмиває низ фотографії */
@@ -965,29 +967,20 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     bottom: 0; 
     left: 0; 
     width: 100%; 
-    height: 100px;
+    height: 120px;
     background: linear-gradient(to top, rgba(95, 116, 106, 1) 0%, rgba(95, 116, 106, 0) 100%);
     pointer-events: none; 
     z-index: 15;
 }
 
-.lfh-author-grid { 
-    display: flex; 
-    width: 100%; 
-    align-items: stretch; 
-    justify-content: space-between; 
-}
-
 /* ТЕКСТ */
 .lfh-author-content { 
-    flex: 1 1 55%; 
-    padding: 60px 40px 60px 60px; 
-    text-align: left; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
+    position: relative;
     z-index: 20; 
+    width: 55%; /* Текст займає рівно 55% і не пускає туди картинку */
+    padding: 60px 40px 60px 60px; 
 }
+
 .lfh-author-title { 
     background: linear-gradient(135deg, #E2CBAA 0%, #C2A373 50%, #A08151 100%); 
     -webkit-background-clip: text; 
@@ -999,6 +992,7 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     font-weight: 800; 
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); 
 }
+
 .lfh-author-desc p { 
     color: #F0F4F2; 
     font-size: 1.05rem; 
@@ -1006,68 +1000,71 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     line-height: 1.6; 
     font-weight: 400; 
 }
+
 .lfh-author-desc p strong { 
     font-weight: 700; 
     color: #FFFFFF; 
 }
 
-/* ================= ЯДЕРНИЙ ФІКС ДЛЯ ФОТО (ГІГАНТСЬКА РУКА) ================= */
+/* ФОТО (АБСОЛЮТНА ПОЗИЦІЯ — НІЯКИХ РОЗРИВІВ ЕКРАНУ) */
 .lfh-author-image { 
-    flex: 0 0 45% !important; /* Жорстко фіксуємо ширину колонки */
-    width: 100% !important; 
-    max-width: 380px !important; /* БЛОКУЄМО розтягування контейнера */
-    min-width: 0 !important; /* КРИТИЧНИЙ ФІКС БАГУ ФЛЕКСБОКСУ! */
-    position: relative !important; 
-    display: flex !important; 
-    justify-content: flex-end !important; 
-    align-items: flex-end !important; 
-    padding: 0 !important; 
-    z-index: 10 !important; 
-    margin-left: auto !important; 
+    position: absolute !important; /* ВИЙМАЄМО З ПОТОКУ */
+    bottom: 0 !important;
+    right: 0 !important;
+    width: 45% !important; /* Жорстко 45% від картки */
+    max-width: 400px !important; /* Жорсткий ліміт в пікселях */
+    height: 100% !important; 
+    display: flex !important;
+    justify-content: flex-end;
+    align-items: flex-end;
+    z-index: 10 !important;
 }
 
 .lfh-author-img { 
     width: 100% !important; 
-    max-width: 100% !important; /* Забороняємо вилазити за колонку */
-    height: auto !important; 
-    max-height: 480px !important; /* Запобіжник по висоті */
-    display: block !important; 
+    max-height: 95% !important; /* Щоб не впиралася в дах картки */
     object-fit: contain !important; 
     object-position: bottom right !important; 
-    transform: none !important; /* Знищуємо будь-які зуми */
+    display: block !important;
+    transform: none !important; 
     filter: drop-shadow(-15px 10px 25px rgba(0,0,0,0.5)) !important; 
     -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%) !important; 
     mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%) !important; 
 }
 
-/* МОБІЛЬНА ВЕРСІЯ (НЕ ЧІПАЄМО, БО ТАМ ОК) */
+/* МОБІЛЬНА ВЕРСІЯ (ПОВЕРТАЄМО ФЛЕКС ДЛЯ СТАКУВАННЯ ЗВЕРХУ ВНИЗ) */
 @media (max-width: 768px) {
-    .lfh-author-card, .lfh-author-grid { flex-direction: column; }
+    .lfh-author-card { 
+        display: flex !important; 
+        flex-direction: column !important; 
+        min-height: auto !important;
+    }
     
     .lfh-author-content { 
+        width: 100% !important;
         order: 1; 
-        padding: 40px 25px 10px 25px; 
+        padding: 40px 25px 0 25px !important; 
         text-align: center; 
     }
     .lfh-author-title { font-size: 1.8rem; margin-bottom: 20px; }
     .lfh-author-desc p { font-size: 1rem; margin-bottom: 15px; text-align: center; }
     
     .lfh-author-image { 
+        position: relative !important; /* Повертаємо в нормальний потік для телефону */
         order: 2; 
-        width: 100%; 
-        max-width: 100%; 
-        min-height: 250px; 
-        margin-top: 10px; 
-        justify-content: center; 
+        width: 100% !important; 
+        max-width: 100% !important; 
+        height: auto !important;
+        min-height: 250px !important; 
+        margin-top: 10px !important; 
+        justify-content: center !important; 
     }
     .lfh-author-img { 
-        max-width: 320px; 
-        max-height: 380px; 
-        margin: 0 auto; 
-        object-position: bottom center; 
-        transform: scale(1); /* На мобільному масштаб скидаємо до звичайного */
-        transform-origin: bottom center;
-        -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%); 
-        mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%); 
+        max-width: 320px !important; 
+        max-height: 380px !important; 
+        margin: 0 auto !important; 
+        object-position: bottom center !important; 
+        -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%) !important; 
+        mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%) !important; 
     }
 }
