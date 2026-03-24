@@ -453,45 +453,49 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     
     .offer-card { padding: 40px 20px !important; }
 
-   /* --- МОБІЛЬНА АДАПТАЦІЯ ДЛЯ PREMIUM-CARD-SPLIT (ІДЕАЛЬНИЙ БАЛАНС) --- */
+   /* --- МОБІЛЬНА АДАПТАЦІЯ ДЛЯ PREMIUM-CARD-SPLIT (МАКСИМАЛЬНО ЩІЛЬНО) --- */
     .premium-card-split {
-        flex-direction: column !important; /* Нормальний порядок: текст, потім фото */
-        padding: 35px 25px 0 25px !important; /* Знизу 0, щоб фото торкалося краю */
-        height: auto !important; /* Картка сама обтягує контент, ніяких дирок! */
+        flex-direction: column !important; 
+        padding: 30px 25px 0 25px !important; /* Зменшили верхній відступ для балансу */
+        height: auto !important; 
         min-height: auto !important; 
         justify-content: flex-start !important;
+        gap: 0 !important; /* Жорстко вбиваємо будь-які щілини між блоками */
     }
     
     .card-content-side {
         flex: 0 0 auto !important;
         text-align: center !important;
         padding: 0 !important;
-        margin-bottom: 20px !important; /* Акуратний відступ від тексту до фото */
+        margin-bottom: 0 !important; /* ПРИБРАЛИ ВІДСТУП */
         position: relative !important;
         z-index: 10 !important;
         width: 100% !important;
     }
     .premium-card-split .card-content-side h4 {
         font-size: 1.4rem !important;
+        margin-bottom: 10px !important; /* Акуратний відступ тільки під заголовком */
     }
     .premium-card-split .card-content-side p {
         font-size: 1rem !important;
+        margin-bottom: 0 !important; /* Жорстко вбиваємо стандартний відступ браузера під текстом! */
     }
 
     .card-image-side {
         flex: 1 1 auto !important;
         width: 100% !important;
-        position: relative !important; /* БІЛЬШЕ НЕ АБСОЛЮТНЕ! Фото має своє місце */
+        position: relative !important; 
         display: flex !important;
         justify-content: center !important;
-        align-items: flex-end !important; /* Жорстко притискаємо фото до низу */
+        align-items: flex-end !important; 
         padding: 0 !important;
+        margin-top: -15px !important; /* МАГІЯ: Трохи підтягуємо фото вгору до тексту */
         z-index: 1 !important;
     }
     
     .split-card-img {
         height: auto !important; 
-        max-height: 270px !important; /* Велике, гарне фото, яке не рве екран */
+        max-height: 280px !important; 
         width: auto !important;
         max-width: 100% !important;
         object-fit: contain !important;
