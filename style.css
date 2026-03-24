@@ -453,23 +453,22 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     
     .offer-card { padding: 40px 20px !important; }
 
-   /* --- МОБІЛЬНА АДАПТАЦІЯ ДЛЯ PREMIUM-CARD-SPLIT (ВИПРАВЛЕНО ТЕКСТ НА ФОТО) --- */
+   /* --- МОБІЛЬНА АДАПТАЦІЯ ДЛЯ PREMIUM-CARD-SPLIT (ІДЕАЛЬНИЙ БАЛАНС) --- */
     .premium-card-split {
-        flex-direction: column-reverse !important; 
-        padding: 35px 25px 0 25px !important; /* Відступ для тексту зверху */
+        flex-direction: column !important; /* Нормальний порядок: текст, потім фото */
+        padding: 35px 25px 0 25px !important; /* Знизу 0, щоб фото торкалося краю */
+        height: auto !important; /* Картка сама обтягує контент, ніяких дирок! */
         min-height: auto !important; 
-        height: 460px !important; /* Зробили картку трохи вищою для повітря */
-        justify-content: flex-end !important;
-        align-items: center !important;
+        justify-content: flex-start !important;
     }
     
     .card-content-side {
         flex: 0 0 auto !important;
         text-align: center !important;
         padding: 0 !important;
-        margin-bottom: auto !important; /* МАГІЯ: Виштовхує текст максимально вгору */
-        z-index: 10 !important;
+        margin-bottom: 20px !important; /* Акуратний відступ від тексту до фото */
         position: relative !important;
+        z-index: 10 !important;
         width: 100% !important;
     }
     .premium-card-split .card-content-side h4 {
@@ -482,27 +481,29 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     .card-image-side {
         flex: 1 1 auto !important;
         width: 100% !important;
-        height: 100% !important;
+        position: relative !important; /* БІЛЬШЕ НЕ АБСОЛЮТНЕ! Фото має своє місце */
+        display: flex !important;
         justify-content: center !important;
-        align-items: flex-end !important;
-        position: absolute !important; 
-        top: 0;
-        left: 0;
-        z-index: 1 !important;
+        align-items: flex-end !important; /* Жорстко притискаємо фото до низу */
         padding: 0 !important;
+        z-index: 1 !important;
     }
     
     .split-card-img {
-        height: 55% !important; /* Зменшили фото, щоб звільнити верхню половину для тексту */
+        height: auto !important; 
+        max-height: 270px !important; /* Велике, гарне фото, яке не рве екран */
+        width: auto !important;
+        max-width: 100% !important;
+        object-fit: contain !important;
         object-position: bottom center !important; 
-        max-height: none !important;
-        filter: drop-shadow(0 15px 40px rgba(0,0,0,0.5)) !important; 
+        display: block !important;
+        filter: drop-shadow(0 15px 30px rgba(0,0,0,0.3)) !important; 
     }
     
-    /* Підсилюємо м'який край на мобільних */
+    /* Легке згладжування обрізаного краю знизу */
     .premium-card--dark.premium-card-split::after {
-        height: 100px;
-        background: linear-gradient(to top, rgba(95, 116, 106, 0.9) 0%, rgba(95, 116, 106, 0.4) 60%, rgba(95, 116, 106, 0) 100%);
+        height: 50px;
+        background: linear-gradient(to top, rgba(95, 116, 106, 0.9) 0%, rgba(95, 116, 106, 0) 100%);
     }
 
 /* ================= АНІМАЦІЇ ПОЯВИ ================= */ 
