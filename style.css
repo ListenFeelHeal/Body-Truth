@@ -502,3 +502,73 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
 body.loading-lock {
     overflow: hidden !important;
 }
+
+/* ================= ОНОВЛЕНІ СТИЛІ ДЛЯ ПРОГРАМИ (ЗЕЛЕНИЙ ФОН) ================= */
+
+/* Сама картка */
+.day-card.sticky-card.day-card--program {
+    background-color: var(--bg-dark) !important; /* Зелений фон */
+    display: flex !important; /* Розташування в рядок */
+    flex-direction: row;
+    align-items: center; /* Центрування по вертикалі */
+    gap: 30px; /* Відступ між картинкою і текстом */
+    padding: 30px !important;
+    border-top: 1px solid rgba(194,163,115,0.3) !important; /* Легка золота лінія зверху */
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3) !important; /* Глибша тінь на темному */
+}
+
+/* Картинка всередині картки */
+.day-program-img {
+    width: 120px; /* Розмір вашої перлинної абстракції */
+    height: 120px;
+    object-fit: contain; /* Щоб не спотворювалася */
+    flex-shrink: 0; /* Щоб не стискалася текстом */
+    border-radius: 15px;
+    filter: drop-shadow(0 5px 15px rgba(255,255,255,0.1)); /* Легке сяйво */
+}
+
+/* Блок тексту справа */
+.day-program-content {
+    flex: 1;
+    text-align: left !important; /* Вирівнювання тексту вліво */
+}
+
+/* Змінюємо кольори тексту всередині темної картки */
+.day-card--program .day-num {
+    color: var(--gold) !important; /* День залишаємо золотим */
+}
+.day-card--program h4 {
+    color: #FFFFFF !important; /* Заголовок білий */
+    margin-bottom: 8px !important;
+}
+.day-card--program p {
+    color: rgba(255,255,255,0.8) !important; /* Опис світло-сірий */
+    margin-bottom: 15px !important;
+}
+
+/* Стиль для кнопки практики (🟢 Сканування тіла) */
+.day-card--program .practice {
+    background: rgba(255,255,255,0.1); /* Напівпрозорий білий фон */
+    color: var(--gold); /* Золотий текст */
+    border: 1px solid rgba(194,163,115,0.2);
+}
+
+/* --- АДАПТАЦІЯ ДЛЯ МОБІЛЬНИХ ТЕЛЕФОНІВ (< 600px) --- */
+@media (max-width: 600px) {
+    .day-card.sticky-card.day-card--program {
+        flex-direction: column; /* На телефоні ставимо картинку НАД текстом */
+        text-align: center;
+        gap: 15px;
+        padding: 25px 20px !important;
+    }
+    
+    .day-program-img {
+        width: 90px; /* Зменшуємо картинку на телефоні */
+        height: 90px;
+        margin-bottom: 10px;
+    }
+    
+    .day-program-content {
+        text-align: center !important;
+    }
+}
