@@ -455,9 +455,10 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--bg-dark); /* Твій фірмовий зелений */
-    z-index: 999999; /* Перекриває абсолютно все на сайті */
+    background-color: var(--bg-dark);
+    z-index: 999999;
     display: flex;
+    flex-direction: column; /* Ставить текст ПІД логотипом */
     justify-content: center;
     align-items: center;
     transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
@@ -473,13 +474,31 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     background-color: #fff;
 }
 
-/* Клас, який JS додасть, щоб сховати прелоадер */
+/* Текст під логотипом */
+.preloader-text {
+    color: var(--gold);
+    margin-top: 25px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    animation: fade-pulse 2s infinite alternate; /* Легке мерехтіння */
+}
+
+/* Анімація для тексту */
+@keyframes fade-pulse {
+    0% { opacity: 0.5; }
+    100% { opacity: 1; text-shadow: 0 0 10px rgba(194, 163, 115, 0.4); }
+}
+
+/* Клас для ховання прелоадера */
 .preloader-hidden {
     opacity: 0 !important;
     visibility: hidden !important;
 }
 
-/* Блокуємо скрол сторінки, поки вона вантажиться */
+/* Блокуємо скрол */
 body.loading-lock {
     overflow: hidden !important;
 }
