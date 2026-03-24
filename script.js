@@ -214,3 +214,23 @@ if (popupForm) {
         window.location.href = 'https://secure.wayforpay.com/button/b2669a557ef69'; 
     }); 
 }
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script> 
+    <script src="script.js"></script> 
+    <script>
+      feather.replace();
+    </script>
+
+    <script>
+        // window.addEventListener('load'...) чекає на завантаження ВСІХ картинок і файлів
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('premium-preloader');
+            const body = document.body;
+            
+            // Даємо мінімальну затримку (пів секунди) для плавності, потім ховаємо
+            setTimeout(function() {
+                preloader.classList.add('preloader-hidden');
+                body.classList.remove('loading-lock'); // Повертаємо скрол
+            }, 500); 
+        });
+    </script>
