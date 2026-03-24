@@ -447,3 +447,39 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
         mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%) !important; 
     }
 }
+
+/* ================= ПРЕЛОАДЕР (ЕКРАН ЗАВАНТАЖЕННЯ) ================= */
+#premium-preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-dark); /* Твій фірмовий зелений */
+    z-index: 999999; /* Перекриває абсолютно все на сайті */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+}
+
+/* Пульсуюче лого по центру */
+.preloader-logo {
+    width: 100px;
+    height: auto;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    padding: 8px;
+    background-color: #fff;
+}
+
+/* Клас, який JS додасть, щоб сховати прелоадер */
+.preloader-hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* Блокуємо скрол сторінки, поки вона вантажиться */
+body.loading-lock {
+    overflow: hidden !important;
+}
