@@ -1,50 +1,46 @@
 document.addEventListener("DOMContentLoaded", function() { 
 
     // =========================================================
-    // ЕФЕКТ ДРУКУ ТЕКСТУ (ДЛЯ ГОЛОВНОГО ЕКРАНУ)
+    // 1. ЕФЕКТ ДРУКУ ТЕКСТУ
     // =========================================================
     const typeTarget = document.getElementById('typewriter');
     if (typeTarget) {
         const textToType = 'чому болить, коли “все нормально”';
         let i = 0;
-        typeTarget.innerHTML = ''; // Очищаємо перед стартом
+        typeTarget.innerHTML = ''; 
         
         function typeWriter() {
             if (i < textToType.length) {
                 typeTarget.innerHTML += textToType.charAt(i);
                 i++;
-                setTimeout(typeWriter, 60); // Швидкість друку
+                setTimeout(typeWriter, 60); 
             }
         }
-        // Запускаємо з невеликою затримкою, щоб встигла пройти анімація появи
         setTimeout(typeWriter, 1200); 
     }
 
     // =========================================================
-    // 1. АНІМАЦІЯ ПОЯВИ ПРИ СКРОЛІ (Reveal System)
+    // 2. АНІМАЦІЯ ПОЯВИ ПРИ СКРОЛІ
     // =========================================================
     const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-zoom');
+    if (revealElements.length > 0) {
+        const revealObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active-reveal');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { root: null, rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
 
-    const revealObserver = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active-reveal');
-                obs.unobserve(entry.target);
-            }
+        revealElements.forEach(el => {
+            el.setAttribute('data-reveal', '');
+            revealObserver.observe(el);
         });
-    }, { 
-        root: null, 
-        rootMargin: '0px 0px -50px 0px',
-        threshold: 0.1
-    });
-
-    revealElements.forEach(el => {
-        el.setAttribute('data-reveal', '');
-        revealObserver.observe(el);
-    });
+    }
 
     // =========================================================
-    // 2. ПЛАВНИЙ СКРОЛ
+    // 3. ПЛАВНИЙ СКРОЛ
     // =========================================================
     document.querySelectorAll('a.smooth-scroll, a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -54,16 +50,13 @@ document.addEventListener("DOMContentLoaded", function() {
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 e.preventDefault();
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
     });
 
     // =========================================================
-    // 3. РОЗУМНИЙ STICKY BAR
+    // 4. РОЗУМНИЙ STICKY BAR
     // =========================================================
     const stickyBarEl = document.getElementById('smartStickyBar');
     const programSection = document.getElementById('program-trigger');
@@ -82,19 +75,15 @@ document.addEventListener("DOMContentLoaded", function() {
             stickyBarEl.classList.add('sticky-hidden');
         }
     }, false);
-
 }); 
 
 // =========================================================
-// 4. ФУНКЦІОНАЛ ТАЙМЕРА
+// 5. ТАЙМЕР
 // =========================================================
 function initTimer() { 
-    // Використовуємо новий ключ, щоб таймер оновився у всіх, хто вже був на сайті
     let endTime = localStorage.getItem('courseTimer47'); 
     const now = new Date().getTime(); 
-    
     if (!endTime || parseInt(endTime, 10) <= now) { 
-        // 47 хвилин * 60 секунд * 1000 мілісекунд
         endTime = now + (47 * 60 * 1000); 
         localStorage.setItem('courseTimer47', endTime); 
     } else { 
@@ -110,7 +99,6 @@ function updateTimers() {
     let timeLeft = endTime - now; 
 
     if (timeLeft <= 0) {  
-        // 47 хвилин * 60 секунд * 1000 мілісекунд
         endTime = now + (47 * 60 * 1000); 
         localStorage.setItem('courseTimer47', endTime); 
         timeLeft = endTime - now; 
@@ -122,7 +110,6 @@ function updateTimers() {
 
     function formatTime(time) { return time < 10 ? `0${time}` : time; } 
 
-    // 1. Оновлюємо головний великий таймер
     const mainTimer = document.getElementById('landing-timer');
     if (mainTimer) { 
         mainTimer.querySelector('.hours').textContent = formatTime(hours); 
@@ -130,7 +117,6 @@ function updateTimers() {
         mainTimer.querySelector('.seconds').textContent = formatTime(seconds); 
     } 
     
-    // 2. Оновлюємо новий міні-таймер у липкій панелі (Sticky Bar)
     const miniTimer = document.getElementById('sticky-mini-timer');
     if (miniTimer) {
         miniTimer.querySelector('.m-hours').textContent = formatTime(hours);
@@ -138,22 +124,22 @@ function updateTimers() {
         miniTimer.querySelector('.m-seconds').textContent = formatTime(seconds);
     }
 } 
-
 updateTimers(); 
 setInterval(updateTimers, 1000);
 
 // =========================================================
-// 5. ФУНКЦІОНАЛ POP-UP ВІКНА ТА ФОРМИ
+// 6. POP-UP ВІКНО ТА ФОРМА
 // =========================================================
 const modal = document.getElementById('popup-modal'); 
 const closeBtn = document.getElementById('close-popup'); 
 
-function openPopup() { 
+// Робимо функцію глобальною, щоб HTML її точно бачив
+window.openPopup = function() { 
     if(modal) modal.classList.add('active'); 
-} 
-function closePopup() { 
+}; 
+window.closePopup = function() { 
     if(modal) modal.classList.remove('active'); 
-} 
+}; 
 
 if(closeBtn) closeBtn.addEventListener('click', closePopup); 
 window.addEventListener('click', (event) => { 
@@ -215,22 +201,22 @@ if (popupForm) {
     }); 
 }
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script> 
-    <script src="script.js"></script> 
-    <script>
-      feather.replace();
-    </script>
+// =========================================================
+// 7. КУЛЕНЕПРОБИВНИЙ ПРЕЛОАДЕР
+// =========================================================
+function hidePreloader() {
+    const preloader = document.getElementById('premium-preloader');
+    if (preloader && !preloader.classList.contains('preloader-hidden')) {
+        preloader.classList.add('preloader-hidden');
+        document.body.classList.remove('loading-lock');
+    }
+}
 
-    <script>
-        // window.addEventListener('load'...) чекає на завантаження ВСІХ картинок і файлів
-        window.addEventListener('load', function() {
-            const preloader = document.getElementById('premium-preloader');
-            const body = document.body;
-            
-            // Даємо мінімальну затримку (пів секунди) для плавності, потім ховаємо
-            setTimeout(function() {
-                preloader.classList.add('preloader-hidden');
-                body.classList.remove('loading-lock'); // Повертаємо скрол
-            }, 500); 
-        });
-    </script>
+// Спосіб 1: Чекаємо повного завантаження сторінки
+window.addEventListener('load', function() {
+    setTimeout(hidePreloader, 500); // Пів секунди для плавності
+});
+
+// Спосіб 2 (Запобіжник): Якщо щось "зависло" (наприклад, важка картинка), 
+// примусово ховаємо прелоадер через 3 секунди
+setTimeout(hidePreloader, 3000);
