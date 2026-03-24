@@ -221,11 +221,11 @@ h1, h2, h3, h4 { font-weight: 800; }
 .lfh-author-desc p strong { font-weight: 700; color: #FFFFFF; }
 
 .lfh-author-image { 
-    position: absolute !important; /* ВИЙМАЄМО З ПОТОКУ */
+    position: absolute !important; 
     bottom: 0 !important;
     right: 0 !important;
-    width: 45% !important; 
-    max-width: 400px !important; 
+    width: 50% !important; /* Збільшили зону для фото */
+    max-width: 550px !important; /* Дали більше місця в пікселях */
     height: 100% !important; 
     display: flex !important;
     justify-content: flex-end;
@@ -234,11 +234,15 @@ h1, h2, h3, h4 { font-weight: 800; }
 }
 .lfh-author-img { 
     width: 100% !important; 
-    max-height: 95% !important; 
+    max-height: 110% !important; /* Дозволили фото вилізти трохи вище за текст */
     object-fit: contain !important; 
     object-position: bottom right !important; 
     display: block !important;
-    transform: none !important; 
+    
+    /* ЗБІЛЬШУЄМО САМЕ ФОТО */
+    transform: scale(1.15) !important; 
+    transform-origin: bottom right !important; 
+    
     filter: drop-shadow(-15px 10px 25px rgba(0,0,0,0.5)) !important; 
     -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%) !important; 
     mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%) !important; 
@@ -430,5 +434,16 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     .lfh-author-title { font-size: 1.8rem; margin-bottom: 20px; }
     .lfh-author-desc p { font-size: 1rem; margin-bottom: 15px; text-align: center; }
     .lfh-author-image { position: relative !important; order: 2; width: 100% !important; max-width: 100% !important; height: auto !important; min-height: 250px !important; margin-top: 10px !important; justify-content: center !important; }
-    .lfh-author-img { max-width: 320px !important; max-height: 380px !important; margin: 0 auto !important; object-position: bottom center !important; -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%) !important; mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%) !important; }
+    .lfh-author-img { 
+        max-width: 320px !important; 
+        max-height: 380px !important; 
+        margin: 0 auto !important; 
+        object-position: bottom center !important; 
+        
+        /* СУНЕМО ВЛІВО НА 25 пікселів */
+        transform: translateX(-25px) !important; 
+        
+        -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%) !important; 
+        mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%) !important; 
+    }
 }
