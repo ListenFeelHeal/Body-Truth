@@ -952,7 +952,7 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     border-radius: var(--radius) !important;
     box-shadow: 0 25px 60px rgba(0,0,0,0.3) !important;
     position: relative;
-    overflow: hidden !important; /* Ховаємо низ під градієнт */
+    overflow: hidden !important; /* БРОНЯ: Ховаємо все, що вилазить за межі картки */
     display: flex;
     align-items: stretch;
     width: 100%;
@@ -1011,11 +1011,10 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     color: #FFFFFF; 
 }
 
-/* ФОТО (ЖОРСТКО ЗАФІКСОВАНІ РОЗМІРИ) */
+/* ФОТО (МАСШТАБ НА КОМП'ЮТЕРІ) */
 .lfh-author-image { 
     flex: 0 0 45%; 
     width: 100%; 
-    max-width: 400px; /* Запобіжник від "гігантів" на компі */
     position: relative; 
     display: flex; 
     justify-content: flex-end; 
@@ -1025,18 +1024,23 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     margin-left: auto; 
 }
 .lfh-author-img { 
-    width: 100%; 
-    height: auto; 
-    max-height: 480px; 
+    width: auto; 
+    height: 100%; 
+    max-height: 550px; /* Дозволяємо вирости */
     display: block; 
     object-fit: contain; 
     object-position: bottom right; 
+    
+    /* ПРЕМІУМ ІНТЕГРАЦІЯ: Збільшуємо фото, щоб не було маленьким в кутку */
+    transform: scale(1.3); 
+    transform-origin: bottom right; 
+
     filter: drop-shadow(-15px 10px 25px rgba(0,0,0,0.5)); /* 3D тінь */
     -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%); 
     mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%); 
 }
 
-/* МОБІЛЬНА ВЕРСІЯ */
+/* МОБІЛЬНА ВЕРСІЯ (НЕ ЧІПАЄМО, БО ТАМ ОК) */
 @media (max-width: 768px) {
     .lfh-author-card, .lfh-author-grid { flex-direction: column; }
     
@@ -1057,10 +1061,12 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
         justify-content: center; 
     }
     .lfh-author-img { 
-        max-width: 300px; /* Запобіжник для телефону */
-        max-height: 350px; 
+        max-width: 320px; 
+        max-height: 380px; 
         margin: 0 auto; 
         object-position: bottom center; 
+        transform: scale(1); /* На мобільному масштаб скидаємо до звичайного */
+        transform-origin: bottom center;
         -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%); 
         mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%); 
     }
