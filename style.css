@@ -148,7 +148,7 @@ h1, h2, h3, h4 { font-weight: 800; }
 .hero { 
     background-color: var(--bg-dark); 
     color: var(--text-light); 
-    padding: 60px 0 120px; 
+    padding: 80px 0 140px; 
     position: relative; 
     overflow: hidden; 
     display: flex;
@@ -161,42 +161,61 @@ h1, h2, h3, h4 { font-weight: 800; }
     z-index: 10; 
 }
 
-/* ПРЕМІАЛЬНА CSS-ТІНЬ (Замість картинки) */
+/* ПРЕМІАЛЬНА CSS-ТІНЬ */
 .hero-vignette {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.4) 100%);
+    background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.5) 100%);
     z-index: 1;
     pointer-events: none; 
 }
 
-/* Загальні стилі для квітів */
+/* Загальні стилі для квітів (тут стоїть запобіжник, щоб більше не вибухали) */
 .hero-decor {
     position: absolute;
     z-index: 2;
     pointer-events: none;
     filter: drop-shadow(0 20px 30px rgba(0,0,0,0.4)); 
+    max-width: 400px; /* Жорсткий запобіжник від гігантських фото */
 }
 
-/* Звисаюча гілка справа зверху (flower-1.png) */
+/* 1: Лівий верхній кут */
+.flower-top-left {
+    width: 300px;
+    top: -30px;
+    left: -50px;
+    transform-origin: top left; 
+    animation: sway-branch 8s ease-in-out infinite;
+}
+
+/* 2: Правий верхній кут */
 .flower-top-right {
     width: 320px;
     top: -40px;
     right: -30px;
     transform-origin: top right; 
-    animation: sway-branch 7s ease-in-out infinite;
+    animation: sway-branch 7s ease-in-out infinite reverse;
 }
 
-/* Гілка зліва знизу (flower-2.png) */
+/* 3: Лівий нижній кут */
 .flower-bottom-left {
     width: 350px;
     bottom: -60px;
     left: -50px;
     transform-origin: bottom left;
-    animation: sway-branch 9s ease-in-out infinite reverse;
+    animation: sway-branch 9s ease-in-out infinite;
+}
+
+/* 4: Правий нижній кут */
+.flower-bottom-right {
+    width: 280px;
+    bottom: -40px;
+    right: -40px;
+    transform-origin: bottom right;
+    animation: sway-branch 8s ease-in-out infinite reverse;
 }
 
 /* Золотий градієнт для "В СТРЕСІ" */
@@ -212,21 +231,15 @@ h1, h2, h3, h4 { font-weight: 800; }
 /* Анімація легкого похитування */
 @keyframes sway-branch {
     0%, 100% { transform: rotate(0deg); }
-    50% { transform: rotate(4deg); }
+    50% { transform: rotate(3deg); }
 }
 
-/* Адаптація для мобільних */
+/* Адаптація для мобільних (зменшуємо розміри, щоб не перекривали текст) */
 @media (max-width: 768px) {
-    .flower-top-right {
-        width: 180px;
-        top: -20px;
-        right: -20px;
-    }
-    .flower-bottom-left {
-        width: 200px;
-        bottom: -30px;
-        left: -30px;
-    }
+    .flower-top-left { width: 150px; top: -10px; left: -20px; }
+    .flower-top-right { width: 180px; top: -20px; right: -20px; }
+    .flower-bottom-left { width: 200px; bottom: -30px; left: -30px; }
+    .flower-bottom-right { width: 160px; bottom: -20px; right: -20px; }
 }
 
 /* ================= ЗНАЙОМІ ВІДЧУТТЯ ================= */ 
