@@ -453,12 +453,12 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     
     .offer-card { padding: 40px 20px !important; }
 
-    /* --- МОБІЛЬНА АДАПТАЦІЯ ДЛЯ PREMIUM-CARD-SPLIT --- */
+   /* --- МОБІЛЬНА АДАПТАЦІЯ ДЛЯ PREMIUM-CARD-SPLIT (ВИПРАВЛЕНО ТЕКСТ НА ФОТО) --- */
     .premium-card-split {
-        flex-direction: column-reverse !important; /* Фото внизу, текст вгорі */
-        padding: 40px 25px 0 25px !important; /* Центрований паддінг */
-        min-height: auto !important; /* Знімаємо фіксовану висоту */
-        height: 420px !important; /* Робимо картку вищою для портрета */
+        flex-direction: column-reverse !important; 
+        padding: 35px 25px 0 25px !important; /* Відступ для тексту зверху */
+        min-height: auto !important; 
+        height: 460px !important; /* Зробили картку трохи вищою для повітря */
         justify-content: flex-end !important;
         align-items: center !important;
     }
@@ -466,9 +466,11 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     .card-content-side {
         flex: 0 0 auto !important;
         text-align: center !important;
-        padding: 0 0 20px 0 !important;
+        padding: 0 !important;
+        margin-bottom: auto !important; /* МАГІЯ: Виштовхує текст максимально вгору */
         z-index: 10 !important;
         position: relative !important;
+        width: 100% !important;
     }
     .premium-card-split .card-content-side h4 {
         font-size: 1.4rem !important;
@@ -483,7 +485,7 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
         height: 100% !important;
         justify-content: center !important;
         align-items: flex-end !important;
-        position: absolute !important; /* Фото як фон */
+        position: absolute !important; 
         top: 0;
         left: 0;
         z-index: 1 !important;
@@ -491,10 +493,10 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     }
     
     .split-card-img {
-        height: 85% !important; /* Фото на 85% висоти картки */
-        object-position: bottom center !important; /* Центруємо фото */
+        height: 55% !important; /* Зменшили фото, щоб звільнити верхню половину для тексту */
+        object-position: bottom center !important; 
         max-height: none !important;
-        filter: drop-shadow(0 15px 40px rgba(0,0,0,0.5)) !important; /* Тінь сильніше для мобільних */
+        filter: drop-shadow(0 15px 40px rgba(0,0,0,0.5)) !important; 
     }
     
     /* Підсилюємо м'який край на мобільних */
@@ -502,7 +504,6 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
         height: 100px;
         background: linear-gradient(to top, rgba(95, 116, 106, 0.9) 0%, rgba(95, 116, 106, 0.4) 60%, rgba(95, 116, 106, 0) 100%);
     }
-}
 
 /* ================= АНІМАЦІЇ ПОЯВИ ================= */ 
 [data-reveal] { opacity: 0; transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1); will-change: opacity, transform; }
