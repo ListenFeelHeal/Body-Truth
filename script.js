@@ -202,7 +202,7 @@ if (popupForm) {
 }
 
 // =========================================================
-// 7. КУЛЕНЕПРОБИВНИЙ ПРЕЛОАДЕР
+// 7. РОЗУМНИЙ ПРЕЛОАДЕР (ЧЕКАЄ ТІЛЬКИ БЛОК 1 ТА БЛОК СИМПТОМІВ)
 // =========================================================
 function hidePreloader() {
     const preloader = document.getElementById('premium-preloader');
@@ -212,11 +212,39 @@ function hidePreloader() {
     }
 }
 
-// Спосіб 1: Чекаємо повного завантаження сторінки
-window.addEventListener('load', function() {
-    setTimeout(hidePreloader, 500); // Пів секунди для плавності
-});
+document.addEventListener('DOMContentLoaded', function() {
+    // Шукаємо ТІЛЬКИ картинки в хедері (квіти, лого) та в блоці симптомів (іконки)
+    const criticalImages = document.querySelectorAll('.hero img, #symptoms img');
+    
+    let imagesLoaded = 0;
+    const totalImages = criticalImages.length;
 
-// Спосіб 2 (Запобіжник): Якщо щось "зависло" (наприклад, важка картинка), 
-// примусово ховаємо прелоадер через 3 секунди
-setTimeout(hidePreloader, 3000);
+    // Якщо раптом картинок немає, просто вимикаємо екран
+    if (totalImages === 0) {
+        hidePreloader();
+        return;
+    }
+
+    // Рахуємо кожну завантажену картинку з цих двох блоків
+    function imageLoaded() {
+        imagesLoaded++;
+        if (imagesLoaded === totalImages) {
+            setTimeout(hidePreloader, 250); // Трохи плавності перед зникненням
+        }
+    }
+
+    criticalImages.forEach(img => {
+        // Якщо картинка вже встигла завантажитись
+        if (img.complete) {
+            imageLoaded();
+        } else {
+            // Чекаємо завантаження або ігноруємо, якщо файл не знайдено
+            img.addEventListener('load', imageLoaded);
+            img.addEventListener('error', imageLoaded); 
+        }
+    });
+
+    // Запобіжник: якщо в клієнтки дуже слабкий мобільний інтернет, 
+    // пускаємо її на сайт примусово через 2.5 секунди.
+    setTimeout(hidePreloader, 2500);
+});
