@@ -453,32 +453,32 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     
     .offer-card { padding: 40px 20px !important; }
 
-   /* --- МОБІЛЬНА АДАПТАЦІЯ ДЛЯ PREMIUM-CARD-SPLIT (МАКСИМАЛЬНО ЩІЛЬНО) --- */
+  /* --- МОБІЛЬНА АДАПТАЦІЯ ДЛЯ PREMIUM-CARD-SPLIT (ІДЕАЛЬНИЙ БАЛАНС ПОВІТРЯ) --- */
     .premium-card-split {
         flex-direction: column !important; 
-        padding: 30px 25px 0 25px !important; /* Зменшили верхній відступ для балансу */
+        padding: 35px 25px 0 25px !important; /* Трохи повернули верхній відступ */
         height: auto !important; 
         min-height: auto !important; 
         justify-content: flex-start !important;
-        gap: 0 !important; /* Жорстко вбиваємо будь-які щілини між блоками */
+        gap: 15px !important; /* ОСЬ ВІН: ідеальний відступ між текстом і фото */
     }
     
     .card-content-side {
         flex: 0 0 auto !important;
         text-align: center !important;
         padding: 0 !important;
-        margin-bottom: 0 !important; /* ПРИБРАЛИ ВІДСТУП */
+        margin-bottom: 0 !important; 
         position: relative !important;
         z-index: 10 !important;
         width: 100% !important;
     }
     .premium-card-split .card-content-side h4 {
         font-size: 1.4rem !important;
-        margin-bottom: 10px !important; /* Акуратний відступ тільки під заголовком */
+        margin-bottom: 10px !important; 
     }
     .premium-card-split .card-content-side p {
         font-size: 1rem !important;
-        margin-bottom: 0 !important; /* Жорстко вбиваємо стандартний відступ браузера під текстом! */
+        margin-bottom: 0 !important; 
     }
 
     .card-image-side {
@@ -489,13 +489,13 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
         justify-content: center !important;
         align-items: flex-end !important; 
         padding: 0 !important;
-        margin-top: -15px !important; /* МАГІЯ: Трохи підтягуємо фото вгору до тексту */
+        margin-top: 0 !important; /* Прибрали мінус, який склеював їх впритул */
         z-index: 1 !important;
     }
     
     .split-card-img {
         height: auto !important; 
-        max-height: 280px !important; 
+        max-height: 260px !important; /* Трошечки зменшили максимум, щоб з відступом виглядало акуратно */
         width: auto !important;
         max-width: 100% !important;
         object-fit: contain !important;
