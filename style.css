@@ -368,27 +368,20 @@ h1, h2, h3, h4 { font-weight: 800; }
 .review-text { font-style: italic; font-size: 1.05rem; color: #E5E0D8; margin-bottom: 30px; font-weight: 400; line-height: 1.6; flex-grow: 1; }
 .review-author { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.1rem; color: #FFFFFF; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
 
-/* Ключові кадри для нескінченного руху зліва направо */
+/* Ключові кадри для руху ЗЛІВА НАПРАВО (Десктоп) */
 @keyframes scroll-reviews {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-50% - 15px)); } /* Зсуваємо рівно на половину треку мінус пів-відступу */
+    0% { transform: translateX(calc(-50% - 15px)); } 
+    100% { transform: translateX(0); }
 }
 
-/* --- АДАПТАЦІЯ ДЛЯ МОБІЛЬНИХ --- */
+/* І трохи нижче замініть ключові кадри всередині @media (max-width: 600px) */
 @media (max-width: 600px) {
-    .reviews-wrapper {
-        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-        mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-    }
-    .review-card {
-        width: 320px; /* Трохи вужчі для телефонів */
-        padding: 30px;
-    }
-    .reviews-track { gap: 20px; }
-    .reviews-group { gap: 20px; }
+    /* ... ваші інші мобільні стилі відгуків залишаються ... */
+    
+    /* Ключові кадри для руху ЗЛІВА НАПРАВО (Мобільний) */
     @keyframes scroll-reviews {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(calc(-50% - 10px)); }
+        0% { transform: translateX(calc(-50% - 10px)); }
+        100% { transform: translateX(0); }
     }
 }
 
