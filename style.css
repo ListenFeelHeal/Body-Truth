@@ -503,69 +503,99 @@ body.loading-lock {
     overflow: hidden !important;
 }
 
-/* ================= ОНОВЛЕНІ СТИЛІ ДЛЯ ПРОГРАМИ (ЗЕЛЕНИЙ ФОН) ================= */
+/* ================= ОНОВЛЕНІ СТИЛІ ДЛЯ ПРОГРАМИ (РОЗДІЛЕННЯ ТА КОНТРАСТ) ================= */
 
-/* Сама картка */
-.day-card.sticky-card.day-card--program {
-    background-color: var(--bg-dark) !important; /* Зелений фон */
-    display: flex !important; /* Розташування в рядок */
-    flex-direction: row;
-    align-items: center; /* Центрування по вертикалі */
-    gap: 30px; /* Відступ між картинкою і текстом */
-    padding: 30px !important;
-    border-top: 1px solid rgba(194,163,115,0.3) !important; /* Легка золота лінія зверху */
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3) !important; /* Глибша тінь на темному */
+/* Намагаємося перефарбувати золоті лінії в перлинно-білі, якщо файли ще золоті */
+.premium-line-icon {
+    /* Цей фільтр спробує перетворити золото на білий */
+    filter: invert(100%) brightness(200%) drop-shadow(0 5px 15px rgba(255,255,255,0.1)) !important; 
 }
 
-/* Картинка всередині картки */
+/* Сама картка дня: темно-зелена секція, дещо світліша картка */
+.day-card.sticky-card.day-card--program {
+    background-color: rgba(255, 255, 255, 0.05) !important; /* Напівпрозорий білий, щоб відірвати від зеленого фону секції */
+    border-top: 1px solid rgba(194, 163, 115, 0.3) !important;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5) !important;
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+    padding: 30px !important;
+    border-radius: var(--radius) !important;
+}
+
+/* Збільшена картинка: значно більша на десктопі */
 .day-program-img {
-    width: 120px; /* Розмір вашої перлинної абстракції */
-    height: 120px;
-    object-fit: contain; /* Щоб не спотворювалася */
-    flex-shrink: 0; /* Щоб не стискалася текстом */
-    border-radius: 15px;
-    filter: drop-shadow(0 5px 15px rgba(255,255,255,0.1)); /* Легке сяйво */
+    width: 180px; 
+    height: 180px;
+    object-fit: contain;
+    flex-shrink: 0;
 }
 
 /* Блок тексту справа */
 .day-program-content {
     flex: 1;
-    text-align: left !important; /* Вирівнювання тексту вліво */
+    text-align: left !important;
+}
+
+/* 'День 1' - тепер перлинно-білий */
+.day-card--program .day-num--pearl {
+    color: #F8F4EF !important; /* Pearl/Ivory white */
+    font-weight: 700;
+}
+/* Колір дня для 7-го світлого дня залишаємо золотим */
+.day-card--program-final .day-num--pearl {
+    color: var(--gold) !important;
 }
 
 /* Змінюємо кольори тексту всередині темної картки */
-.day-card--program .day-num {
-    color: var(--gold) !important; /* День залишаємо золотим */
-}
 .day-card--program h4 {
-    color: #FFFFFF !important; /* Заголовок білий */
-    margin-bottom: 8px !important;
+    color: #FFFFFF !important;
 }
 .day-card--program p {
-    color: rgba(255,255,255,0.8) !important; /* Опис світло-сірий */
-    margin-bottom: 15px !important;
+    color: rgba(255,255,255,0.8) !important;
+    font-size: 1.05rem !important;
+    margin-bottom: 20px !important;
 }
 
-/* Стиль для кнопки практики (🟢 Сканування тіла) */
-.day-card--program .practice {
-    background: rgba(255,255,255,0.1); /* Напівпрозорий білий фон */
-    color: var(--gold); /* Золотий текст */
-    border: 1px solid rgba(194,163,115,0.2);
+/* Етикетка практики: повністю білий фон з темним текстом */
+.day-card--program .practice--filled {
+    background: #FFFFFF !important; /* Білий фон */
+    color: var(--bg-dark) !important; /* Темно-зелений текст */
+    border: none !important;
+    padding: 10px 18px;
+    font-size: 1rem;
+}
+
+/* Спеціальні стилі для 7-го світлого дня */
+.day-card--program-final {
+    text-align: left !important;
+}
+.day-card--program-final h4 {
+    color: var(--bg-dark) !important;
+}
+.day-card--program-final p {
+    color: var(--bg-dark) !important;
+}
+.day-card--program-final .day-program-img {
+    filter: none !important; /* Вимикаємо перефарбування для золотої 7-ї */
 }
 
 /* --- АДАПТАЦІЯ ДЛЯ МОБІЛЬНИХ ТЕЛЕФОНІВ (< 600px) --- */
 @media (max-width: 600px) {
+    /* Картка: Картинка тепер НАД текстом */
     .day-card.sticky-card.day-card--program {
-        flex-direction: column; /* На телефоні ставимо картинку НАД текстом */
+        flex-direction: column !important; /* Стовпчик */
         text-align: center;
         gap: 15px;
         padding: 25px 20px !important;
     }
     
+    /* Збільшена картинка на мобільному */
     .day-program-img {
-        width: 90px; /* Зменшуємо картинку на телефоні */
-        height: 90px;
-        margin-bottom: 10px;
+        width: 120px; 
+        height: 120px;
+        margin-bottom: 15px;
     }
     
     .day-program-content {
