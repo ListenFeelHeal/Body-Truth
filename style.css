@@ -309,71 +309,86 @@ h1, h2, h3, h4 { font-weight: 800; }
 .pressure-stack .sticky-card { padding: 35px !important; top: calc(15vh + (var(--idx) * 15px)); }
 .p-icon svg { width: 36px; height: 36px; color: var(--gold); stroke-width: 1.5; margin-bottom: 15px; }
 
-/* ================= ВІДГУКИ (ОНОВЛЕНИЙ ПРЕМІУМ СТИЛЬ) ================= */
+/* ================= ВІДГУКИ (АВТОСКРОЛ + ЗБІЛЬШЕННЯ) ================= */
 .reviews-wrapper { 
-    display: flex; 
-    gap: 30px; /* Більше повітря між картками */
-    overflow-x: auto; 
-    scroll-snap-type: x mandatory; 
-    padding-bottom: 50px; /* Місце для глибокої тіні */
-    padding-top: 10px;
-    -ms-overflow-style: none; 
-    scrollbar-width: none; 
-    margin-top: 30px; 
-    overflow-y: visible !important; 
+    overflow: hidden; /* Ховаємо все, що вилазить за краї екрану */
+    padding: 30px 0 60px 0; /* Даємо місце зверху і знизу, щоб картки могли збільшуватися */
+    margin-top: 20px; 
+    
+    /* Магія розмиття по краях залишається! */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
 }
-.reviews-wrapper::-webkit-scrollbar { display: none; }
 
-/* Картка відгуку: фірмовий стиль (зелений фон, золота рамка, глибока тінь) */
+/* Трек, який рухається */
+.reviews-track {
+    display: flex;
+    width: max-content;
+    gap: 30px;
+    /* Анімація на 40 секунд. Можна змінити цифру, якщо хочете швидше або повільніше */
+    animation: scroll-reviews 40s linear infinite; 
+}
+
+/* ЗУПИНКА ПРИ НАВЕДЕННІ ТА ДОТИКУ */
+.reviews-track:hover,
+.reviews-track:active {
+    animation-play-state: paused;
+}
+
+/* Групи карток всередині треку */
+.reviews-group {
+    display: flex;
+    gap: 30px;
+}
+
+/* Сама картка відгуку */
 .review-card { 
-    flex: 0 0 340px; /* Трохи ширші для зручності читання */
-    scroll-snap-align: center; 
+    width: 420px; /* Фіксована ширина */
     background-color: var(--bg-dark); 
-    border: 1px solid rgba(194, 163, 115, 0.3); /* Тонка золота рамка */
-    box-shadow: 0 20px 40px rgba(0,0,0,0.25); /* Глибока тінь */
+    border: 1px solid rgba(194, 163, 115, 0.3); 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2); 
     color: #fff; 
     text-align: left; 
     padding: 40px; 
     border-radius: var(--radius); 
     display: flex;
     flex-direction: column;
+    cursor: pointer; /* Курсор-ручка підказує, що з цим можна взаємодіяти */
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease;
 }
 
-/* Зірочки */
-.stars { 
-    color: var(--gold); 
-    font-size: 1.4rem; 
-    margin-bottom: 20px; 
-    letter-spacing: 3px; 
+/* ЕФЕКТ ЗБІЛЬШЕННЯ ПРИ НАВЕДЕННІ */
+.review-card:hover {
+    transform: scale(1.05); /* Збільшуємо на 5% */
+    box-shadow: 0 25px 50px rgba(0,0,0,0.4); /* Підсилюємо тінь */
+    z-index: 10;
 }
 
-/* Текст відгуку */
-.review-text { 
-    font-style: italic; 
-    font-size: 1.05rem; 
-    color: #E5E0D8; /* Теплий світло-сірий, як у програмі */
-    margin-bottom: 30px; 
-    text-transform: none; 
-    font-weight: 400; 
-    line-height: 1.6;
-    flex-grow: 1; /* Притискає автора до низу картки */
+.stars { color: var(--gold); font-size: 1.4rem; margin-bottom: 20px; letter-spacing: 3px; }
+.review-text { font-style: italic; font-size: 1.05rem; color: #E5E0D8; margin-bottom: 30px; font-weight: 400; line-height: 1.6; flex-grow: 1; }
+.review-author { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.1rem; color: #FFFFFF; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+
+/* Ключові кадри для нескінченного руху зліва направо */
+@keyframes scroll-reviews {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 15px)); } /* Зсуваємо рівно на половину треку мінус пів-відступу */
 }
 
-/* Автор відгуку */
-.review-author { 
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700; 
-    font-size: 1.1rem; 
-    color: #FFFFFF; 
-    border-top: 1px solid rgba(255,255,255,0.1); /* Елегантна лінія розділення */
-    padding-top: 20px;
-}
-
-/* Адаптація для телефонів */
+/* --- АДАПТАЦІЯ ДЛЯ МОБІЛЬНИХ --- */
 @media (max-width: 600px) {
+    .reviews-wrapper {
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+        mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    }
     .review-card {
-        flex: 0 0 290px;
+        width: 320px; /* Трохи вужчі для телефонів */
         padding: 30px;
+    }
+    .reviews-track { gap: 20px; }
+    .reviews-group { gap: 20px; }
+    @keyframes scroll-reviews {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(-50% - 10px)); }
     }
 }
 
