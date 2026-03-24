@@ -604,3 +604,33 @@ body.loading-lock {
     
     .day-program-content { text-align: center !important; }
 }
+
+/* ================= ФІКС НАЛИПАННЯ ТА СТРИБКІВ КАРТОК ================= */
+
+/* Робимо стабільний контейнер з фіксованою відстанню (gap) */
+.program-stack, .pressure-stack { 
+    display: flex !important; 
+    flex-direction: column !important; 
+    gap: 50px !important; /* Стабільна відстань між картками замість margin */
+    padding-bottom: 100px !important; /* Даємо великий запас місця внизу, щоб 7 картка мала куди скролитися */
+}
+
+/* Прибираємо margin, який ламав "липкість" */
+.sticky-card {
+    margin-bottom: 0 !important; /* ВАЖЛИВО! */
+    will-change: transform; /* Допомагає браузеру не "смикати" картку під час скролу */
+}
+
+/* Додаткова адаптація для мобільного, щоб картки не з'їдали весь екран */
+@media (max-width: 600px) {
+    .program-stack, .pressure-stack {
+        gap: 40px !important;
+        padding-bottom: 80px !important;
+    }
+    
+    /* Зменшуємо крок налипання зверху на телефоні */
+    .day-card.sticky-card.day-card--program,
+    .day-card.sticky-card.day-card--program-final {
+        top: calc(8vh + (var(--idx) * 10px)) !important; 
+    }
+}
