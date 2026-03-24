@@ -1,65 +1,99 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-   <meta name="facebook-domain-verification" content="mfu9cwr9xoaihtvyh222j7u4irdtxe" />
     <meta charset="UTF-8">
-    <title>Оплата успішна! | Body Exhale</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+    <title>Оплата успішна | Body Exhale</title>
+    <meta name="facebook-domain-verification" content="mfu9cwr9xoaihtvyh222j7u4irdtxe" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+
     <style>
-        /* Додаємо box-sizing, щоб відступи не ламали ширину блоку на телефоні */
-        * {
-            box-sizing: border-box;
+        /* Специфічні стилі саме для центрування цієї сторінки */
+        body {
+            background-color: var(--bg-dark); /* Темно-зелений фон */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden; /* Щоб не було зайвого скролу */
+            background-image: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%);
         }
-        body { 
-            background: #161616; 
-            color: white; 
-            font-family: 'Montserrat', sans-serif; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            min-height: 100vh; 
-            margin: 0; 
-            text-align: center; 
-            padding: 20px; /* Захист від прилипання до країв екрану */
-        }
-        .card { 
-            background: #C2A373; 
-            padding: 40px 25px; /* Зменшили бокові відступи для мобільної версії */
-            border-radius: 20px; 
-            max-width: 400px; 
-            width: 100%; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3); 
-        }
-        h1 { 
-            font-size: 24px; 
-            margin-top: 0;
-            margin-bottom: 20px; 
-            color: #161616; 
-            font-weight: 700; /* Заголовки обов'язково жирним */
-        }
-        p { 
-            margin-bottom: 30px; 
-            color: #161616; 
-            font-weight: 500; 
-            font-size: 16px;
-            line-height: 1.5;
-        }
-        .btn { 
-            display: block; /* Кнопка на всю доступну ширину картки */
+        
+        .success-card {
+            background: #fff;
+            padding: 50px 40px;
+            border-radius: var(--radius);
+            max-width: 450px;
             width: 100%;
-            background: #161616; 
-            color: #C2A373; 
-            padding: 18px 20px; 
-            text-decoration: none; 
-            border-radius: 12px; 
-            font-weight: 800; 
-            text-transform: uppercase; 
-            transition: 0.3s;
-            font-size: 14px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            border: 1px solid rgba(194, 163, 115, 0.3);
+            position: relative;
+            z-index: 10;
         }
-        .btn:hover {
-            background: #2a2a2a;
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(194, 163, 115, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: var(--gold);
+        }
+
+        .success-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke-width: 2.5;
+        }
+
+        .success-card h1 {
+            font-size: 1.8rem;
+            color: var(--bg-dark);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 800;
+        }
+
+        .success-card p {
+            color: #555;
+            font-size: 1.05rem;
+            margin-bottom: 35px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .decor-line {
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+            margin: 0 auto 25px;
+            border-radius: 3px;
+        }
+
+        /* Декоративні квіти на фоні по кутах */
+        .bg-flower {
+            position: absolute;
+            opacity: 0.15;
+            z-index: 1;
+            pointer-events: none;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+        }
+        .flower-1 { top: -50px; left: -50px; width: 300px; transform: rotate(15deg); }
+        .flower-2 { bottom: -50px; right: -50px; width: 250px; transform: rotate(-15deg); }
+
+        @media (max-width: 480px) {
+            .success-card { padding: 40px 25px; }
+            .success-card h1 { font-size: 1.5rem; }
+            .success-card p { font-size: 0.95rem; }
         }
     </style>
 
@@ -77,7 +111,7 @@
     fbq('init', '1625849898561536');
     fbq('track', 'PageView');
     
-    /* ЦЕ ГОЛОВНЕ: Подія покупки, яка спрацює при завантаженні цієї сторінки */
+    /* Відстеження покупки */
     fbq('track', 'Purchase', {value: 399.00, currency: 'UAH'});
     </script>
     <noscript><img height="1" width="1" style="display:none"
@@ -85,10 +119,24 @@
     /></noscript>
     </head>
 <body>
-    <div class="card">
-        <h1>ДЯКУЄМО ЗА ОПЛАТУ! 🎉</h1>
-        <p>Натисніть кнопку нижче, щоб отримати доступ до курсу в Telegram</p>
-        <a href="https://t.me/ListenFeelHeal_bot?start=ZGw6MzE4NzQ5" class="btn">ПОЧАТИ КУРС У TELEGRAM</a>
+
+    <img src="flower-1.png" alt="" class="bg-flower flower-1">
+    <img src="flower-2.png" alt="" class="bg-flower flower-2">
+
+    <div class="success-card">
+        <div class="success-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+        </div>
+        
+        <h1>Оплата успішна!</h1>
+        <div class="decor-line"></div>
+        <p>Твій безпечний простір відкрито 🤍<br>Натисни кнопку нижче, щоб перейти у Telegram та розпочати курс.</p>
+        
+        <a href="https://t.me/ListenFeelHeal_bot?start=ZGw6MzE4NzQ5" class="btn btn-gold pulse" style="width: 100%; box-sizing: border-box;">ПОЧАТИ КУРС У TELEGRAM</a>
     </div>
+
 </body>
 </html>
