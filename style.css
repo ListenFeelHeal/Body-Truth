@@ -503,9 +503,9 @@ body.loading-lock {
     overflow: hidden !important;
 }
 
-/* ================= ФІНАЛЬНІ СТИЛІ ПРОГРАМИ (ЗЕЛЕНІ КАРТКИ, БІЛИЙ ТЕКСТ, MONTSERRAT) ================= */
+/* ================= ПРЕМІАЛЬНІ КАРТКИ ЗІ ШРИФТОМ MONTSERRAT ================= */
 
-/* Фіксуємо контейнер, щоб картки не стрибали при скролі */
+/* Фіксуємо контейнер */
 .program-stack { 
     display: flex !important; 
     flex-direction: column !important; 
@@ -516,11 +516,12 @@ body.loading-lock {
     margin-bottom: 0 !important; 
 }
 
-/* Сама картка дня: темно-зелена */
-.day-card.sticky-card.day-card--program {
-    background-color: var(--bg-dark) !important; 
-    border: 1px solid rgba(194, 163, 115, 0.3) !important; /* Тонка золота рамка */
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2) !important; 
+/* Преміальна темна картка (Градієнт, тонка золота рамка, глибока тінь) */
+.day-card.sticky-card.day-card--program,
+.day-card.sticky-card.day-card--program-final {
+    background: linear-gradient(145deg, #4A5C52 0%, #35453D 100%) !important; 
+    border: 1px solid rgba(194, 163, 115, 0.3) !important; 
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05) !important; 
     display: flex !important;
     flex-direction: row;
     align-items: center;
@@ -529,12 +530,13 @@ body.loading-lock {
     border-radius: var(--radius) !important;
 }
 
-/* Картинки всередині карток */
+/* Картинки (збільшені) */
 .day-program-img {
-    width: 180px !important; 
-    height: 180px !important;
+    width: 200px !important; 
+    height: 200px !important;
     object-fit: contain;
     flex-shrink: 0;
+    transform: scale(1.3); 
 }
 
 /* Блок тексту справа */
@@ -544,53 +546,60 @@ body.loading-lock {
     z-index: 2; 
 }
 
-/* НАПИС "ДЕНЬ X": Золотий */
-.day-card--program .day-num--gold {
+/* НАПИС "ДЕНЬ X": Золотий, з відступами */
+.day-card--program .day-num--pearl,
+.day-card--program-final .day-num--gold {
     color: var(--gold) !important; 
-    font-weight: 800 !important;
+    font-weight: 700 !important;
     font-size: 0.9rem !important;
-    letter-spacing: 2px !important;
+    letter-spacing: 2.5px !important;
     text-transform: uppercase !important;
     margin-bottom: 10px !important;
 }
 
-/* ЗАГОЛОВОК: Оригінальний товстий шрифт (Montserrat), білий колір */
-.day-card--program h4 { 
-    font-family: 'Montserrat', sans-serif !important;
+/* ЗАГОЛОВОК: Товстий оригінальний Montserrat, білий */
+.day-card--program h4,
+.day-card--program-final h4 { 
+    font-family: 'Montserrat', sans-serif !important; 
     color: #FFFFFF !important; 
-    font-size: 1.8rem !important; 
+    font-size: 2.2rem !important; 
     font-weight: 800 !important;
     letter-spacing: 0px !important;
-    line-height: 1.2 !important;
+    line-height: 1.1 !important;
     margin-bottom: 12px !important;
 }
 
-/* ОПИС: Світло-сірий */
-.day-card--program p { 
-    color: #F0F4F2 !important; 
-    font-size: 1.05rem !important; 
+/* ОПИС: Теплий світло-сірий */
+.day-card--program p,
+.day-card--program-final p { 
+    color: #E5E0D8 !important; 
+    font-size: 1.1rem !important; 
     font-weight: 500 !important;
     line-height: 1.6 !important;
     margin-bottom: 25px !important; 
 }
 
-/* ЕТИКЕТКА ПРАКТИКИ: Білий фон, темний текст */
-.day-card--program .practice {
-    background: #FFFFFF !important; 
-    color: var(--bg-dark) !important; 
-    border: none !important;
-    padding: 10px 18px !important;
+/* ЕТИКЕТКА ПРАКТИКИ: Витончена округла прозора "пігулка" з білою рамкою */
+.day-card--program .practice--light,
+.day-card--program .practice--dark,
+.day-card--program-final .practice--dark {
+    background: transparent !important; 
+    color: #FFFFFF !important; 
+    border: 1px solid rgba(255,255,255,0.4) !important;
+    padding: 8px 22px !important;
     font-size: 0.95rem !important;
-    font-weight: 700 !important;
-    border-radius: 8px !important; 
+    font-weight: 500 !important;
+    border-radius: 50px !important; 
     display: inline-block !important;
+    letter-spacing: 0.5px;
 }
 
 /* --- АДАПТАЦІЯ ДЛЯ МОБІЛЬНИХ ТЕЛЕФОНІВ --- */
 @media (max-width: 600px) {
     .program-stack { gap: 40px !important; padding-bottom: 80px !important; }
 
-    .day-card.sticky-card.day-card--program {
+    .day-card.sticky-card.day-card--program,
+    .day-card.sticky-card.day-card--program-final {
         flex-direction: column !important; 
         text-align: center !important;
         padding: 35px 25px !important;
@@ -601,13 +610,15 @@ body.loading-lock {
     .day-program-img {
         width: 140px !important; 
         height: 140px !important;
+        transform: scale(1.3); 
         margin-bottom: 15px;
     }
     
     .day-program-content { text-align: center !important; }
     
-    .day-card--program h4 {
-        font-size: 1.5rem !important;
+    .day-card--program h4,
+    .day-card--program-final h4 {
+        font-size: 1.8rem !important;
     }
 }
 
