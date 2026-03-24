@@ -300,177 +300,115 @@ h1, h2, h3, h4 { font-weight: 800; }
 } 
 .check-icon { color: var(--gold); width: 24px; height: 24px; flex-shrink: 0; }
 
-/* ================= ДОВІРА (Я ПОРУЧ) - ПРЕМІАЛЬНА СЕКЦІЯ ================= */
+/* ================= ДОВІРА (Я ПОРУЧ) - ПРЕМІАЛЬНА КАРТКА ДЗЕРКАЛЬНА ================= */
 .trust-section {
-    background-color: var(--bg-dark); /* Суцільний темно-зелений фон, як на Hero */
-    padding: 100px 0; /* Більше повітря для преміальності */
-    position: relative; /* Для ефекту м'якого краю та декору */
-    overflow: hidden; /* Щоб декор не вилазив за межі */
+    background-color: var(--bg-light); /* Секція на світлому фоні сайту */
 }
 
-/* 1. Ефект м'якого нижнього краю під фотографією (такий самий, як у Hero) */
-.trust-section::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 80px; /* Глибина ефекту */
-    background: linear-gradient(to top, rgba(95, 116, 106, 0.7) 0%, rgba(95, 116, 106, 0) 100%);
-    pointer-events: none;
-    z-index: 5;
-}
-
-/* 2. ПРЕМІАЛЬНЕ ЗАТЕМНЕННЯ (ВІНЬЄТКА) ДЛЯ ГЛИБИНИ */
-.trust-vignette {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.5) 100%);
-    z-index: 1;
-    pointer-events: none; /* Щоб не заважало клікати */
-}
-
-/* 3. ДЕКОР ПО КРАЯХ СЕКЦІЇ (Водяні знаки, opacity 10-15%) */
-.trust-decor {
-    position: absolute;
-    z-index: 2;
-    pointer-events: none;
-    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15)); /* М'якша тінь */
-    height: auto; 
-    object-fit: contain; 
-    opacity: 0.12; /* Робимо напівпрозорими водяними знаками, як водяний знак */
-}
-
-/* Гілка евкаліпта зліва зверху (наприклад, flower-3.png) */
-.flower-top-left {
-    width: 250px;
-    top: -50px;
-    left: -80px;
-}
-
-/* Гілка бавовни справа знизу (наприклад, flower-4.png) */
-.flower-bottom-right {
-    width: 220px;
-    bottom: -40px;
-    right: -80px;
-}
-
-/* 4. ЗАГАЛЬНА СТРУКТУРА */
-.trust-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.3fr; /* Фото ліворуч, текст праворуч */
-    gap: 60px; /* Більше простору */
-    align-items: center; /* Центрування по вертикалі */
-    max-width: 1000px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 10;
-}
-
-/* 5. ФОТОГРАФІЯ БЕЗ ФОНУ (face-new.png) */
-.trust-image-wrapper {
-    width: 100%;
+.trust-card {
+    padding: 0 !important; /* Жорстко вбиваємо паддінг картки, щоб фото торкалося краю */
+    overflow: hidden; /* Обрізаємо кути фото під радіус картки */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+    align-items: center; /* Центрування тексту по вертикалі */
+    min-height: 350px; /* Optional standard height */
 }
-.trust-face-img {
+
+.trust-split-grid {
+    display: grid;
+    grid-template-columns: 1fr 300px; /* Текст займає місце, Фото має фіксовану ширину праворуч */
     width: 100%;
-    max-width: 350px; /* Жорсткий запобіжник */
+    gap: 0;
+}
+
+/* --- ЛІВА КОЛОНКА (ТЕКСТ) --- */
+.trust-content-side {
+    padding: 50px; /* Паддінг тільки для тексту всередині картки */
+    text-align: left;
+}
+
+/* Оновлюємо заголовок всерединіdark картки на золотий */
+.trust-card h2.section-title {
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+    color: #C2A373 !important; /* BACKUP solid gold color */
+    display: inline-block; /* Essential for correct text-clip gradient reuse if needed */
+}
+
+/* Білий читабельний текст */
+.trust-description p {
+    color: var(--text-light) !important;
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    text-transform: none;
+    font-weight: 400;
+}
+.trust-description p strong {
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+/* --- ПРАВА КОЛОНКА (ФОТО FLUSH TO EDGE) --- */
+.trust-image-side {
+    position: relative; /* Context for absolute image placement if needed */
+    width: 300px;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end; /* Жорстко притискаємо фото до низу */
+}
+
+.trust-side-img {
+    width: auto;
+    max-width: 100%;
     height: auto;
     display: block;
     object-fit: contain;
-    object-position: center;
-    filter: drop-shadow(0 15px 40px rgba(0,0,0,0.3)); /* Глибока преміальна тінь */
-    z-index: 10;
+    object-position: bottom center;
+    /* У тебе має бути ідеально вирізане PNG без фону */
 }
 
-/* 6. ТЕКСТОВИЙ БЛОК (Справа) */
-.trust-text-block {
-    text-align: left;
-    padding: 0;
-    position: relative;
-}
-
-/* Легка тонка золота рамка по контуру контентної частини (опціонально) */
-.trust-text-block::after {
-    content: '';
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    right: -20px;
-    bottom: -20px;
-    border: 1px solid rgba(194, 163, 115, 0.1); /* Дуже тонка і ледь помітна */
-    border-radius: var(--radius);
-    pointer-events: none;
-}
-
-/* ЗАГОЛОВОК "Я ПОРУЧ" - Золотий, як на Hero */
-.text-gold-accent {
-    color: #C2A373 !important; /* Золотий відтенок, як "В СТРЕСІ" */
-    font-size: 2.2rem;
-    margin-bottom: 25px;
-    text-transform: uppercase;
-    font-weight: 800;
-}
-
-/* ОСНОВНИЙ ТЕКСТ - Білий, чистий */
-.trust-description p {
-    color: #F0F4F2 !important; /* М'який білий для гармонії */
-    font-family: 'Montserrat', sans-serif !important; /* Чистий шрифт */
-    font-size: 1.05rem;
-    margin-bottom: 20px;
-    font-weight: 400; /* Regular */
-    line-height: 1.5; /* Достатній міжрядковий інтервал */
-    text-transform: none;
-}
-
-/* ВИДІЛЕННЯ ЖИРНИМ */
-.trust-description strong {
-    font-weight: 700 !important; /* Bold */
-    color: #FFFFFF !important; /* Можна зробити ще білішим */
-}
-
-/* ================= АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ (Я ПОРУЧ) ================= */
+/* ================= МОБІЛЬНА АДАПТАЦІЯ (ДЗЕРКАЛЬНА) ================= */
 @media (max-width: 768px) {
-    .trust-grid {
+    .trust-card {
+        flex-direction: column;
+        padding: 0 !important;
+    }
+
+    .trust-split-grid {
         grid-template-columns: 1fr; /* Один стовпець */
-        gap: 40px; /* Менше простору */
-        text-align: center; /* Центрування всього контенту */
-    }
-    
-    .trust-section {
-        padding: 80px 0; /* Трохи менше повітря зверху і знизу */
+        flex-direction: column-reverse; /* Жорстко: фото ПІСЛЯ тексту на мобільному (за ієрархією) */
+        display: flex;
     }
 
-    /* Вирізане фото йде зверху по центру */
-    .trust-image-wrapper {
-        justify-content: center;
-        order: -1; /* Жорстко ставимо фото першим */
-    }
-    .trust-face-img {
-        max-width: 280px; /* Зменшили */
+    .trust-content-side {
+        padding: 30px 20px;
+        text-align: center;
+        order: 2; /* Текст йде другим */
     }
 
-    /* Весь текст — під ним */
-    .trust-text-block {
-        text-align: center; /* Центрування тексту */
-    }
-    .trust-text-block::after {
-        display: none; /* Прибрали рамку на мобільних */
+    .trust-card h2.section-title { font-size: 1.8rem; }
+    .trust-description p { font-size: 1rem; }
+
+    .trust-image-side {
+        order: 1; /* Фото йде першим на мобільному, щоб було зверху */
+        width: 100%;
+        height: auto;
+        position: relative;
+        display: flex;
+        justify-content: center; /* Центрування фото по центру екрану */
+        align-items: flex-end;
+        min-height: 250px; /* Give some space for photo */
     }
 
-    .text-gold-accent {
-        font-size: 1.8rem;
-        margin-bottom: 20px;
-    }
-    .trust-description p {
-        font-size: 1rem;
-        margin-bottom: 15px;
+    .trust-side-img {
+        width: auto;
+        max-width: 90%;
+        height: auto;
+        max-height: 280px; /* Cap photo size on mobile */
+        margin: 0 auto;
+        object-fit: contain;
+        object-position: bottom center;
     }
 }
 
