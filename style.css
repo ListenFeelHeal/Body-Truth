@@ -379,21 +379,36 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
 .pab-timer .colon { margin: 0 4px !important; }
 .pab-action { display: flex !important; justify-content: center !important; align-items: center !important; flex: 1 1 auto !important; background: linear-gradient(135deg, #D0B58D 0%, #A08151 100%) !important; color: #161616 !important; font-weight: 800 !important; font-size: 1.05rem !important; text-transform: uppercase !important; letter-spacing: 1.5px !important; border-left: 1px solid rgba(0, 0, 0, 0.1) !important; padding: 0 20px !important; text-align: center !important; }
 
-/* ================= POPUP ================= */ 
-.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 10000; justify-content: center; align-items: center; padding: 20px; } 
+/* ================= POPUP (ОНОВЛЕНИЙ ПРЕМІУМ) ================= */ 
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 10000; justify-content: center; align-items: center; padding: 20px; } 
 .modal-overlay.active { display: flex; } 
-.modal-content { background: var(--bg-light); width: 100%; max-width: 420px; padding: 40px 30px; border-radius: 25px; position: relative; text-align: center; color: var(--bg-dark); box-shadow: 0 20px 60px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto; scrollbar-width: none; } 
+.modal-content { background: var(--bg-light); width: 100%; max-width: 420px; padding: 45px 35px; border-radius: 30px; position: relative; text-align: center; color: var(--bg-dark); box-shadow: 0 25px 70px rgba(0,0,0,0.6); max-height: 90vh; overflow-y: auto; scrollbar-width: none; } 
 .modal-content::-webkit-scrollbar { display: none; } 
-.close-btn { position: absolute; top: 15px; right: 25px; font-size: 2.5rem; cursor: pointer; color: #888; transition: 0.3s; } 
-.close-btn:hover { color: var(--bg-dark); } 
-.modal-header h3 { font-size: 1.15rem; margin-bottom: 15px; font-weight: 700; color: var(--bg-dark); } 
-.popup-form input, .iti input, .iti input[type=text], .iti input[type=tel] { width: 100%; padding: 18px 20px 18px 60px !important; border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; font-size: 1rem; font-family: 'Montserrat', sans-serif; font-weight: 600; text-align: left !important; margin-bottom: 15px; outline: none; background: #fff; color: var(--bg-dark); transition: 0.3s; } 
-.popup-form input:focus, .iti input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(194,163,115,0.2); }
+
+/* Покращений хрестик */
+.close-btn { position: absolute; top: 15px; right: 25px; font-size: 2.8rem; font-weight: 300; cursor: pointer; color: #999; transition: all 0.3s ease; line-height: 1; } 
+.close-btn:hover { color: var(--bg-dark); transform: scale(1.1); } 
+
+.modal-header h3 { font-size: 1.2rem; margin-bottom: 15px; font-weight: 800; color: var(--bg-dark); text-transform: uppercase; letter-spacing: 1px; } 
+
+/* Градієнтна ціна в попапі */
+.modal-price .price-current {
+    background: linear-gradient(135deg, #D0B58D 0%, #A08151 100%);
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    font-size: 3.2rem !important;
+}
+
+/* Поля вводу з красивим фокусом */
+.popup-form input, .iti input, .iti input[type=text], .iti input[type=tel] { width: 100%; padding: 18px 20px 18px 60px !important; border: 2px solid rgba(0,0,0,0.05); border-radius: 15px; font-size: 1rem; font-family: 'Montserrat', sans-serif; font-weight: 600; text-align: left !important; margin-bottom: 15px; outline: none; background: #fff; color: var(--bg-dark); transition: all 0.3s ease; box-shadow: inset 0 2px 5px rgba(0,0,0,0.02); } 
+.popup-form input:focus, .iti input:focus { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(194,163,115,0.15), inset 0 2px 5px rgba(0,0,0,0.02); background: #FAF8F5; }
+
 .email-wrapper, .phone-wrapper { margin-bottom: 15px; } 
 .iti { width: 100%; display: block; } 
-.iti__flag-container { border-radius: 12px 0 0 12px; } 
-.iti__country-list { text-align: left; font-family: 'Montserrat', sans-serif; font-weight: 500; border-radius: 12px; max-width: 300px; color: var(--bg-dark); box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: none; } 
-.secure-text { margin-top: 20px; font-size: 0.85rem; font-weight: 600; color: #666; text-align: center;} 
+.iti__flag-container { border-radius: 15px 0 0 15px; } 
+.iti__country-list { text-align: left; font-family: 'Montserrat', sans-serif; font-weight: 500; border-radius: 15px; max-width: 300px; color: var(--bg-dark); box-shadow: 0 15px 40px rgba(0,0,0,0.15); border: none; } 
+
+.secure-text { margin-top: 25px; font-size: 0.85rem; font-weight: 600; color: #888; text-align: center; }
 
 /* ================= АНІМАЦІЇ ПОЯВИ ================= */ 
 [data-reveal] { opacity: 0; transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1); will-change: opacity, transform; }
