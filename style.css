@@ -200,7 +200,7 @@ h1, h2, h3, h4 { font-weight: 800; }
     filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15)) !important; /* М'якша тінь */
     height: auto !important; 
     object-fit: contain !important; 
-    opacity: 0.25 !important; /* МАГІЯ: Робимо напівпрозорими водяними знаками */
+    opacity: 0.75 !important; /* МАГІЯ: Робимо напівпрозорими водяними знаками */
 }
 
 /* Лівий верхній кут (ПЕРЕВЕРНУТИЙ ДОГОРИ ДРИҐОМ) */
