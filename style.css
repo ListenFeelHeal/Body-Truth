@@ -503,104 +503,140 @@ body.loading-lock {
     overflow: hidden !important;
 }
 
-/* ================= ПОВЕРНЕННЯ ДО СТАБІЛЬНОЇ ТЕМНОЇ ВЕРСІЇ ================= */
+/* ================= ФІНАЛЬНІ СТИЛІ ПРОГРАМИ (ЗЕЛЕНІ КАРТКИ, БІЛИЙ ТЕКСТ, MONTSERRAT) ================= */
 
-/* Стабільний контейнер з фіксованою відстанню (gap), щоб картки не стрибали */
+/* Фіксуємо контейнер, щоб картки не стрибали при скролі */
 .program-stack { 
     display: flex !important; 
     flex-direction: column !important; 
     gap: 50px !important; 
     padding-bottom: 100px !important; 
 }
-
-/* Прибираємо margin, який ламав липкість */
 .sticky-card {
     margin-bottom: 0 !important; 
 }
 
-/* Темна картка (СУЦІЛЬНИЙ колір #697F74, щоб не просвічувався текст знизу!) */
+/* Сама картка дня: темно-зелена */
 .day-card.sticky-card.day-card--program {
-    background-color: #697F74 !important; 
-    border-top: 1px solid rgba(194, 163, 115, 0.4) !important;
-    box-shadow: 0 -15px 30px rgba(0,0,0,0.15) !important;
+    background-color: var(--bg-dark) !important; 
+    border: 1px solid rgba(194, 163, 115, 0.3) !important; /* Тонка золота рамка */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2) !important; 
     display: flex !important;
     flex-direction: row;
     align-items: center;
-    gap: 30px;
-    padding: 30px !important;
+    gap: 40px;
+    padding: 40px !important;
     border-radius: var(--radius) !important;
 }
 
-/* Картинка (збільшений розмір без шкідливих transform) */
+/* Картинки всередині карток */
 .day-program-img {
-    width: 160px !important; 
-    height: 160px !important;
+    width: 180px !important; 
+    height: 180px !important;
     object-fit: contain;
     flex-shrink: 0;
-    /* Повертаємо білий фільтр, щоб золоті картинки стали білими на зеленому фоні */
-    filter: invert(100%) brightness(200%) drop-shadow(0 5px 15px rgba(255,255,255,0.1)); 
 }
-/* Вимикаємо фільтр для 7-го світлого дня */
-.day-card--program-final .day-program-img { filter: none !important; }
 
 /* Блок тексту справа */
 .day-program-content {
     flex: 1;
     text-align: left !important;
+    z-index: 2; 
 }
 
-/* Тексти (Шрифт Montserrat повернувся) */
-.day-card--program .day-num--pearl { color: #F8F4EF !important; font-weight: 800 !important; font-size: 0.9rem !important; text-transform: uppercase; margin-bottom: 10px;}
-.day-card--program-final .day-num--gold { color: var(--gold) !important; font-weight: 800 !important; font-size: 0.9rem !important; text-transform: uppercase; margin-bottom: 10px;}
+/* НАПИС "ДЕНЬ X": Золотий */
+.day-card--program .day-num--gold {
+    color: var(--gold) !important; 
+    font-weight: 800 !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    margin-bottom: 10px !important;
+}
 
-.day-card--program h4 { color: #FFFFFF !important; font-size: 1.6rem !important; font-weight: 800 !important; margin-bottom: 10px !important;}
-.day-card--program p { color: rgba(255,255,255,0.9) !important; font-size: 1.05rem !important; margin-bottom: 25px !important; }
+/* ЗАГОЛОВОК: Оригінальний товстий шрифт (Montserrat), білий колір */
+.day-card--program h4 { 
+    font-family: 'Montserrat', sans-serif !important;
+    color: #FFFFFF !important; 
+    font-size: 1.8rem !important; 
+    font-weight: 800 !important;
+    letter-spacing: 0px !important;
+    line-height: 1.2 !important;
+    margin-bottom: 12px !important;
+}
 
-.day-card--program-final { display: flex !important; flex-direction: row; align-items: center; text-align: left !important; gap: 30px; padding: 30px !important; }
-.day-card--program-final h4 { color: var(--bg-dark) !important; font-size: 1.6rem !important; font-weight: 800 !important; margin-bottom: 10px !important;}
-.day-card--program-final p { color: #444 !important; font-size: 1.05rem !important; margin-bottom: 25px !important;}
+/* ОПИС: Світло-сірий */
+.day-card--program p { 
+    color: #F0F4F2 !important; 
+    font-size: 1.05rem !important; 
+    font-weight: 500 !important;
+    line-height: 1.6 !important;
+    margin-bottom: 25px !important; 
+}
 
-/* Етикетки практик */
-.day-card--program .practice--light {
+/* ЕТИКЕТКА ПРАКТИКИ: Білий фон, темний текст */
+.day-card--program .practice {
     background: #FFFFFF !important; 
     color: var(--bg-dark) !important; 
     border: none !important;
     padding: 10px 18px !important;
     font-size: 0.95rem !important;
     font-weight: 700 !important;
-    border-radius: 8px !important;
-    display: inline-block !important;
-}
-.day-card--program-final .practice--dark {
-    background: var(--bg-dark) !important; 
-    color: #FFFFFF !important; 
-    border: none !important;
-    padding: 10px 18px !important;
-    font-size: 0.95rem !important;
-    font-weight: 700 !important;
-    border-radius: 8px !important;
+    border-radius: 8px !important; 
     display: inline-block !important;
 }
 
 /* --- АДАПТАЦІЯ ДЛЯ МОБІЛЬНИХ ТЕЛЕФОНІВ --- */
 @media (max-width: 600px) {
     .program-stack { gap: 40px !important; padding-bottom: 80px !important; }
-    
-    .day-card.sticky-card.day-card--program,
-    .day-card.sticky-card.day-card--program-final {
+
+    .day-card.sticky-card.day-card--program {
         flex-direction: column !important; 
         text-align: center !important;
-        padding: 30px 20px !important;
+        padding: 35px 25px !important;
         gap: 15px;
-        top: calc(8vh + (var(--idx) * 12px)) !important; 
+        top: calc(10vh + (var(--idx) * 12px)) !important; 
     }
     
     .day-program-img {
-        width: 130px !important; 
-        height: 130px !important;
-        margin-bottom: 10px;
+        width: 140px !important; 
+        height: 140px !important;
+        margin-bottom: 15px;
     }
     
     .day-program-content { text-align: center !important; }
-    .day-card--program h4, .day-card--program-final h4 { font-size: 1.4rem !important; }
+    
+    .day-card--program h4 {
+        font-size: 1.5rem !important;
+    }
+}
+
+/* ================= ФІКС НАЛИПАННЯ ТА СТРИБКІВ КАРТОК ================= */
+
+/* Робимо стабільний контейнер з фіксованою відстанню (gap) */
+.program-stack, .pressure-stack { 
+    display: flex !important; 
+    flex-direction: column !important; 
+    gap: 50px !important; /* Стабільна відстань між картками замість margin */
+    padding-bottom: 100px !important; /* Даємо великий запас місця внизу, щоб 7 картка мала куди скролитися */
+}
+
+/* Прибираємо margin, який ламав "липкість" */
+.sticky-card {
+    margin-bottom: 0 !important; /* ВАЖЛИВО! */
+    will-change: transform; /* Допомагає браузеру не "смикати" картку під час скролу */
+}
+
+/* Додаткова адаптація для мобільного, щоб картки не з'їдали весь екран */
+@media (max-width: 600px) {
+    .program-stack, .pressure-stack {
+        gap: 40px !important;
+        padding-bottom: 80px !important;
+    }
+    
+    /* Зменшуємо крок налипання зверху на телефоні */
+    .day-card.sticky-card.day-card--program,
+    .day-card.sticky-card.day-card--program-final {
+        top: calc(8vh + (var(--idx) * 10px)) !important; 
+    }
 }
