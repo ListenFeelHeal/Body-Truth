@@ -300,115 +300,134 @@ h1, h2, h3, h4 { font-weight: 800; }
 } 
 .check-icon { color: var(--gold); width: 24px; height: 24px; flex-shrink: 0; }
 
-/* ================= ДОВІРА (Я ПОРУЧ) - ПРЕМІАЛЬНА КАРТКА ДЗЕРКАЛЬНА ================= */
+/* ================= ДОВІРА (Я ПОРУЧ) - ФІНАЛЬНИЙ ВАРІАНТ ================= */
 .trust-section {
-    background-color: var(--bg-light); /* Секція на світлому фоні сайту */
+    background-color: var(--bg-light);
+    padding: 80px 0;
 }
 
 .trust-card {
-    padding: 0 !important; /* Жорстко вбиваємо паддінг картки, щоб фото торкалося краю */
-    overflow: hidden; /* Обрізаємо кути фото під радіус картки */
+    padding: 0 !important; 
+    background-color: var(--bg-dark) !important; 
+    border-radius: var(--radius) !important;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.3) !important;
+    position: relative;
+    overflow: hidden !important; /* ВАЖЛИВО: закриваємо контент, щоб градієнт не вилазив */
     display: flex;
-    align-items: center; /* Центрування тексту по вертикалі */
-    min-height: 350px; /* Optional standard height */
+    align-items: stretch;
+}
+
+/* МАГІЯ: Ефект розмазування низу (градієнт) */
+.trust-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: linear-gradient(to top, rgba(95, 116, 106, 1) 0%, rgba(95, 116, 106, 0) 100%);
+    pointer-events: none;
+    z-index: 15; /* Перекриває низ фотографії */
 }
 
 .trust-split-grid {
-    display: grid;
-    grid-template-columns: 1fr 300px; /* Текст займає місце, Фото має фіксовану ширину праворуч */
+    display: flex;
     width: 100%;
-    gap: 0;
+    align-items: stretch;
+    justify-content: space-between;
 }
 
-/* --- ЛІВА КОЛОНКА (ТЕКСТ) --- */
+/* --- ТЕКСТ --- */
 .trust-content-side {
-    padding: 50px; /* Паддінг тільки для тексту всередині картки */
+    flex: 1 1 60% !important; 
+    padding: 60px 40px 60px 60px !important; 
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 20; /* Текст завжди над градієнтом */
 }
 
-/* Оновлюємо заголовок всерединіdark картки на золотий */
-.trust-card h2.section-title {
-    font-size: 2.2rem;
-    margin-bottom: 25px;
-    color: #C2A373 !important; /* BACKUP solid gold color */
-    display: inline-block; /* Essential for correct text-clip gradient reuse if needed */
+.text-gold-accent {
+    background: linear-gradient(135deg, #E2CBAA 0%, #C2A373 50%, #A08151 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    display: inline-block !important;
+    font-size: 2.2rem !important;
+    margin-bottom: 25px !important;
+    text-transform: uppercase;
+    font-weight: 800;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)) !important; 
 }
 
-/* Білий читабельний текст */
 .trust-description p {
-    color: var(--text-light) !important;
-    font-size: 1.05rem;
-    margin-bottom: 20px;
-    line-height: 1.5;
-    text-transform: none;
+    color: #F0F4F2 !important; 
+    font-size: 1.05rem !important;
+    margin-bottom: 20px !important;
+    line-height: 1.6 !important;
     font-weight: 400;
 }
 .trust-description p strong {
-    font-weight: 700;
-    color: #FFFFFF;
+    font-weight: 700 !important;
+    color: #FFFFFF !important;
 }
 
-/* --- ПРАВА КОЛОНКА (ФОТО FLUSH TO EDGE) --- */
+/* --- ФОТО --- */
 .trust-image-side {
-    position: relative; /* Context for absolute image placement if needed */
-    width: 300px;
-    height: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end; /* Жорстко притискаємо фото до низу */
+    flex: 0 0 40% !important; 
+    width: 350px !important; 
+    position: relative !important;
+    display: flex !important;
+    justify-content: center !important; 
+    align-items: flex-end !important; /* Жорстко притискаємо фото до низу */
+    padding: 0 !important;
+    z-index: 10;
 }
 
-.trust-side-img {
-    width: auto;
-    max-width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
-    object-position: bottom center;
-    /* У тебе має бути ідеально вирізане PNG без фону */
+.trust-face-img {
+    width: auto !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 450px !important; /* Запобіжник висоти */
+    display: block !important;
+    object-fit: contain !important;
+    object-position: bottom center !important; 
+    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.4)) !important; 
 }
 
-/* ================= МОБІЛЬНА АДАПТАЦІЯ (ДЗЕРКАЛЬНА) ================= */
+/* ================= МОБІЛЬНА АДАПТАЦІЯ (ПРАВИЛЬНА ІЄРАРХІЯ) ================= */
 @media (max-width: 768px) {
     .trust-card {
-        flex-direction: column;
-        padding: 0 !important;
+        flex-direction: column !important; 
     }
 
     .trust-split-grid {
-        grid-template-columns: 1fr; /* Один стовпець */
-        flex-direction: column-reverse; /* Жорстко: фото ПІСЛЯ тексту на мобільному (за ієрархією) */
-        display: flex;
+        flex-direction: column !important;
+        display: flex !important;
     }
 
+    /* 1. ТЕКСТ ЗВЕРХУ */
     .trust-content-side {
-        padding: 30px 20px;
-        text-align: center;
-        order: 2; /* Текст йде другим */
+        order: 1 !important; /* Текст йде першим */
+        padding: 40px 25px 10px 25px !important; 
+        text-align: center !important;
     }
 
-    .trust-card h2.section-title { font-size: 1.8rem; }
-    .trust-description p { font-size: 1rem; }
+    .text-gold-accent { font-size: 1.8rem !important; margin-bottom: 20px !important; }
+    .trust-description p { font-size: 1rem !important; margin-bottom: 15px !important; text-align: center !important;}
 
+    /* 2. ФОТО ЗНИЗУ */
     .trust-image-side {
-        order: 1; /* Фото йде першим на мобільному, щоб було зверху */
-        width: 100%;
-        height: auto;
-        position: relative;
-        display: flex;
-        justify-content: center; /* Центрування фото по центру екрану */
-        align-items: flex-end;
-        min-height: 250px; /* Give some space for photo */
+        order: 2 !important; /* Фото йде другим, притиснуте до низу */
+        width: 100% !important;
+        min-height: 250px !important; 
+        margin-top: 0 !important; 
     }
 
-    .trust-side-img {
-        width: auto;
-        max-width: 90%;
-        height: auto;
-        max-height: 280px; /* Cap photo size on mobile */
-        margin: 0 auto;
-        object-fit: contain;
-        object-position: bottom center;
+    .trust-face-img {
+        max-width: 90% !important;
+        max-height: 320px !important; 
+        margin: 0 auto !important;
     }
 }
 
