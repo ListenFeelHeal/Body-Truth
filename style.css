@@ -309,13 +309,73 @@ h1, h2, h3, h4 { font-weight: 800; }
 .pressure-stack .sticky-card { padding: 35px !important; top: calc(15vh + (var(--idx) * 15px)); }
 .p-icon svg { width: 36px; height: 36px; color: var(--gold); stroke-width: 1.5; margin-bottom: 15px; }
 
-/* ================= ВІДГУКИ ================= */
-.reviews-wrapper { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 20px; -ms-overflow-style: none; scrollbar-width: none; margin-top: 20px; overflow-y: visible !important; }
+/* ================= ВІДГУКИ (ОНОВЛЕНИЙ ПРЕМІУМ СТИЛЬ) ================= */
+.reviews-wrapper { 
+    display: flex; 
+    gap: 30px; /* Більше повітря між картками */
+    overflow-x: auto; 
+    scroll-snap-type: x mandatory; 
+    padding-bottom: 50px; /* Місце для глибокої тіні */
+    padding-top: 10px;
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+    margin-top: 30px; 
+    overflow-y: visible !important; 
+}
 .reviews-wrapper::-webkit-scrollbar { display: none; }
-.review-card { flex: 0 0 320px; scroll-snap-align: center; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; text-align: left; padding: 35px; border-radius: 20px; }
-.stars { color: var(--gold); font-size: 1.2rem; margin-bottom: 15px; }
-.review-text { font-style: italic; font-size: 1rem; color: #ddd; margin-bottom: 25px; text-transform: none; font-weight: 400; line-height: 1.5;}
-.review-author { font-weight: 700; font-size: 0.95rem; color: var(--gold); }
+
+/* Картка відгуку: фірмовий стиль (зелений фон, золота рамка, глибока тінь) */
+.review-card { 
+    flex: 0 0 340px; /* Трохи ширші для зручності читання */
+    scroll-snap-align: center; 
+    background-color: var(--bg-dark); 
+    border: 1px solid rgba(194, 163, 115, 0.3); /* Тонка золота рамка */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25); /* Глибока тінь */
+    color: #fff; 
+    text-align: left; 
+    padding: 40px; 
+    border-radius: var(--radius); 
+    display: flex;
+    flex-direction: column;
+}
+
+/* Зірочки */
+.stars { 
+    color: var(--gold); 
+    font-size: 1.4rem; 
+    margin-bottom: 20px; 
+    letter-spacing: 3px; 
+}
+
+/* Текст відгуку */
+.review-text { 
+    font-style: italic; 
+    font-size: 1.05rem; 
+    color: #E5E0D8; /* Теплий світло-сірий, як у програмі */
+    margin-bottom: 30px; 
+    text-transform: none; 
+    font-weight: 400; 
+    line-height: 1.6;
+    flex-grow: 1; /* Притискає автора до низу картки */
+}
+
+/* Автор відгуку */
+.review-author { 
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700; 
+    font-size: 1.1rem; 
+    color: #FFFFFF; 
+    border-top: 1px solid rgba(255,255,255,0.1); /* Елегантна лінія розділення */
+    padding-top: 20px;
+}
+
+/* Адаптація для телефонів */
+@media (max-width: 600px) {
+    .review-card {
+        flex: 0 0 290px;
+        padding: 30px;
+    }
+}
 
 /* ================= ОФФЕР ================= */ 
 .offer-section { background-color: var(--bg-light); } 
