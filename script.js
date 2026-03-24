@@ -248,3 +248,34 @@ document.addEventListener('DOMContentLoaded', function() {
     // пускаємо її на сайт примусово через 2.5 секунди.
     setTimeout(hidePreloader, 2500);
 });
+
+// Керування відгуками: клік — стоп, другий клік — гоу
+document.addEventListener('DOMContentLoaded', () => {
+    const track = document.querySelector('.reviews-track');
+    const cards = document.querySelectorAll('.review-card');
+
+    cards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Перевіряємо, чи ця картка вже була натиснута
+            const wasActive = this.classList.contains('is-active');
+
+            // Скидаємо все (зменшуємо всі картки, запускаємо рух)
+            cards.forEach(c => c.classList.remove('is-active'));
+            track.classList.remove('paused');
+
+            // Якщо вона не була активною — зупиняємо і збільшуємо
+            if (!wasActive) {
+                this.classList.add('is-active');
+                track.classList.add('paused');
+            }
+            
+            e.stopPropagation(); // Щоб клік не "пролетів" до фону
+        });
+    });
+
+    // Якщо клікнути просто на фон сайту — все запускається знову
+    document.body.addEventListener('click', () => {
+        cards.forEach(c => c.classList.remove('is-active'));
+        track.classList.remove('paused');
+    });
+});
