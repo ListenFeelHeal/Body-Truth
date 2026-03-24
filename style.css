@@ -1011,32 +1011,33 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     color: #FFFFFF; 
 }
 
-/* ФОТО (ЖОРСТКА ФІКСАЦІЯ РОЗМІРУ БЕЗ МАСШТАБУВАННЯ) */
+/* ================= ЯДЕРНИЙ ФІКС ДЛЯ ФОТО (ГІГАНТСЬКА РУКА) ================= */
 .lfh-author-image { 
-    flex: 0 0 45%; /* Колонка займає 45% картки */
-    width: 100%; 
-    position: relative; 
-    display: flex; 
-    justify-content: flex-end; 
-    align-items: flex-end; 
-    padding: 0; 
-    z-index: 10; 
+    flex: 0 0 45% !important; /* Жорстко фіксуємо ширину колонки */
+    width: 100% !important; 
+    max-width: 380px !important; /* БЛОКУЄМО розтягування контейнера */
+    min-width: 0 !important; /* КРИТИЧНИЙ ФІКС БАГУ ФЛЕКСБОКСУ! */
+    position: relative !important; 
+    display: flex !important; 
+    justify-content: flex-end !important; 
+    align-items: flex-end !important; 
+    padding: 0 !important; 
+    z-index: 10 !important; 
+    margin-left: auto !important; 
 }
-.lfh-author-img { 
-    width: 100%; /* Фото ніколи не вилізе за межі колонки */
-    max-width: 380px; /* Запобіжник для великих екранів */
-    height: auto; /* Висота підлаштовується автоматично */
-    max-height: 500px; /* Запобіжник по висоті */
-    display: block; 
-    object-fit: contain; 
-    object-position: bottom right; 
-    
-    /* ВБИВАЄМО БУДЬ-ЯКИЙ SCALE, ЯКИЙ РОБИВ З НЕЇ ГІГАНТА */
-    transform: none !important; 
 
-    filter: drop-shadow(-15px 10px 25px rgba(0,0,0,0.5)); 
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%); 
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%); 
+.lfh-author-img { 
+    width: 100% !important; 
+    max-width: 100% !important; /* Забороняємо вилазити за колонку */
+    height: auto !important; 
+    max-height: 480px !important; /* Запобіжник по висоті */
+    display: block !important; 
+    object-fit: contain !important; 
+    object-position: bottom right !important; 
+    transform: none !important; /* Знищуємо будь-які зуми */
+    filter: drop-shadow(-15px 10px 25px rgba(0,0,0,0.5)) !important; 
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%) !important; 
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%) !important; 
 }
 
 /* МОБІЛЬНА ВЕРСІЯ (НЕ ЧІПАЄМО, БО ТАМ ОК) */
