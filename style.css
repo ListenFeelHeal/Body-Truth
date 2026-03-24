@@ -86,6 +86,7 @@ h1, h2, h3, h4 { font-weight: 800; }
     background: #fff; border-radius: var(--radius); padding: 40px 30px; 
     box-shadow: var(--shadow-soft); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     border: 1px solid rgba(0,0,0,0.03);
+    position: relative; /* Для ефекту м'якого краю */
 }
 .hover-lift { transition: transform 0.4s ease, box-shadow 0.4s ease; }
 .hover-lift:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: rgba(194,163,115,0.2);}
@@ -95,8 +96,22 @@ h1, h2, h3, h4 { font-weight: 800; }
 .premium-card--dark.sticky-card { 
     background-color: var(--bg-dark) !important; 
     border-color: rgba(255,255,255,0.1) !important; 
+    overflow: hidden !important; /* Жорстко обрізаємо фото по нижньому краю картки */
 }
 .premium-card--dark:hover { box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+
+/* Ефект м'якого нижнього краю під фотографією */
+.premium-card--dark.premium-card-split::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px; /* Глибина ефекту */
+    background: linear-gradient(to top, rgba(95, 116, 106, 0.6) 0%, rgba(95, 116, 106, 0) 100%);
+    pointer-events: none;
+    z-index: 5;
+}
 
 /* Ідеально білі заголовки на зеленому фоні */
 .premium-card--dark h2, 
@@ -193,16 +208,53 @@ h1, h2, h3, h4 { font-weight: 800; }
 .sticky-card p { font-size: 1rem; color: #555; margin-bottom: 15px; } 
 .practice { display: inline-block; background: var(--bg-light); padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; color: var(--bg-dark); } 
 
-/* СТИЛІ ДЛЯ ТЕКСТУ В ЗЕЛЕНИХ СТІКІ-КАРТКАХ (Симптоми) */
-.premium-card--dark.sticky-card .card-center-title {
-    text-align: center !important;
-    color: #FFFFFF !important;
-    font-size: 1.5rem !important;
+/* ================= НОВИЙ STICKY CARD SPLIT (Для Симптомів) ================= */
+.premium-card-split {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 0 0 50px !important; /* Тільки лівий паддінг для тексту */
+    min-height: 280px !important; /* Фіксована преміальна висота */
+    column-gap: 30px !important;
 }
-.premium-card--dark.sticky-card .card-center-text {
-    text-align: center !important;
+
+.card-content-side {
+    flex: 1 1 55% !important;
+    text-align: left !important;
+    padding: 40px 0 !important;
+}
+.premium-card-split .card-content-side h4 {
+    font-size: 1.6rem !important;
+    margin-bottom: 15px !important;
+    color: #FFFFFF !important;
+    letter-spacing: 1px !important;
+}
+.premium-card-split .card-content-side p {
+    font-size: 1.1rem !important;
+    line-height: 1.5 !important;
     color: #F0F4F2 !important;
-    font-size: 1.05rem !important;
+    opacity: 1 !important;
+}
+
+.card-image-side {
+    flex: 0 0 40% !important;
+    height: 100% !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: flex-end !important; /* Низ фото на межі картки */
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.split-card-img {
+    width: auto !important;
+    height: 100% !important;
+    max-height: 280px !important; /* Максимальна висота картки */
+    object-fit: contain !important; /* Зберігаємо пропорції */
+    object-position: bottom right !important; /* Низ і право */
+    display: block !important;
+    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.3)) !important; /* Жорстка тінь для преміум ефекту */
 }
 
 /* ================= БОТ ================= */
@@ -360,6 +412,8 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
 
 /* ================= АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ ================= */ 
 @media (max-width: 768px) { 
+    .container { padding: 0 15px; }
+    
     .sticky-card {
         top: calc(8vh + (var(--idx) * 15px)); 
         margin-bottom: 60px; 
@@ -398,6 +452,56 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     .feature-row .f-text strong { font-size: 1rem; }
     
     .offer-card { padding: 40px 20px !important; }
+
+    /* --- МОБІЛЬНА АДАПТАЦІЯ ДЛЯ PREMIUM-CARD-SPLIT --- */
+    .premium-card-split {
+        flex-direction: column-reverse !important; /* Фото внизу, текст вгорі */
+        padding: 40px 25px 0 25px !important; /* Центрований паддінг */
+        min-height: auto !important; /* Знімаємо фіксовану висоту */
+        height: 420px !important; /* Робимо картку вищою для портрета */
+        justify-content: flex-end !important;
+        align-items: center !important;
+    }
+    
+    .card-content-side {
+        flex: 0 0 auto !important;
+        text-align: center !important;
+        padding: 0 0 20px 0 !important;
+        z-index: 10 !important;
+        position: relative !important;
+    }
+    .premium-card-split .card-content-side h4 {
+        font-size: 1.4rem !important;
+    }
+    .premium-card-split .card-content-side p {
+        font-size: 1rem !important;
+    }
+
+    .card-image-side {
+        flex: 1 1 auto !important;
+        width: 100% !important;
+        height: 100% !important;
+        justify-content: center !important;
+        align-items: flex-end !important;
+        position: absolute !important; /* Фото як фон */
+        top: 0;
+        left: 0;
+        z-index: 1 !important;
+        padding: 0 !important;
+    }
+    
+    .split-card-img {
+        height: 85% !important; /* Фото на 85% висоти картки */
+        object-position: bottom center !important; /* Центруємо фото */
+        max-height: none !important;
+        filter: drop-shadow(0 15px 40px rgba(0,0,0,0.5)) !important; /* Тінь сильніше для мобільних */
+    }
+    
+    /* Підсилюємо м'який край на мобільних */
+    .premium-card--dark.premium-card-split::after {
+        height: 100px;
+        background: linear-gradient(to top, rgba(95, 116, 106, 0.9) 0%, rgba(95, 116, 106, 0.4) 60%, rgba(95, 116, 106, 0) 100%);
+    }
 }
 
 /* ================= АНІМАЦІЇ ПОЯВИ ================= */ 
@@ -446,52 +550,6 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
         text-shadow: 0 0 8px rgba(194, 163, 115, 0.8);
         border-color: var(--gold);
     }
-}
-
-/* ================= ВЕЛИКІ ФОТО-ІКОНКИ (ВЕКТОР ТА ЗОБРАЖЕННЯ) ================= */
-.icon-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-bottom: 20px;
-}
-.icon-wrapper svg {
-    color: var(--gold);
-    stroke-width: 1.2px; 
-    transition: transform 0.4s ease;
-}
-
-/* Центрування для карток симптомів */
-.center-icon {
-    justify-content: center !important;
-    width: 100%;
-    margin-bottom: 25px !important;
-}
-
-/* Стилі для твоїх нових ВЕЛИКИХ картинок */
-.custom-icon {
-    width: 100% !important;
-    max-width: 220px !important; /* ВЕЛИКИЙ розмір замість старих іконок */
-    height: auto;
-    display: block;
-    margin: 0 auto !important;
-    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.25)) !important; /* Глибока преміальна тінь */
-    transition: transform 0.4s ease;
-}
-
-.premium-card:hover .icon-wrapper svg,
-.premium-card:hover .custom-icon {
-    transform: scale(1.05); 
-}
-.learn-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-.learn-item svg {
-    color: var(--gold);
-    flex-shrink: 0;
-    stroke-width: 1.5px;
 }
 
 /* ================= МОНОЛІТНА ПРЕМІУМ ПАНЕЛЬ (ЗА ТВОЇМ ТЗ) ================= */
