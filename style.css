@@ -144,7 +144,7 @@ h1, h2, h3, h4 { font-weight: 800; }
 .subtitle::after { content: '|'; animation: blink 1s step-end infinite; color: var(--gold); }
 @keyframes blink { 50% { opacity: 0; } }
 
-/* ================= ДЕКОР ГОЛОВНОГО ЕКРАНУ (HERO) - БРОНЬОВАНИЙ ФІКС ================= */
+/* ================= ДЕКОР ГОЛОВНОГО ЕКРАНУ (HERO) ================= */
 .hero { 
     background-color: var(--bg-dark); 
     color: var(--text-light); 
@@ -161,7 +161,26 @@ h1, h2, h3, h4 { font-weight: 800; }
     z-index: 10; 
 }
 
-/* ПРЕМІАЛЬНА CSS-ТІНЬ */
+/* 1. ВИПРАВЛЕННЯ ТЕКСТІВ (ТИПОГРАФІКА) */
+.pre-title { 
+    color: #FFFFFF !important; /* Зробили білим */
+    font-weight: 600 !important; /* SemiBold для читабельності */
+    letter-spacing: 2px; 
+    margin-bottom: 15px; 
+    font-size: 1rem; /* Трохи збільшили */
+    text-transform: uppercase; 
+} 
+
+.subtitle { 
+    font-family: 'Montserrat', sans-serif !important; /* Єдиний шрифт без засічок */
+    font-size: 1.4rem !important; 
+    font-style: normal !important; /* Прибрали курсив */
+    font-weight: 500 !important; /* Medium */
+    color: #E5E0D8; 
+    margin: 0;
+} 
+
+/* 2. ПРЕМІАЛЬНА CSS-ТІНЬ */
 .hero-vignette {
     position: absolute;
     top: 0;
@@ -173,53 +192,53 @@ h1, h2, h3, h4 { font-weight: 800; }
     pointer-events: none; 
 }
 
-/* Загальні стилі для квітів (ЖОРСТКА ФІКСАЦІЯ ПРОПОРЦІЙ) */
+/* 3. РОЗВАНТАЖЕННЯ ДЕКОРУ (Водяні знаки) */
 .hero-decor {
     position: absolute !important;
     z-index: 2 !important;
     pointer-events: none !important;
-    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.4)) !important; 
-    height: auto !important; /* Вбиває розтягування по вертикалі */
-    object-fit: contain !important; /* Зберігає пропорції */
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15)) !important; /* М'якша тінь */
+    height: auto !important; 
+    object-fit: contain !important; 
+    opacity: 0.25 !important; /* МАГІЯ: Робимо напівпрозорими водяними знаками */
 }
 
-/* 1: Лівий верхній кут */
+/* Лівий верхній кут (ПЕРЕВЕРНУТИЙ ДОГОРИ ДРИҐОМ) */
 .flower-top-left {
-    width: 300px !important;
-    top: -30px !important;
-    left: -50px !important;
-    transform-origin: top left !important; 
-    animation: sway-branch 8s ease-in-out infinite !important;
+    width: 250px !important; /* Зменшили */
+    top: -50px !important;
+    left: -80px !important; /* Відсунули за край */
+    transform-origin: center center !important; 
+    animation: sway-flipped 8s ease-in-out infinite !important;
 }
 
-/* 2: Правий верхній кут */
+/* Правий верхній кут (ПЕРЕВЕРНУТИЙ ДОГОРИ ДРИҐОМ) */
 .flower-top-right {
-    width: 320px !important;
-    top: -40px !important;
-    right: -30px !important;
-    transform-origin: top right !important; 
-    animation: sway-branch 7s ease-in-out infinite reverse !important;
+    width: 250px !important; /* Зменшили */
+    top: -50px !important;
+    right: -80px !important; /* Відсунули за край */
+    transform-origin: center center !important; 
+    animation: sway-flipped-reverse 7s ease-in-out infinite !important;
 }
 
-/* 3: Лівий нижній кут */
+/* Лівий нижній кут */
 .flower-bottom-left {
-    width: 350px !important;
+    width: 250px !important;
     bottom: -60px !important;
-    left: -50px !important;
+    left: -80px !important;
     transform-origin: bottom left !important;
     animation: sway-branch 9s ease-in-out infinite !important;
 }
 
-/* 4: Правий нижній кут */
+/* Правий нижній кут */
 .flower-bottom-right {
-    width: 280px !important;
+    width: 220px !important;
     bottom: -40px !important;
-    right: -40px !important;
+    right: -80px !important;
     transform-origin: bottom right !important;
-    animation: sway-branch 8s ease-in-out infinite reverse !important;
+    animation: sway-branch-reverse 8s ease-in-out infinite !important;
 }
 
-/* Золотий градієнт для "В СТРЕСІ" */
 .gold-gradient-text {
     background: linear-gradient(135deg, #E2CBAA 0%, #C2A373 50%, #A08151 100%);
     -webkit-background-clip: text;
@@ -229,18 +248,32 @@ h1, h2, h3, h4 { font-weight: 800; }
     font-weight: 900;
 }
 
-/* Анімація легкого похитування */
+/* 4. АНІМАЦІЇ (З урахуванням перевернутих картинок) */
 @keyframes sway-branch {
     0%, 100% { transform: rotate(0deg); }
     50% { transform: rotate(3deg); }
 }
+@keyframes sway-branch-reverse {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-3deg); }
+}
+/* Анімації для перевернутих верхніх квітів (scaleY(-1) робить ефект "догори дриґом") */
+@keyframes sway-flipped {
+    0%, 100% { transform: scaleY(-1) rotate(0deg); }
+    50% { transform: scaleY(-1) rotate(3deg); }
+}
+@keyframes sway-flipped-reverse {
+    0%, 100% { transform: scaleY(-1) rotate(0deg); }
+    50% { transform: scaleY(-1) rotate(-3deg); }
+}
 
 /* Адаптація для мобільних */
 @media (max-width: 768px) {
-    .flower-top-left { width: 150px !important; top: -10px !important; left: -20px !important; }
-    .flower-top-right { width: 180px !important; top: -20px !important; right: -20px !important; }
-    .flower-bottom-left { width: 200px !important; bottom: -30px !important; left: -30px !important; }
-    .flower-bottom-right { width: 160px !important; bottom: -20px !important; right: -20px !important; }
+    .flower-top-left { width: 140px !important; top: -20px !important; left: -40px !important; }
+    .flower-top-right { width: 150px !important; top: -20px !important; right: -40px !important; }
+    .flower-bottom-left { width: 160px !important; bottom: -30px !important; left: -40px !important; }
+    .flower-bottom-right { width: 140px !important; bottom: -20px !important; right: -40px !important; }
+    .subtitle { font-size: 1.1rem !important; }
 }
 
 /* ================= ЗНАЙОМІ ВІДЧУТТЯ ================= */ 
