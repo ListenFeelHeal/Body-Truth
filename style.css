@@ -503,7 +503,7 @@ body.loading-lock {
     overflow: hidden !important;
 }
 
-/* ================= ПРЕМІАЛЬНІ КАРТКИ ЗІ ШРИФТОМ MONTSERRAT ================= */
+/* ================= ФІНАЛЬНИЙ ПРЕМІУМ З ФІРМОВИМ ЗЕЛЕНИМ ТА MONTSERRAT ================= */
 
 /* Фіксуємо контейнер */
 .program-stack { 
@@ -516,12 +516,12 @@ body.loading-lock {
     margin-bottom: 0 !important; 
 }
 
-/* Преміальна темна картка (Градієнт, тонка золота рамка, глибока тінь) */
+/* Картка дня: ФІРМОВИЙ ЗЕЛЕНИЙ колір + преміальна рамка і тінь */
 .day-card.sticky-card.day-card--program,
 .day-card.sticky-card.day-card--program-final {
-    background: linear-gradient(145deg, #4A5C52 0%, #35453D 100%) !important; 
-    border: 1px solid rgba(194, 163, 115, 0.3) !important; 
-    box-shadow: 0 25px 50px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05) !important; 
+    background: var(--bg-dark) !important; /* Чистий фірмовий зелений без градієнтів */
+    border: 1px solid rgba(194, 163, 115, 0.3) !important; /* Тонка золота рамка */
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3) !important; /* Глибока тінь для об'єму */
     display: flex !important;
     flex-direction: row;
     align-items: center;
@@ -546,8 +546,11 @@ body.loading-lock {
     z-index: 2; 
 }
 
-/* НАПИС "ДЕНЬ X": Золотий, з відступами */
+/* НАПИС "ДЕНЬ 1": Золотий, з відступами */
+.day-card--program .day-num,
+.day-card--program .day-num--gold,
 .day-card--program .day-num--pearl,
+.day-card--program-final .day-num,
 .day-card--program-final .day-num--gold {
     color: var(--gold) !important; 
     font-weight: 700 !important;
@@ -579,9 +582,11 @@ body.loading-lock {
     margin-bottom: 25px !important; 
 }
 
-/* ЕТИКЕТКА ПРАКТИКИ: Витончена округла прозора "пігулка" з білою рамкою */
+/* МІНІ-ВСТАВКИ ПРАКТИК (прозорий фон, біла рамка, круглі "пігулки") */
+.day-card--program .practice,
 .day-card--program .practice--light,
 .day-card--program .practice--dark,
+.day-card--program-final .practice,
 .day-card--program-final .practice--dark {
     background: transparent !important; 
     color: #FFFFFF !important; 
@@ -589,7 +594,7 @@ body.loading-lock {
     padding: 8px 22px !important;
     font-size: 0.95rem !important;
     font-weight: 500 !important;
-    border-radius: 50px !important; 
+    border-radius: 50px !important; /* Овальна форма */
     display: inline-block !important;
     letter-spacing: 0.5px;
 }
