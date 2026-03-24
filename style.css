@@ -503,13 +503,7 @@ body.loading-lock {
     overflow: hidden !important;
 }
 
-/* ================= ОНОВЛЕНІ СТИЛІ ДЛЯ ПРОГРАМИ (РОЗДІЛЕННЯ ТА КОНТРАСТ) ================= */
-
-/* Намагаємося перефарбувати золоті лінії в перлинно-білі, якщо файли ще золоті */
-.premium-line-icon {
-    /* Цей фільтр спробує перетворити золото на білий */
-    filter: invert(100%) brightness(200%) drop-shadow(0 5px 15px rgba(255,255,255,0.1)) !important; 
-}
+/* ================= ОНОВЛЕНІ ТА ВИПРАВЛЕНІ СТИЛІ ДЛЯ ПРОГРАМИ (БЕЗ НАКЛАДАННЯ ТА З КОНТРАСТОМ) ================= */
 
 /* Сама картка дня: темно-зелена секція, дещо світліша картка */
 .day-card.sticky-card.day-card--program {
@@ -530,6 +524,7 @@ body.loading-lock {
     height: 180px;
     object-fit: contain;
     flex-shrink: 0;
+    /* Я прибрав фільтр, щоб вона не була 'дивною'. Найкраще - це замінити файли на білі. */
 }
 
 /* Блок тексту справа */
@@ -538,7 +533,7 @@ body.loading-lock {
     text-align: left !important;
 }
 
-/* 'День 1' - тепер перлинно-білий */
+/* 'День X' - тепер перлинно-білий на темному фоні */
 .day-card--program .day-num--pearl {
     color: #F8F4EF !important; /* Pearl/Ivory white */
     font-weight: 700;
@@ -558,18 +553,34 @@ body.loading-lock {
     margin-bottom: 20px !important;
 }
 
-/* Етикетка практики: повністю білий фон з темним текстом */
-.day-card--program .practice--filled {
+/* Етикетка практики: СВІТЛА на темній картці (1-6 дні) */
+.day-card--program .practice--light {
     background: #FFFFFF !important; /* Білий фон */
     color: var(--bg-dark) !important; /* Темно-зелений текст */
     border: none !important;
     padding: 10px 18px;
     font-size: 1rem;
+    font-weight: 600;
+    display: inline-block;
+    border-radius: 8px;
+}
+
+/* Етикетка практики: ТЕМНА на світлій картці (7 день) */
+.day-card--program-final .practice--dark {
+    background: var(--bg-dark) !important; /* Темно-зелений фон */
+    color: #FFFFFF !important; /* Білий текст */
+    border: none !important;
+    padding: 10px 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    display: inline-block;
+    border-radius: 8px;
 }
 
 /* Спеціальні стилі для 7-го світлого дня */
 .day-card--program-final {
     text-align: left !important;
+    gap: 30px;
 }
 .day-card--program-final h4 {
     color: var(--bg-dark) !important;
@@ -577,18 +588,17 @@ body.loading-lock {
 .day-card--program-final p {
     color: var(--bg-dark) !important;
 }
-.day-card--program-final .day-program-img {
-    filter: none !important; /* Вимикаємо перефарбування для золотої 7-ї */
-}
 
-/* --- АДАПТАЦІЯ ДЛЯ МОБІЛЬНИХ ТЕЛЕФОНІВ (< 600px) --- */
+/* --- АДАПТАЦІЯ ДЛЯ МОБІЛЬНИХ ТЕЛЕФОНІВ (< 600px) - ВИПРАВЛЕНО НАКЛАДАННЯ --- */
 @media (max-width: 600px) {
-    /* Картка: Картинка тепер НАД текстом */
-    .day-card.sticky-card.day-card--program {
+    /* Картка: Картинка тепер НАД текстом, БЕЗ transform */
+    .day-card.sticky-card.day-card--program,
+    .day-card--program-final {
         flex-direction: column !important; /* Стовпчик */
         text-align: center;
         gap: 15px;
         padding: 25px 20px !important;
+        top: calc(8vh + (var(--idx) * 15px)); /* Відступ для стікі */
     }
     
     /* Збільшена картинка на мобільному */
@@ -600,5 +610,14 @@ body.loading-lock {
     
     .day-program-content {
         text-align: center !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* Відновлюємо накладання бота */
+    #bot-section .clean-phone-wrapper,
+    #bot-section .bot-features-list {
+        padding: 0 !important;
+        margin: 0 !important;
     }
 }
