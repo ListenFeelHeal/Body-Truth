@@ -425,13 +425,6 @@ h1, h2, h3, h4 { font-weight: 800; }
 .price-current .currency-symbol { font-size: 0.5em; font-weight: 700; vertical-align: super; color: var(--gold); margin-left: 5px; }
 .price-old { font-size: 1.8rem; color: rgba(255,255,255,0.4); text-decoration: line-through !important; font-weight: 600; display: inline-flex; align-items: baseline; white-space: nowrap; }
 .price-old .currency-symbol-old { font-size: 0.8rem; font-weight: 400; margin-left: 4px; }
-.timer-wrapper { margin-top: 40px; } 
-.timer-label { font-weight: 800; margin-bottom: 15px; font-size: 1.1rem; } 
-.box-timer { display: flex; justify-content: center; align-items: flex-start; gap: 10px; } 
-.time-box { background: rgba(255,255,255,0.1); color: var(--text-light); border-radius: 12px; padding: 15px; min-width: 80px; display: flex; flex-direction: column; align-items: center; } 
-.time-box span { font-size: 2.5rem; font-weight: 800; line-height: 1; } 
-.time-box small { font-size: 0.75rem; text-transform: uppercase; margin-top: 5px; color: var(--gold); font-weight: 600; } 
-.time-separator { font-size: 2.5rem; font-weight: 800; margin-top: 5px; } 
 /* Градієнтна ціна в головному блоці оферу */
 .offer-card .price-current,
 .offer-card .price-current .currency-symbol {
@@ -474,17 +467,6 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     margin: 3px 0 !important; 
 }
 .pab-currency { font-size: 0.6em !important; vertical-align: super !important; font-weight: 700 !important; margin-left: 2px !important; }
-.pab-timer { 
-    color: #FFFFFF !important; 
-    font-weight: 400 !important; 
-    font-size: 0.9rem !important; 
-    font-variant-numeric: tabular-nums !important; 
-    letter-spacing: 0.5px !important; 
-    display: flex !important; 
-    align-items: center !important; 
-    line-height: 1 !important; 
-}
-.pab-timer .colon { margin: 0 4px !important; }
 .pab-action { display: flex !important; justify-content: center !important; align-items: center !important; flex: 1 1 auto !important; background: linear-gradient(135deg, #D0B58D 0%, #A08151 100%) !important; color: #161616 !important; font-weight: 800 !important; font-size: 1.05rem !important; text-transform: uppercase !important; letter-spacing: 1.5px !important; border-left: 1px solid rgba(0, 0, 0, 0.1) !important; padding: 0 20px !important; text-align: center !important; }
 
 /* ================= POPUP (ОНОВЛЕНИЙ ПРЕМІУМ) ================= */ 
@@ -560,7 +542,6 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     .trust-text-card { text-align: center; padding: 30px 20px !important;}
     .trust-text-card h2 { font-size: 1.8rem; }
     .pressure-ui-wrapper h2 { text-align: center; }
-    .time-box { min-width: 70px; } 
     .modal-content { max-height: 85vh; padding: 35px 20px; } 
     .clean-phone-wrapper { max-width: 260px; margin: 0 auto; }
     .bot-features-list { gap: 10px; padding: 0 10px; margin-top: 20px;}
@@ -571,7 +552,6 @@ footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 20p
     .pab-info { padding: 0 20px !important; }
     .pab-old-price { font-size: 0.9rem !important; }
     .pab-price { font-size: 1.6rem !important; }
-    .pab-timer { font-size: 0.85rem !important; }
     .pab-action { font-size: 0.95rem !important; padding: 0 15px !important; }
 
     /* МОБІЛЬНИЙ СТІКІ КАРТ (СИМПТОМИ) */
