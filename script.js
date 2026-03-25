@@ -78,56 +78,6 @@ document.addEventListener("DOMContentLoaded", function() {
 }); 
 
 // =========================================================
-// 5. ТАЙМЕР
-// =========================================================
-function initTimer() { 
-    let endTime = localStorage.getItem('courseTimer47'); 
-    const now = new Date().getTime(); 
-    if (!endTime || parseInt(endTime, 10) <= now) { 
-        endTime = now + (47 * 60 * 1000); 
-        localStorage.setItem('courseTimer47', endTime); 
-    } else { 
-        endTime = parseInt(endTime, 10); 
-    } 
-    return endTime; 
-} 
-
-let endTime = initTimer(); 
-
-function updateTimers() { 
-    const now = new Date().getTime(); 
-    let timeLeft = endTime - now; 
-
-    if (timeLeft <= 0) {  
-        endTime = now + (47 * 60 * 1000); 
-        localStorage.setItem('courseTimer47', endTime); 
-        timeLeft = endTime - now; 
-    } 
-
-    const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24); 
-    const minutes = Math.floor((timeLeft / (1000 * 60)) % 60); 
-    const seconds = Math.floor((timeLeft / 1000) % 60); 
-
-    function formatTime(time) { return time < 10 ? `0${time}` : time; } 
-
-    const mainTimer = document.getElementById('landing-timer');
-    if (mainTimer) { 
-        mainTimer.querySelector('.hours').textContent = formatTime(hours); 
-        mainTimer.querySelector('.minutes').textContent = formatTime(minutes); 
-        mainTimer.querySelector('.seconds').textContent = formatTime(seconds); 
-    } 
-    
-    const miniTimer = document.getElementById('sticky-mini-timer');
-    if (miniTimer) {
-        miniTimer.querySelector('.m-hours').textContent = formatTime(hours);
-        miniTimer.querySelector('.m-minutes').textContent = formatTime(minutes);
-        miniTimer.querySelector('.m-seconds').textContent = formatTime(seconds);
-    }
-} 
-updateTimers(); 
-setInterval(updateTimers, 1000);
-
-// =========================================================
 // 6. POP-UP ВІКНО ТА ФОРМА
 // =========================================================
 const modal = document.getElementById('popup-modal'); 
